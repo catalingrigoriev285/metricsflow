@@ -19,8 +19,6 @@ namespace metricsflow
             emp.SubmitAnswer(1, 2);
 
             emp.TakeTest(test);
-
-            Console.ReadKey();
         }
     }
 }
