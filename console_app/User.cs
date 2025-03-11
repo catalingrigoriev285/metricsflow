@@ -11,13 +11,16 @@ namespace console_app
     internal class User
     {
         public static readonly string[] Roles = { "Admin", "Employee" };
+        // Admin: Create tests, view analytics, manage employees
+        // Employee: Take tests, view analytics
 
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
-        public string password { get; set; }
         public string role { get; set; }
-        public string password_hash { get; set; }
+        public string password { get; set; }
+
+        public int score { get; set; }
 
         public override string ToString()
         {
@@ -31,7 +34,7 @@ namespace console_app
             this.email = email;
             this.password = password;
             this.role = role;
-            this.password_hash = password_hash;
+            this.score = 0;
         }
     }
 }
