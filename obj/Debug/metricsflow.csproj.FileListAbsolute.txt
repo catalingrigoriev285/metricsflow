@@ -1,7 +1,0 @@
-C:\Users\catal\Documents\GitHub\metricsflow\bin\Debug\metricsflow.exe.config
-C:\Users\catal\Documents\GitHub\metricsflow\bin\Debug\metricsflow.exe
-C:\Users\catal\Documents\GitHub\metricsflow\bin\Debug\metricsflow.pdb
-C:\Users\catal\Documents\GitHub\metricsflow\obj\Debug\metricsflow.csproj.AssemblyReference.cache
-C:\Users\catal\Documents\GitHub\metricsflow\obj\Debug\metricsflow.csproj.CoreCompileInputs.cache
-C:\Users\catal\Documents\GitHub\metricsflow\obj\Debug\metricsflow.exe
-C:\Users\catal\Documents\GitHub\metricsflow\obj\Debug\metricsflow.pdb
