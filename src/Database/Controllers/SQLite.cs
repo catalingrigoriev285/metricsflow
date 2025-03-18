@@ -24,8 +24,6 @@ namespace Database
             }
         }
 
-        
-
         public void CreateTable(string table_name, string[] columns)
         {
             string query = $"CREATE TABLE IF NOT EXISTS {table_name} (";
@@ -56,13 +54,13 @@ namespace Database
             }
         }
 
-        public SQLiteDataReader Find(string table_name, string condition)
-        {
-            string query = $"SELECT * FROM {table_name} WHERE {condition}";
-            using (SQLiteCommand sQLiteCommand = new SQLiteCommand(query, sQLiteConnection))
-            {
-                return sQLiteCommand.ExecuteReader();
-            }
-        }
+        //public SQLiteDataReader Find(string table_name, string condition)
+        //{
+        //    string query = $"SELECT * FROM {table_name} WHERE {condition}";
+        //    using (SQLiteCommand sQLiteCommand = new SQLiteCommand(query, sQLiteConnection))
+        //    {
+        //        return sQLiteCommand.ExecuteReader();
+        //    }
+        //}
     }
 }
