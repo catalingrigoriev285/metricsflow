@@ -6,13 +6,13 @@ namespace Database
     {
         static void Main(string[] args)
         {
-            Database database = new Database("database.db", 3);
+            //Database database = new SQlite("database.db", 3);
 
-            database.CreateTable("users", new string[] { "id", "username", "password" });
+            //database.CreateTable("users", new string[] { "id", "username", "password" });
 
-            database.ExecuteQuery("INSERT INTO users (id, username, password) VALUES (1, 'admin', 'admin')");
+            //database.ExecuteQuery("INSERT INTO users (id, username, password) VALUES (1, 'admin', 'admin')");
 
-            database.Close();
+            //database.Close();
         }
     }
 }
