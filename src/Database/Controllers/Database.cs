@@ -4,11 +4,11 @@ using System.IO;
 
 namespace Database
 {
-    public class SQlite
+    public class SQLite
     {
         public SQLiteConnection sQLiteConnection;
 
-        public SQlite(string database_name, int database_version)
+        public SQLite(string database_name, int database_version)
         {
             sQLiteConnection = new SQLiteConnection($"Data Source={database_name};Version={database_version};");
             sQLiteConnection.Open();

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Database;
+using static Database.SQLite;
 
 namespace metricsflow
 {
@@ -12,7 +12,7 @@ namespace metricsflow
     {
         static void Main(string[] args)
         {
-            Database.SQlite database = new Database.SQlite("database.db", 3);
+            SQLite database = new SQLite("database.db", 3);
 
             database.CreateTable("users", new string[] { "id", "username", "password" });
 
