@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "metricsflow", "metricsflow.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "src\Database\Database.csproj", "{B29389A2-A5D0-4D6A-895D-A340506DFA24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "app\Models\Models.csproj", "{B510C553-6572-4DF1-8441-5616075E5D36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B29389A2-A5D0-4D6A-895D-A340506DFA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29389A2-A5D0-4D6A-895D-A340506DFA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29389A2-A5D0-4D6A-895D-A340506DFA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B510C553-6572-4DF1-8441-5616075E5D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B510C553-6572-4DF1-8441-5616075E5D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B510C553-6572-4DF1-8441-5616075E5D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B510C553-6572-4DF1-8441-5616075E5D36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
