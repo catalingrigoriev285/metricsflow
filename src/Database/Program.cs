@@ -1,18 +1,18 @@
 ﻿using System;
+using System.IO;
 
 namespace Database
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            //Database database = new SQlite("database.db", 3);
+            SQLite database = new SQLite("database.db", 3);
 
-            //database.CreateTable("users", new string[] { "id", "username", "password" });
+            string query = File.ReadAllText($"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}/src/Database/Queries/create.sql");
+            database.ExecuteQuery(query);
 
-            //database.ExecuteQuery("INSERT INTO users (id, username, password) VALUES (1, 'admin', 'admin')");
-
-            //database.Close();
+            database.Close();
         }
     }
 }
