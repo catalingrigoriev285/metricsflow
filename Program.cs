@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using metricsflow.app.Data;
+using metricsflow.app.Models;
 
-using Database;
-
-namespace metricsflow
+User user = new User
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Database.Program.Main(args);
-        }
-    }
+    username = "admin",
+    password = "admin",
+    email = "admin@gmail.com",
+    role = "admin"
+};
+
+using (var context = new DatabaseContext())
+{
+    context.Users.Add(user);
+    context.SaveChanges();
 }
+
+Console.WriteLine("User added successfully");
