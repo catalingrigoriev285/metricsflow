@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using metricsflow.app.Models;
+using metricsflow.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace metricsflow.app.Data
+namespace metricsflow.Data
 {
     internal class DatabaseContext : DbContext
     {

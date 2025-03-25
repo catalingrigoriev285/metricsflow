@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace metricsflow.app.Models;
+namespace metricsflow.Models;
 
 public class User
 {

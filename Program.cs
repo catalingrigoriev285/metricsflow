@@ -1,11 +1,11 @@
-﻿using metricsflow.app.Data;
-using metricsflow.app.Models;
+﻿using metricsflow.Data;
+using metricsflow.Models;
 
 User user = new User
 {
-    username = "admin",
-    password = "admin",
-    email = "admin@gmail.com",
+    username = "admin2",
+    password = "admin2",
+    email = "admin2@gmail.com",
     role = "admin"
 };
 
