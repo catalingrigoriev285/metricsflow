@@ -30,5 +30,15 @@ namespace metricsflow.resources.interfaces.welcome
         {
             this.Close();
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Version 1.0\n\nCreated by Catalin Grigoriev", "About");
+        }
     }
 }
