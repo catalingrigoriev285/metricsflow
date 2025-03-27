@@ -1,18 +1,11 @@
-﻿using metricsflow.Data;
-using metricsflow.Models;
+namespace metricsflow;
 
-User user = new User
+internal static class Program
 {
-    username = "admin2",
-    password = "admin2",
-    email = "admin2@gmail.com",
-    role = "admin"
-};
-
-using (var context = new DatabaseContext())
-{
-    context.Users.Add(user);
-    context.SaveChanges();
+    [STAThread]
+    static void Main()
+    {
+        ApplicationConfiguration.Initialize();
+        Application.Run(new Form1());
+    }
 }
-
-Console.WriteLine("User added successfully");
