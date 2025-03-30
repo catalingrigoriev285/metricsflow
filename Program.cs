@@ -1,4 +1,4 @@
-using metricsflow.resources.interfaces.welcome;
+using metricsflow.resources.interfaces.auth;
 
 namespace metricsflow;
 internal static class Program
@@ -7,6 +7,6 @@ internal static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(new Welcome());
+        Application.Run(new Auth());
     }
 }
