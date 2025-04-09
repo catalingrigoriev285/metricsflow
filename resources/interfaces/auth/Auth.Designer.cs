@@ -30,12 +30,16 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            button_auth_signin = new Button();
+            button_auth_signin = new MetroFramework.Controls.MetroButton();
             textBox_auth_password = new TextBox();
             label2 = new Label();
             textBox_auth_email = new TextBox();
             label1 = new Label();
             tabPage2 = new TabPage();
+            textBox_reg_prename = new TextBox();
+            label_reg_prename = new Label();
+            textBox_reg_name = new TextBox();
+            label_reg_name = new Label();
             textBox_reg_repeat_password = new TextBox();
             label_reg_repeat_password = new Label();
             button_reg_signup = new Button();
@@ -44,10 +48,6 @@
             textBox_reg_email = new TextBox();
             label_reg_email = new Label();
             tabPage3 = new TabPage();
-            textBox_reg_name = new TextBox();
-            label_reg_name = new Label();
-            textBox_reg_prename = new TextBox();
-            label_reg_prename = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -84,11 +84,15 @@
             button_auth_signin.BackColor = Color.White;
             button_auth_signin.Cursor = Cursors.Hand;
             button_auth_signin.FlatStyle = FlatStyle.Flat;
+            button_auth_signin.Highlight = false;
             button_auth_signin.Location = new Point(19, 183);
             button_auth_signin.Name = "button_auth_signin";
             button_auth_signin.Size = new Size(585, 51);
+            button_auth_signin.Style = MetroFramework.MetroColorStyle.Blue;
+            button_auth_signin.StyleManager = null;
             button_auth_signin.TabIndex = 4;
             button_auth_signin.Text = "Sign In";
+            button_auth_signin.Theme = MetroFramework.MetroThemeStyle.Light;
             button_auth_signin.UseVisualStyleBackColor = false;
             // 
             // textBox_auth_password
@@ -147,6 +151,42 @@
             tabPage2.Size = new Size(642, 426);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sign Up";
+            // 
+            // textBox_reg_prename
+            // 
+            textBox_reg_prename.Location = new Point(306, 134);
+            textBox_reg_prename.Name = "textBox_reg_prename";
+            textBox_reg_prename.PlaceholderText = "Enter your prename";
+            textBox_reg_prename.Size = new Size(298, 27);
+            textBox_reg_prename.TabIndex = 15;
+            // 
+            // label_reg_prename
+            // 
+            label_reg_prename.AutoSize = true;
+            label_reg_prename.Font = new Font("Segoe UI", 10F);
+            label_reg_prename.Location = new Point(306, 99);
+            label_reg_prename.Name = "label_reg_prename";
+            label_reg_prename.Size = new Size(78, 23);
+            label_reg_prename.TabIndex = 14;
+            label_reg_prename.Text = "Prename";
+            // 
+            // textBox_reg_name
+            // 
+            textBox_reg_name.Location = new Point(19, 134);
+            textBox_reg_name.Name = "textBox_reg_name";
+            textBox_reg_name.PlaceholderText = "Enter your name";
+            textBox_reg_name.Size = new Size(281, 27);
+            textBox_reg_name.TabIndex = 13;
+            // 
+            // label_reg_name
+            // 
+            label_reg_name.AutoSize = true;
+            label_reg_name.Font = new Font("Segoe UI", 10F);
+            label_reg_name.Location = new Point(19, 99);
+            label_reg_name.Name = "label_reg_name";
+            label_reg_name.Size = new Size(56, 23);
+            label_reg_name.TabIndex = 12;
+            label_reg_name.Text = "Name";
             // 
             // textBox_reg_repeat_password
             // 
@@ -224,42 +264,6 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "About";
             // 
-            // textBox_reg_name
-            // 
-            textBox_reg_name.Location = new Point(19, 134);
-            textBox_reg_name.Name = "textBox_reg_name";
-            textBox_reg_name.PlaceholderText = "Enter your name";
-            textBox_reg_name.Size = new Size(281, 27);
-            textBox_reg_name.TabIndex = 13;
-            // 
-            // label_reg_name
-            // 
-            label_reg_name.AutoSize = true;
-            label_reg_name.Font = new Font("Segoe UI", 10F);
-            label_reg_name.Location = new Point(19, 99);
-            label_reg_name.Name = "label_reg_name";
-            label_reg_name.Size = new Size(56, 23);
-            label_reg_name.TabIndex = 12;
-            label_reg_name.Text = "Name";
-            // 
-            // textBox_reg_prename
-            // 
-            textBox_reg_prename.Location = new Point(306, 134);
-            textBox_reg_prename.Name = "textBox_reg_prename";
-            textBox_reg_prename.PlaceholderText = "Enter your prename";
-            textBox_reg_prename.Size = new Size(298, 27);
-            textBox_reg_prename.TabIndex = 15;
-            // 
-            // label_reg_prename
-            // 
-            label_reg_prename.AutoSize = true;
-            label_reg_prename.Font = new Font("Segoe UI", 10F);
-            label_reg_prename.Location = new Point(306, 99);
-            label_reg_prename.Name = "label_reg_prename";
-            label_reg_prename.Size = new Size(78, 23);
-            label_reg_prename.TabIndex = 14;
-            label_reg_prename.Text = "Prename";
-            // 
             // Auth
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -287,7 +291,7 @@
         private TabPage tabPage1;
         private TextBox textBox_auth_email;
         private Label label1;
-        private Button button_auth_signin;
+        private MetroFramework.Controls.MetroButton button_auth_signin;
         private TextBox textBox_auth_password;
         private Label label2;
         private TextBox textBox_reg_repeat_password;
