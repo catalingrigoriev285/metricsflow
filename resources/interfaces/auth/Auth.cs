@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using metricsflow.app.models;
 using metricsflow.app.services;
+using Microsoft.IdentityModel.Tokens;
 
 namespace metricsflow.resources.interfaces.auth
 {
@@ -78,14 +79,22 @@ namespace metricsflow.resources.interfaces.auth
 
             if (validateRegisterRequest())
             {
-                User user = new User();
-                user.email = textBox_reg_email.Text;
-                user.name = textBox_reg_name.Text;
-                user.prename = textBox_reg_prename.Text;
-                user.password = textBox_reg_password.Text;
-
                 UserService userService = new UserService();
-                userService.Create(user);
+
+                if (!userService.Where("email", textBox_reg_email.Text).IsNullOrEmpty())
+                {
+                    MessageBox.Show("Email already exists");
+                    return;
+                } else
+                {
+                    User user = new User();
+                    user.email = textBox_reg_email.Text;
+                    user.name = textBox_reg_name.Text;
+                    user.prename = textBox_reg_prename.Text;
+                    user.password = textBox_reg_password.Text;
+
+                    userService.Create(user);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace metricsflow.app.services
@@ -45,6 +46,23 @@ namespace metricsflow.app.services
                 _context.Set<T>().Remove(entity);
                 _context.SaveChanges();
             }
+        }
+
+        public List<T> Where(string propertyName, object value)
+        {
+            var parameter = Expression.Parameter(typeof(T), "x");
+
+            var property = Expression.Property(parameter, propertyName);
+
+            var propertyType = property.Type;
+
+            var constant = Expression.Constant(Convert.ChangeType(value, propertyType), propertyType);
+
+            var equality = Expression.Equal(property, constant);
+
+            var lambda = Expression.Lambda<Func<T, bool>>(equality, parameter);
+
+            return _context.Set<T>().Where(lambda).ToList();
         }
     }
 }
