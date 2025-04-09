@@ -30,20 +30,24 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            button1 = new Button();
-            textBox2 = new TextBox();
+            button_auth_signin = new Button();
+            textBox_auth_password = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            textBox_auth_email = new TextBox();
             label1 = new Label();
             tabPage2 = new TabPage();
-            textBox5 = new TextBox();
-            label5 = new Label();
-            button2 = new Button();
-            textBox3 = new TextBox();
-            label3 = new Label();
-            textBox4 = new TextBox();
-            label4 = new Label();
+            textBox_reg_repeat_password = new TextBox();
+            label_reg_repeat_password = new Label();
+            button_reg_signup = new Button();
+            textBox_reg_password = new TextBox();
+            label_reg_password = new Label();
+            textBox_reg_email = new TextBox();
+            label_reg_email = new Label();
             tabPage3 = new TabPage();
+            textBox_reg_name = new TextBox();
+            label_reg_name = new Label();
+            textBox_reg_prename = new TextBox();
+            label_reg_prename = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -57,43 +61,43 @@
             tabControl1.Location = new Point(2, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(634, 453);
+            tabControl1.Size = new Size(650, 459);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(181, 209, 255);
-            tabPage1.Controls.Add(button1);
-            tabPage1.Controls.Add(textBox2);
+            tabPage1.Controls.Add(button_auth_signin);
+            tabPage1.Controls.Add(textBox_auth_password);
             tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(textBox_auth_email);
             tabPage1.Controls.Add(label1);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(626, 420);
+            tabPage1.Size = new Size(642, 426);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Sign In";
             // 
-            // button1
+            // button_auth_signin
             // 
-            button1.BackColor = Color.White;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(19, 183);
-            button1.Name = "button1";
-            button1.Size = new Size(585, 51);
-            button1.TabIndex = 4;
-            button1.Text = "Sign In";
-            button1.UseVisualStyleBackColor = false;
+            button_auth_signin.BackColor = Color.White;
+            button_auth_signin.Cursor = Cursors.Hand;
+            button_auth_signin.FlatStyle = FlatStyle.Flat;
+            button_auth_signin.Location = new Point(19, 183);
+            button_auth_signin.Name = "button_auth_signin";
+            button_auth_signin.Size = new Size(585, 51);
+            button_auth_signin.TabIndex = 4;
+            button_auth_signin.Text = "Sign In";
+            button_auth_signin.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // textBox_auth_password
             // 
-            textBox2.Location = new Point(19, 136);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Enter your password";
-            textBox2.Size = new Size(585, 27);
-            textBox2.TabIndex = 3;
+            textBox_auth_password.Location = new Point(19, 136);
+            textBox_auth_password.Name = "textBox_auth_password";
+            textBox_auth_password.PlaceholderText = "Enter your password";
+            textBox_auth_password.Size = new Size(585, 27);
+            textBox_auth_password.TabIndex = 3;
             // 
             // label2
             // 
@@ -105,13 +109,13 @@
             label2.TabIndex = 2;
             label2.Text = "Password";
             // 
-            // textBox1
+            // textBox_auth_email
             // 
-            textBox1.Location = new Point(19, 56);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Enter your email";
-            textBox1.Size = new Size(585, 27);
-            textBox1.TabIndex = 1;
+            textBox_auth_email.Location = new Point(19, 56);
+            textBox_auth_email.Name = "textBox_auth_email";
+            textBox_auth_email.PlaceholderText = "Enter your email";
+            textBox_auth_email.Size = new Size(585, 27);
+            textBox_auth_email.TabIndex = 1;
             // 
             // label1
             // 
@@ -126,99 +130,141 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(181, 209, 255);
-            tabPage2.Controls.Add(textBox5);
-            tabPage2.Controls.Add(label5);
-            tabPage2.Controls.Add(button2);
-            tabPage2.Controls.Add(textBox3);
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(textBox4);
-            tabPage2.Controls.Add(label4);
+            tabPage2.Controls.Add(textBox_reg_prename);
+            tabPage2.Controls.Add(label_reg_prename);
+            tabPage2.Controls.Add(textBox_reg_name);
+            tabPage2.Controls.Add(label_reg_name);
+            tabPage2.Controls.Add(textBox_reg_repeat_password);
+            tabPage2.Controls.Add(label_reg_repeat_password);
+            tabPage2.Controls.Add(button_reg_signup);
+            tabPage2.Controls.Add(textBox_reg_password);
+            tabPage2.Controls.Add(label_reg_password);
+            tabPage2.Controls.Add(textBox_reg_email);
+            tabPage2.Controls.Add(label_reg_email);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(626, 420);
+            tabPage2.Size = new Size(642, 426);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sign Up";
             // 
-            // textBox5
+            // textBox_reg_repeat_password
             // 
-            textBox5.Location = new Point(19, 222);
-            textBox5.Name = "textBox5";
-            textBox5.PlaceholderText = "Repeat your password";
-            textBox5.Size = new Size(585, 27);
-            textBox5.TabIndex = 11;
+            textBox_reg_repeat_password.Location = new Point(19, 287);
+            textBox_reg_repeat_password.Name = "textBox_reg_repeat_password";
+            textBox_reg_repeat_password.PlaceholderText = "Repeat your password";
+            textBox_reg_repeat_password.Size = new Size(585, 27);
+            textBox_reg_repeat_password.TabIndex = 11;
             // 
-            // label5
+            // label_reg_repeat_password
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10F);
-            label5.Location = new Point(19, 187);
-            label5.Name = "label5";
-            label5.Size = new Size(178, 23);
-            label5.TabIndex = 10;
-            label5.Text = "Repeat your password";
+            label_reg_repeat_password.AutoSize = true;
+            label_reg_repeat_password.Font = new Font("Segoe UI", 10F);
+            label_reg_repeat_password.Location = new Point(19, 261);
+            label_reg_repeat_password.Name = "label_reg_repeat_password";
+            label_reg_repeat_password.Size = new Size(178, 23);
+            label_reg_repeat_password.TabIndex = 10;
+            label_reg_repeat_password.Text = "Repeat your password";
             // 
-            // button2
+            // button_reg_signup
             // 
-            button2.Cursor = Cursors.Hand;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(19, 331);
-            button2.Name = "button2";
-            button2.Size = new Size(585, 51);
-            button2.TabIndex = 9;
-            button2.Text = "Sign Up";
-            button2.UseVisualStyleBackColor = true;
+            button_reg_signup.BackColor = Color.White;
+            button_reg_signup.Cursor = Cursors.Hand;
+            button_reg_signup.FlatStyle = FlatStyle.Flat;
+            button_reg_signup.Location = new Point(19, 331);
+            button_reg_signup.Name = "button_reg_signup";
+            button_reg_signup.Size = new Size(585, 51);
+            button_reg_signup.TabIndex = 9;
+            button_reg_signup.Text = "Sign Up";
+            button_reg_signup.UseVisualStyleBackColor = false;
+            button_reg_signup.Click += button_reg_signup_Click;
             // 
-            // textBox3
+            // textBox_reg_password
             // 
-            textBox3.Location = new Point(19, 136);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Enter your password";
-            textBox3.Size = new Size(585, 27);
-            textBox3.TabIndex = 8;
+            textBox_reg_password.Location = new Point(19, 214);
+            textBox_reg_password.Name = "textBox_reg_password";
+            textBox_reg_password.PlaceholderText = "Enter your password";
+            textBox_reg_password.Size = new Size(585, 27);
+            textBox_reg_password.TabIndex = 8;
             // 
-            // label3
+            // label_reg_password
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(19, 101);
-            label3.Name = "label3";
-            label3.Size = new Size(81, 23);
-            label3.TabIndex = 7;
-            label3.Text = "Password";
+            label_reg_password.AutoSize = true;
+            label_reg_password.Font = new Font("Segoe UI", 10F);
+            label_reg_password.Location = new Point(19, 188);
+            label_reg_password.Name = "label_reg_password";
+            label_reg_password.Size = new Size(81, 23);
+            label_reg_password.TabIndex = 7;
+            label_reg_password.Text = "Password";
             // 
-            // textBox4
+            // textBox_reg_email
             // 
-            textBox4.Location = new Point(19, 56);
-            textBox4.Name = "textBox4";
-            textBox4.PlaceholderText = "Enter your email";
-            textBox4.Size = new Size(585, 27);
-            textBox4.TabIndex = 6;
+            textBox_reg_email.Location = new Point(19, 56);
+            textBox_reg_email.Name = "textBox_reg_email";
+            textBox_reg_email.PlaceholderText = "Enter your email";
+            textBox_reg_email.Size = new Size(585, 27);
+            textBox_reg_email.TabIndex = 6;
             // 
-            // label4
+            // label_reg_email
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10F);
-            label4.Location = new Point(19, 21);
-            label4.Name = "label4";
-            label4.Size = new Size(51, 23);
-            label4.TabIndex = 5;
-            label4.Text = "Email";
+            label_reg_email.AutoSize = true;
+            label_reg_email.Font = new Font("Segoe UI", 10F);
+            label_reg_email.Location = new Point(19, 21);
+            label_reg_email.Name = "label_reg_email";
+            label_reg_email.Size = new Size(51, 23);
+            label_reg_email.TabIndex = 5;
+            label_reg_email.Text = "Email";
             // 
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(181, 209, 255);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(626, 420);
+            tabPage3.Size = new Size(642, 426);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "About";
+            // 
+            // textBox_reg_name
+            // 
+            textBox_reg_name.Location = new Point(19, 134);
+            textBox_reg_name.Name = "textBox_reg_name";
+            textBox_reg_name.PlaceholderText = "Enter your name";
+            textBox_reg_name.Size = new Size(281, 27);
+            textBox_reg_name.TabIndex = 13;
+            // 
+            // label_reg_name
+            // 
+            label_reg_name.AutoSize = true;
+            label_reg_name.Font = new Font("Segoe UI", 10F);
+            label_reg_name.Location = new Point(19, 99);
+            label_reg_name.Name = "label_reg_name";
+            label_reg_name.Size = new Size(56, 23);
+            label_reg_name.TabIndex = 12;
+            label_reg_name.Text = "Name";
+            // 
+            // textBox_reg_prename
+            // 
+            textBox_reg_prename.Location = new Point(306, 134);
+            textBox_reg_prename.Name = "textBox_reg_prename";
+            textBox_reg_prename.PlaceholderText = "Enter your prename";
+            textBox_reg_prename.Size = new Size(298, 27);
+            textBox_reg_prename.TabIndex = 15;
+            // 
+            // label_reg_prename
+            // 
+            label_reg_prename.AutoSize = true;
+            label_reg_prename.Font = new Font("Segoe UI", 10F);
+            label_reg_prename.Location = new Point(306, 99);
+            label_reg_prename.Name = "label_reg_prename";
+            label_reg_prename.Size = new Size(78, 23);
+            label_reg_prename.TabIndex = 14;
+            label_reg_prename.Text = "Prename";
             // 
             // Auth
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(181, 209, 255);
+            BackColor = Color.White;
             ClientSize = new Size(622, 433);
             Controls.Add(tabControl1);
             MaximumSize = new Size(640, 480);
@@ -239,17 +285,21 @@
         private TabPage tabPage2;
         private TabPage tabPage3;
         private TabPage tabPage1;
-        private TextBox textBox1;
+        private TextBox textBox_auth_email;
         private Label label1;
-        private Button button1;
-        private TextBox textBox2;
+        private Button button_auth_signin;
+        private TextBox textBox_auth_password;
         private Label label2;
-        private TextBox textBox5;
-        private Label label5;
-        private Button button2;
-        private TextBox textBox3;
-        private Label label3;
-        private TextBox textBox4;
-        private Label label4;
+        private TextBox textBox_reg_repeat_password;
+        private Label label_reg_repeat_password;
+        private Button button_reg_signup;
+        private TextBox textBox_reg_password;
+        private Label label_reg_password;
+        private TextBox textBox_reg_email;
+        private Label label_reg_email;
+        private TextBox textBox_reg_prename;
+        private Label label_reg_prename;
+        private TextBox textBox_reg_name;
+        private Label label_reg_name;
     }
 }
