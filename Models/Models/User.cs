@@ -24,6 +24,8 @@ namespace Models
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
 
+        public User() { }
+
         public User(string name, string prename, string email, Role role)
         {
             this.name = name;
