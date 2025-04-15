@@ -1,8 +1,8 @@
 namespace UserInterface
 {
-    public partial class Form1 : Form
+    public partial class Auth : Form
     {
-        public Form1()
+        public Auth()
         {
             this.MaximizeBox = false;
             InitializeComponent();

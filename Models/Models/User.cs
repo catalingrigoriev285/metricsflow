@@ -14,7 +14,7 @@ namespace Models
         public string prename { get; set; }
 
         public string email { get; set; }
-        
+
         private string password { get; set; }
 
         public string phone { get; set; }
@@ -41,6 +41,11 @@ namespace Models
             return $"User: {name} {prename}, Email: {email}, Role: {role.name}, Created At: {created_at}, Updated At: {updated_at}";
         }
 
+        public string display()
+        {
+            return $"{id}, {name} {prename}, Email: {email}, Role: {role.name}, Created At: {created_at}, Updated At: {updated_at}";
+        }
+
         public void setPassword(string password)
         {
             this.password = password;
@@ -49,6 +54,18 @@ namespace Models
         public string getPassword()
         {
             return this.password;
+        }
+
+        public void destroy()
+        {
+            this.name = null;
+            this.prename = null;
+            this.email = null;
+            this.password = null;
+            this.phone = null;
+            this.role = null;
+            this.created_at = DateTime.MinValue;
+            this.updated_at = DateTime.MinValue;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UserInterface
 {
-    partial class Form1
+    partial class Auth
     {
         /// <summary>
         ///  Required designer variable.
