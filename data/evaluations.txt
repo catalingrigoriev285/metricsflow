@@ -1,0 +1,10 @@
+0,test,qwr
+0,qwr,qwr
+qwr,True
+
+
+0,test3,data
+0,apple?,qwr
+yes,False
+
+

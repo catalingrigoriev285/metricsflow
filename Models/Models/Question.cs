@@ -34,7 +34,7 @@ namespace Models
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
 
-        public Question(string title, string description, List<Answer> answers)
+        public Question(string title, string description, List<Answer> answers = null)
         {
             this.title = title;
             this.description = description;

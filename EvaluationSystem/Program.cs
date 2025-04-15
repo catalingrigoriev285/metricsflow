@@ -157,6 +157,8 @@ namespace EvaluationSystem
                         break;
 
                     case 6:
+                        evaluations.AddRange((new EvaluationInterface()).loadEvaluations());
+
                         if (evaluations.Count == 0)
                         {
                             Console.WriteLine("No evaluations found.");
@@ -195,6 +197,11 @@ namespace EvaluationSystem
                         }
                         break;
                     case 9:
+                        foreach (var evaluation in evaluations)
+                        {
+                            (new EvaluationInterface()).saveEvaluation(evaluation);
+                            Console.WriteLine($"Evaluation '{evaluation.title}' saved to file.");
+                        }
                         break;
 
                     case 10:
