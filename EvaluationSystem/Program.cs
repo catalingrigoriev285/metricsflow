@@ -11,8 +11,6 @@ namespace EvaluationSystem
             List<User> users = new List<User>();
             List<Evaluation> evaluations = new List<Evaluation>();
 
-            UserInterface data = new UserInterface();
-
             int? selected_option = null;
             while (true)
             {
@@ -55,6 +53,7 @@ namespace EvaluationSystem
                         string roleDescription = Console.ReadLine();
                         
                         Role tempRole = new Role(roleName, roleDescription);
+                        tempRole.id = roles.Count + 1;
                         roles.Add(tempRole);
 
                         Console.WriteLine($"Role '{roleName}' created successfully.");
@@ -126,6 +125,8 @@ namespace EvaluationSystem
                         break;
 
                     case 4:
+                        roles.AddRange((new RoleInterface()).loadRoles());
+
                         if (roles.Count == 0)
                         {
                             Console.WriteLine("No roles found.");
@@ -140,7 +141,7 @@ namespace EvaluationSystem
                         break;
 
                     case 5:
-                        users.AddRange(data.loadUsers());
+                        users.AddRange((new UserInterface()).loadUsers());
 
                         if (users.Count == 0)
                         {
@@ -180,11 +181,16 @@ namespace EvaluationSystem
                         break;
 
                     case 7:
+                        foreach (var role in roles)
+                        {
+                            (new RoleInterface()).saveRole(role);
+                            Console.WriteLine($"Role '{role.name}' saved to file.");
+                        }
                         break;
                     case 8:
                         foreach (var user in users)
                         {
-                            data.saveUser(user);
+                            (new UserInterface()).saveUser(user);
                             Console.WriteLine($"User '{user.name} {user.prename}' saved to file.");
                         }
                         break;
