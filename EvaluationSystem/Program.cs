@@ -1,4 +1,5 @@
-﻿using EvaluationSystem.Models;
+﻿using Models;
+using DatabaseManagement.FileSystem;
 
 namespace EvaluationSystem
 {
@@ -9,6 +10,8 @@ namespace EvaluationSystem
             List<Role> roles = new List<Role>();
             List<User> users = new List<User>();
             List<Evaluation> evaluations = new List<Evaluation>();
+
+            UserInterface data = new UserInterface();
 
             int? selected_option = null;
             while (true)
@@ -137,7 +140,9 @@ namespace EvaluationSystem
                         break;
 
                     case 5:
-                        if(users.Count == 0)
+                        users.AddRange(data.loadUsers());
+
+                        if (users.Count == 0)
                         {
                             Console.WriteLine("No users found.");
                             break;
@@ -177,6 +182,11 @@ namespace EvaluationSystem
                     case 7:
                         break;
                     case 8:
+                        foreach (var user in users)
+                        {
+                            data.saveUser(user);
+                            Console.WriteLine($"User '{user.name} {user.prename}' saved to file.");
+                        }
                         break;
                     case 9:
                         break;
