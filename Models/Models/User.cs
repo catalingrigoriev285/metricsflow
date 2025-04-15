@@ -45,5 +45,10 @@ namespace Models
         {
             this.password = password;
         }
+
+        public string getPassword()
+        {
+            return this.password;
+        }
     }
 }

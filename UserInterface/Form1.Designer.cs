@@ -54,8 +54,8 @@
             // 
             // metroTabControl_main
             // 
-            metroTabControl_main.Controls.Add(tabPage_signup);
             metroTabControl_main.Controls.Add(tabPage_signin);
+            metroTabControl_main.Controls.Add(tabPage_signup);
             metroTabControl_main.CustomBackground = false;
             metroTabControl_main.FontSize = MetroFramework.MetroTabControlSize.Medium;
             metroTabControl_main.FontWeight = MetroFramework.MetroTabControlWeight.Light;
@@ -289,6 +289,7 @@
             metroButton_auth_submit.TabIndex = 4;
             metroButton_auth_submit.Text = "Sign In";
             metroButton_auth_submit.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroButton_auth_submit.Click += metroButton_auth_submit_Click;
             // 
             // metroTextBox_password
             // 

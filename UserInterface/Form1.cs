@@ -86,5 +86,47 @@ namespace UserInterface
                 }
             }
         }
+
+        bool validateLogin()
+        {
+            if (string.IsNullOrEmpty(metroTextBox_email.Text))
+            {
+                MessageBox.Show("Please enter an email!", "Validation");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(metroTextBox_password.Text))
+            {
+                MessageBox.Show("Please enter a password!", "Validation");
+                return false;
+            }
+            return true;
+        }
+
+        private void metroButton_auth_submit_Click(object sender, EventArgs e)
+        {
+            if(validateLogin())
+            {
+                Models.User user = new Models.User();
+                user.email = metroTextBox_email.Text;
+                user.setPassword(metroTextBox_password.Text);
+                DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
+                
+                try
+                {
+                    if (userInterface.auth(user.email, user.getPassword()))
+                    {
+                        MessageBox.Show("Login successful!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid email or password!", "Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error logging in: {ex.Message}", "Error");
+                }
+            }
+        }
     }
 }

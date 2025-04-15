@@ -61,7 +61,7 @@ namespace DatabaseManagement.FileSystem
 
             using (StreamWriter writer = new StreamWriter(File.Open(file_path, FileMode.Append)))
             {
-                writer.WriteLine($"{user.name},{user.prename},{user.email},{user.role.name},{user.phone},{user.created_at},{user.updated_at}");
+                writer.WriteLine($"{user.name},{user.prename},{user.email},{user.getPassword()},{user.role.name},{user.phone},{user.created_at},{user.updated_at}");
             }
         }
 
@@ -77,18 +77,37 @@ namespace DatabaseManagement.FileSystem
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length != 7)
+                    if (parts.Length != 8)
                     {
                         throw new FormatException($"Invalid line format: {line}");
                     }
-                    User user = new User(parts[0], parts[1], parts[2], new Role(parts[3], ""));
-                    user.phone = parts[4];
-                    user.created_at = DateTime.Parse(parts[5]);
-                    user.updated_at = DateTime.Parse(parts[6]);
+                    User user = new User(parts[0], parts[1], parts[2], new Role(parts[4], ""));
+                    user.setPassword(parts[3]);
+                    user.phone = parts[5];
+                    user.created_at = DateTime.Parse(parts[6]);
+                    user.updated_at = DateTime.Parse(parts[7]);
                     users.Add(user);
                 }
             }
             return users;
+        }
+
+        public bool auth(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                //throw new ArgumentException("Email cannot be null or empty", nameof(email));
+                return false;
+            }
+            else if (string.IsNullOrEmpty(password))
+            {
+                //throw new ArgumentException("Password cannot be null or empty", nameof(password));
+                return false;
+            }
+
+            List<User> users = loadUsers();
+            User user = users.FirstOrDefault(u => u.email == email && u.getPassword() == password);
+            return user != null;
         }
     }
 }
