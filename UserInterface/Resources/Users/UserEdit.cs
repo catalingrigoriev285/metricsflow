@@ -13,10 +13,14 @@ namespace UserInterface.Resources.Users
 {
     public partial class UserEdit : Form
     {
-        public UserEdit()
+        private Admin _adminForm;
+
+        public UserEdit(Admin adminForm)
         {
             this.MaximizeBox = false;
             InitializeComponent();
+
+            _adminForm = adminForm;
         }
 
         private void UserEdit_Load(object sender, EventArgs e)

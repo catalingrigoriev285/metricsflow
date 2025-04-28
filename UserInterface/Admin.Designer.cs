@@ -58,6 +58,7 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
+            button_users_create = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -82,6 +83,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button_users_create);
             tabPage1.Controls.Add(button_users_search);
             tabPage1.Controls.Add(textBox_users_search);
             tabPage1.Controls.Add(dataGridView_users);
@@ -327,6 +329,16 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
+            // button_users_create
+            // 
+            button_users_create.Location = new Point(284, 6);
+            button_users_create.Name = "button_users_create";
+            button_users_create.Size = new Size(128, 29);
+            button_users_create.TabIndex = 3;
+            button_users_create.Text = "Add a new user";
+            button_users_create.UseVisualStyleBackColor = true;
+            button_users_create.Click += button_users_create_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -385,5 +397,6 @@
         private DataGridViewTextBoxColumn updatedatDataGridViewTextBoxColumn1;
         private BindingSource roleBindingSource;
         private Button button_roles_edit_add;
+        private Button button_users_create;
     }
 }

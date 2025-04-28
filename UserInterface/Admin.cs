@@ -65,7 +65,7 @@ namespace UserInterface
                         user.setID(userId);
 
                         UserInterface.globals.sessionSelectedUser = user;
-                        UserInterface.Resources.Users.UserEdit userEdit = new UserInterface.Resources.Users.UserEdit();
+                        UserInterface.Resources.Users.UserEdit userEdit = new UserInterface.Resources.Users.UserEdit(this);
                         userEdit.ShowDialog();
                     }
                 }
@@ -193,6 +193,12 @@ namespace UserInterface
                 var filteredRoles = roles.Where(r => r.name.ToLower().Contains(searchText) || r.description.ToLower().Contains(searchText)).ToList();
                 dataGridView_roles_render(filteredRoles);
             }
+        }
+
+        private void button_users_create_Click(object sender, EventArgs e)
+        {
+            UserInterface.Resources.Users.UserCreate userCreate = new UserInterface.Resources.Users.UserCreate(this);
+            userCreate.ShowDialog(this);
         }
     }
 }
