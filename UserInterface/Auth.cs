@@ -1,3 +1,6 @@
+using System.Security.Cryptography;
+using System.Text;
+
 namespace UserInterface
 {
     public partial class Auth : Form
@@ -52,7 +55,15 @@ namespace UserInterface
                 user.email = metroTextBox_signup_email.Text;
                 user.name = metroTextBox_signup_name.Text;
                 user.prename = metroTextBox_signup_prename.Text;
-                user.setPassword(metroTextBox_signup_password.Text);
+
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(metroTextBox_signup_password.Text);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+
+                    string encryptedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                    user.setPassword(encryptedPassword);
+                }
 
                 if ((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles().Count == 0)
                 {
@@ -108,14 +119,43 @@ namespace UserInterface
             {
                 Models.User user = new Models.User();
                 user.email = metroTextBox_email.Text;
-                user.setPassword(metroTextBox_password.Text);
+
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(metroTextBox_password.Text);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+
+                    string encryptedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                    user.setPassword(encryptedPassword);
+                }
+
                 DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
                 
                 try
                 {
                     if (userInterface.auth(user.email, user.getPassword()))
                     {
-                        MessageBox.Show("Login successful!", "Success");
+                        user = userInterface.loadUsers().FirstOrDefault(u => u.email == user.email && u.getPassword() == user.getPassword());
+                        UserInterface.globals.sessionUser = user;
+
+                        if (user != null)
+                        {
+                            this.Hide();
+                            switch (user.getRole())
+                            {
+                                case "admin":
+                                    UserInterface.Admin admin = new UserInterface.Admin();
+                                    admin.ShowDialog();
+                                    this.Close();
+
+                                    break;
+                                case "employee":
+                                    break;
+                                default:
+                                    MessageBox.Show("Role not recognized!", "Error");
+                                    break;
+                            }
+                        }
                     }
                     else
                     {

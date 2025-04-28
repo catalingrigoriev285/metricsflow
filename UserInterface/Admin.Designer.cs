@@ -58,10 +58,11 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new Point(0, 31);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(0, 28);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(794, 489);
+            tabControl1.Size = new Size(782, 448);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -70,7 +71,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(786, 456);
+            tabPage1.Size = new Size(774, 415);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
@@ -80,14 +81,17 @@
             dataGridView_users.AllowUserToAddRows = false;
             dataGridView_users.AllowUserToDeleteRows = false;
             dataGridView_users.AutoGenerateColumns = false;
+            dataGridView_users.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_users.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView_users.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_users.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, prenameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn, createdatDataGridViewTextBoxColumn, updatedatDataGridViewTextBoxColumn });
             dataGridView_users.DataSource = userBindingSource;
-            dataGridView_users.Location = new Point(6, 6);
+            dataGridView_users.Dock = DockStyle.Fill;
+            dataGridView_users.Location = new Point(3, 3);
             dataGridView_users.Name = "dataGridView_users";
             dataGridView_users.ReadOnly = true;
             dataGridView_users.RowHeadersWidth = 51;
-            dataGridView_users.Size = new Size(760, 398);
+            dataGridView_users.Size = new Size(768, 409);
             dataGridView_users.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -97,7 +101,6 @@
             idDataGridViewTextBoxColumn.MinimumWidth = 6;
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Width = 125;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -106,7 +109,6 @@
             nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             nameDataGridViewTextBoxColumn.ReadOnly = true;
-            nameDataGridViewTextBoxColumn.Width = 125;
             // 
             // prenameDataGridViewTextBoxColumn
             // 
@@ -115,7 +117,6 @@
             prenameDataGridViewTextBoxColumn.MinimumWidth = 6;
             prenameDataGridViewTextBoxColumn.Name = "prenameDataGridViewTextBoxColumn";
             prenameDataGridViewTextBoxColumn.ReadOnly = true;
-            prenameDataGridViewTextBoxColumn.Width = 125;
             // 
             // emailDataGridViewTextBoxColumn
             // 
@@ -124,7 +125,6 @@
             emailDataGridViewTextBoxColumn.MinimumWidth = 6;
             emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             emailDataGridViewTextBoxColumn.ReadOnly = true;
-            emailDataGridViewTextBoxColumn.Width = 125;
             // 
             // phoneDataGridViewTextBoxColumn
             // 
@@ -133,7 +133,6 @@
             phoneDataGridViewTextBoxColumn.MinimumWidth = 6;
             phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             phoneDataGridViewTextBoxColumn.ReadOnly = true;
-            phoneDataGridViewTextBoxColumn.Width = 125;
             // 
             // roleDataGridViewTextBoxColumn
             // 
@@ -142,7 +141,6 @@
             roleDataGridViewTextBoxColumn.MinimumWidth = 6;
             roleDataGridViewTextBoxColumn.Name = "roleDataGridViewTextBoxColumn";
             roleDataGridViewTextBoxColumn.ReadOnly = true;
-            roleDataGridViewTextBoxColumn.Width = 125;
             // 
             // createdatDataGridViewTextBoxColumn
             // 
@@ -151,7 +149,6 @@
             createdatDataGridViewTextBoxColumn.MinimumWidth = 6;
             createdatDataGridViewTextBoxColumn.Name = "createdatDataGridViewTextBoxColumn";
             createdatDataGridViewTextBoxColumn.ReadOnly = true;
-            createdatDataGridViewTextBoxColumn.Width = 125;
             // 
             // updatedatDataGridViewTextBoxColumn
             // 
@@ -160,7 +157,6 @@
             updatedatDataGridViewTextBoxColumn.MinimumWidth = 6;
             updatedatDataGridViewTextBoxColumn.Name = "updatedatDataGridViewTextBoxColumn";
             updatedatDataGridViewTextBoxColumn.ReadOnly = true;
-            updatedatDataGridViewTextBoxColumn.Width = 125;
             // 
             // userBindingSource
             // 
@@ -171,7 +167,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(786, 456);
+            tabPage2.Size = new Size(774, 415);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Roles";
             tabPage2.UseVisualStyleBackColor = true;
@@ -180,7 +176,7 @@
             // 
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(786, 456);
+            tabPage3.Size = new Size(774, 415);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Evaluations";
             tabPage3.UseVisualStyleBackColor = true;
@@ -205,8 +201,9 @@
             // signOutToolStripMenuItem
             // 
             signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            signOutToolStripMenuItem.Size = new Size(149, 26);
+            signOutToolStripMenuItem.Size = new Size(224, 26);
             signOutToolStripMenuItem.Text = "Sign Out";
+            signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
             // Admin
             // 
@@ -219,6 +216,7 @@
             Name = "Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin";
+            WindowState = FormWindowState.Maximized;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).EndInit();

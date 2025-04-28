@@ -15,11 +15,12 @@ namespace UserInterface
     {
         public Admin()
         {
-            this.MaximizeBox = false;
             InitializeComponent();
 
             List<Models.User> users = new List<Models.User>();
             users.AddRange((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+
+            users = users.Where(u => u.id != UserInterface.globals.sessionUser.id).ToList();
 
             dataGridView_users.DataSource = users;
 
@@ -37,6 +38,16 @@ namespace UserInterface
                     MessageBox.Show("Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 }
             };
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserInterface.globals.sessionUser = null;
+            this.Hide();
+
+            UserInterface.Auth auth = new UserInterface.Auth();
+            auth.ShowDialog();
+            this.Close();
         }
     }
 }

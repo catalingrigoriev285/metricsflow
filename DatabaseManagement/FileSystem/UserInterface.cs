@@ -59,9 +59,33 @@ namespace DatabaseManagement.FileSystem
                 Directory.CreateDirectory(directoryPath);
             }
 
+            user.setID(getLatestID() + 1);
+
             using (StreamWriter writer = new StreamWriter(File.Open(file_path, FileMode.Append)))
             {
-                writer.WriteLine($"{user.name},{user.prename},{user.email},{user.getPassword()},{user.role.name},{user.phone},{user.created_at},{user.updated_at}");
+                writer.WriteLine($"{user.id}, {user.name},{user.prename},{user.email},{user.getPassword()},{user.role.name},{user.phone},{user.created_at},{user.updated_at}");
+            }
+        }
+
+        public int getLatestID()
+        {
+            if (!File.Exists(file_path))
+            {
+                throw new FileNotFoundException($"File not found: {file_path}");
+            }
+            using (StreamReader reader = new StreamReader(file_path))
+            {
+                string line;
+                int latestID = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length > 0 && int.TryParse(parts[0], out int id))
+                    {
+                        latestID = Math.Max(latestID, id);
+                    }
+                }
+                return latestID;
             }
         }
 
@@ -77,16 +101,24 @@ namespace DatabaseManagement.FileSystem
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length != 8)
+                    if (parts.Length != 9)  
                     {
                         throw new FormatException($"Invalid line format: {line}");
                     }
-                    User user = new User(parts[0], parts[1], parts[2], new Role(parts[4], ""));
-                    user.setPassword(parts[3]);
-                    user.phone = parts[5];
-                    user.created_at = DateTime.Parse(parts[6]);
-                    user.updated_at = DateTime.Parse(parts[7]);
-                    users.Add(user);
+                    try
+                    {
+                        User user = new User(parts[1].Trim(), parts[2].Trim(), parts[3].Trim(), new Role(parts[5].Trim(), ""));
+                        user.setID(int.Parse(parts[0].Trim()));
+                        user.setPassword(parts[4].Trim());
+                        user.phone = parts[6].Trim();
+                        user.created_at = DateTime.Parse(parts[7].Trim());
+                        user.updated_at = DateTime.Parse(parts[8].Trim());
+                        users.Add(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new FormatException($"Error parsing line: {line}. Details: {ex.Message}");
+                    }
                 }
             }
             return users;

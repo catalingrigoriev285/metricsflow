@@ -46,6 +46,16 @@ namespace Models
             return $"{id}, {name} {prename}, Email: {email}, Role: {role.name}, Created At: {created_at}, Updated At: {updated_at}";
         }
 
+        public string getRole()
+        {
+            return this.role?.name ?? "undefined";
+        }
+
+        public void setID(int id)
+        {
+            this.id = id;
+        }
+
         public void setPassword(string password)
         {
             this.password = password;
