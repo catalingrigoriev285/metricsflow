@@ -124,6 +124,21 @@ namespace DatabaseManagement.FileSystem
             return users;
         }
 
+        public User getUserById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID must be greater than 0", nameof(id));
+            }
+            List<User> users = loadUsers();
+            User user = users.FirstOrDefault(u => u.id == id);
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User with ID {id} not found");
+            }
+            return user;
+        }
+
         public void destroyUser(User user)
         {
             if (user == null)

@@ -1,4 +1,2 @@
 1,admin,qwr
-2,qwr,wqr
-1,employee,Employer Role
-2,Admin,admin
+2,employee,Employer Role

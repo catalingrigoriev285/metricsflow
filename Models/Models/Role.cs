@@ -12,8 +12,8 @@ namespace Models
         public string name { get; set; }
         public string description { get; set; }
 
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
 
         public Role() { }
 
@@ -21,8 +21,8 @@ namespace Models
         {
             this.name = name;
             this.description = description;
-            this.created_at = DateTime.Now;
-            this.updated_at = DateTime.Now;
+            this.created_at = DateTime.Now.ToString();
+            this.updated_at = DateTime.Now.ToString();
         }
 
         public override string ToString()
@@ -33,6 +33,11 @@ namespace Models
         public string display()
         {
             return $"{id}, {name}, {description}, Created At: {created_at}, Updated At: {updated_at}";
+        }
+
+        public void setID(int id)
+        {
+            this.id = id;
         }
     }
 }

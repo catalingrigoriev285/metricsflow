@@ -34,9 +34,33 @@ namespace DatabaseManagement.FileSystem
                 Directory.CreateDirectory(directoryPath);
             }
 
+            role.setID(getLatestID() + 1);
+
             using (StreamWriter writer = new StreamWriter(file_path, true))
             {
                 writer.WriteLine($"{role.id},{role.name},{role.description}");
+            }
+        }
+
+        public int getLatestID()
+        {
+            if (!File.Exists(file_path))
+            {
+                throw new FileNotFoundException($"File not found: {file_path}");
+            }
+            using (StreamReader reader = new StreamReader(file_path))
+            {
+                string line;
+                int latestID = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length > 0 && int.TryParse(parts[0], out int id))
+                    {
+                        latestID = Math.Max(latestID, id);
+                    }
+                }
+                return latestID;
             }
         }
 
@@ -64,6 +88,23 @@ namespace DatabaseManagement.FileSystem
                 }
             }
             return roles;
+        }
+
+        public void destroyRole(Role role)
+        {
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role), "Role cannot be null");
+            }
+            List<Role> roles = loadRoles();
+            roles.RemoveAll(r => r.id == role.id);
+            using (StreamWriter writer = new StreamWriter(file_path, false))
+            {
+                foreach (Role r in roles)
+                {
+                    writer.WriteLine($"{r.id},{r.name},{r.description}");
+                }
+            }
         }
     }
 }

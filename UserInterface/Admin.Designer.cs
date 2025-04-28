@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button_users_search = new Button();
+            textBox_users_search = new TextBox();
             dataGridView_users = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -42,16 +44,27 @@
             updatedatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             userBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
+            button_roles_edit_add = new Button();
+            dataGridView_roles = new DataGridView();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            createdatDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            updatedatDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            roleBindingSource = new BindingSource(components);
+            button_roles_search = new Button();
+            textBox_roles_search = new TextBox();
             tabPage3 = new TabPage();
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
-            textBox_users_search = new TextBox();
-            button_users_search = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_roles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)roleBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -79,6 +92,23 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button_users_search
+            // 
+            button_users_search.Location = new Point(184, 6);
+            button_users_search.Name = "button_users_search";
+            button_users_search.Size = new Size(94, 29);
+            button_users_search.TabIndex = 2;
+            button_users_search.Text = "Search";
+            button_users_search.UseVisualStyleBackColor = true;
+            button_users_search.Click += button_users_search_Click;
+            // 
+            // textBox_users_search
+            // 
+            textBox_users_search.Location = new Point(6, 8);
+            textBox_users_search.Name = "textBox_users_search";
+            textBox_users_search.Size = new Size(172, 27);
+            textBox_users_search.TabIndex = 1;
             // 
             // dataGridView_users
             // 
@@ -165,9 +195,14 @@
             // userBindingSource
             // 
             userBindingSource.DataSource = typeof(Models.User);
+            userBindingSource.CurrentChanged += userBindingSource_CurrentChanged;
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button_roles_edit_add);
+            tabPage2.Controls.Add(dataGridView_roles);
+            tabPage2.Controls.Add(button_roles_search);
+            tabPage2.Controls.Add(textBox_roles_search);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -175,6 +210,89 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Roles";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button_roles_edit_add
+            // 
+            button_roles_edit_add.Location = new Point(283, 7);
+            button_roles_edit_add.Name = "button_roles_edit_add";
+            button_roles_edit_add.Size = new Size(132, 29);
+            button_roles_edit_add.TabIndex = 6;
+            button_roles_edit_add.Text = "Add a new role";
+            button_roles_edit_add.UseVisualStyleBackColor = true;
+            button_roles_edit_add.Click += button_roles_edit_add_Click;
+            // 
+            // dataGridView_roles
+            // 
+            dataGridView_roles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView_roles.AutoGenerateColumns = false;
+            dataGridView_roles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_roles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_roles.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, nameDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn, createdatDataGridViewTextBoxColumn1, updatedatDataGridViewTextBoxColumn1 });
+            dataGridView_roles.DataSource = roleBindingSource;
+            dataGridView_roles.Location = new Point(6, 41);
+            dataGridView_roles.Name = "dataGridView_roles";
+            dataGridView_roles.RowHeadersVisible = false;
+            dataGridView_roles.RowHeadersWidth = 51;
+            dataGridView_roles.Size = new Size(760, 366);
+            dataGridView_roles.TabIndex = 5;
+            dataGridView_roles.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            idDataGridViewTextBoxColumn1.DataPropertyName = "id";
+            idDataGridViewTextBoxColumn1.HeaderText = "id";
+            idDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
+            nameDataGridViewTextBoxColumn1.HeaderText = "name";
+            nameDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
+            descriptionDataGridViewTextBoxColumn.HeaderText = "description";
+            descriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            // 
+            // createdatDataGridViewTextBoxColumn1
+            // 
+            createdatDataGridViewTextBoxColumn1.DataPropertyName = "created_at";
+            createdatDataGridViewTextBoxColumn1.HeaderText = "created_at";
+            createdatDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            createdatDataGridViewTextBoxColumn1.Name = "createdatDataGridViewTextBoxColumn1";
+            // 
+            // updatedatDataGridViewTextBoxColumn1
+            // 
+            updatedatDataGridViewTextBoxColumn1.DataPropertyName = "updated_at";
+            updatedatDataGridViewTextBoxColumn1.HeaderText = "updated_at";
+            updatedatDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            updatedatDataGridViewTextBoxColumn1.Name = "updatedatDataGridViewTextBoxColumn1";
+            // 
+            // roleBindingSource
+            // 
+            roleBindingSource.DataSource = typeof(Models.Role);
+            // 
+            // button_roles_search
+            // 
+            button_roles_search.Location = new Point(183, 6);
+            button_roles_search.Name = "button_roles_search";
+            button_roles_search.Size = new Size(94, 29);
+            button_roles_search.TabIndex = 4;
+            button_roles_search.Text = "Search";
+            button_roles_search.UseVisualStyleBackColor = true;
+            button_roles_search.Click += button_roles_search_Click;
+            // 
+            // textBox_roles_search
+            // 
+            textBox_roles_search.Location = new Point(5, 8);
+            textBox_roles_search.Name = "textBox_roles_search";
+            textBox_roles_search.PlaceholderText = "Search a role...";
+            textBox_roles_search.Size = new Size(172, 27);
+            textBox_roles_search.TabIndex = 3;
             // 
             // tabPage3
             // 
@@ -209,23 +327,6 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
-            // textBox_users_search
-            // 
-            textBox_users_search.Location = new Point(6, 8);
-            textBox_users_search.Name = "textBox_users_search";
-            textBox_users_search.Size = new Size(172, 27);
-            textBox_users_search.TabIndex = 1;
-            // 
-            // button_users_search
-            // 
-            button_users_search.Location = new Point(184, 6);
-            button_users_search.Name = "button_users_search";
-            button_users_search.Size = new Size(94, 29);
-            button_users_search.TabIndex = 2;
-            button_users_search.Text = "Search";
-            button_users_search.UseVisualStyleBackColor = true;
-            button_users_search.Click += button_users_search_Click;
-            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -243,6 +344,10 @@
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).EndInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_roles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)roleBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -270,5 +375,15 @@
         private BindingSource userBindingSource;
         private Button button_users_search;
         private TextBox textBox_users_search;
+        private DataGridView dataGridView_roles;
+        private Button button_roles_search;
+        private TextBox textBox_roles_search;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn createdatDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn updatedatDataGridViewTextBoxColumn1;
+        private BindingSource roleBindingSource;
+        private Button button_roles_edit_add;
     }
 }
