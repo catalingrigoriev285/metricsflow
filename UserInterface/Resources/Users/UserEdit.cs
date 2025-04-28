@@ -41,13 +41,54 @@ namespace UserInterface.Resources.Users
                     textBox_users_edit_prename.Text = user.prename;
                     textBox_users_edit_email.Text = user.email;
                     textBox_users_edit_phone.Text = user.phone;
+
+                    comboBox_users_edit.Items.Clear();
+                    List<Models.Role> roles = new List<Models.Role>();
+                    roles.AddRange((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles());
+                    foreach (Models.Role role in roles)
+                    {
+                        comboBox_users_edit.Items.Add(role.name);
+                    }
+
+                    comboBox_users_edit.SelectedIndex = comboBox_users_edit.Items.IndexOf(user.getRole());
                 }
             }
         }
 
         private void button_users_edit_save_Click(object sender, EventArgs e)
         {
-            
+            User currentUser = UserInterface.globals.sessionSelectedUser;
+            string name = textBox_users_edit_name.Text;
+            string prename = textBox_users_edit_prename.Text;
+            string email = textBox_users_edit_email.Text;
+            string phone = textBox_users_edit_phone.Text;
+            string roleName = comboBox_users_edit.SelectedItem.ToString();
+
+            DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
+            Models.User user = userInterface.getUserById(currentUser.id);
+            Models.Role role = (new DatabaseManagement.FileSystem.RoleInterface()).getRoleByName(roleName);
+
+            if (user != null && role != null)
+            {
+                user.name = name;
+                user.prename = prename;
+                user.email = email;
+                user.phone = phone;
+                user.role = role;
+
+                user.updated_at = DateTime.UtcNow.ToString("o");
+
+                userInterface.updateUser(user);
+            }
+            else
+            {
+                MessageBox.Show("Error updating user!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            _adminForm.dataGridView_users_render((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+
+            MessageBox.Show("User updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }

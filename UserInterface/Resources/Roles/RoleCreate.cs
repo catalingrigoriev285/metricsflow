@@ -22,23 +22,44 @@ namespace UserInterface.Resources.Roles
             _adminForm = adminForm;
         }
 
+        private bool validate()
+        {
+            if (string.IsNullOrEmpty(textBox_roles_create_name.Text))
+            {
+                MessageBox.Show("Role name cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(textBox_roles_create_desc.Text))
+            {
+                MessageBox.Show("Role description cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         private void button_roles_edit_create_Click(object sender, EventArgs e)
         {
-            DatabaseManagement.FileSystem.RoleInterface roleInterface = new DatabaseManagement.FileSystem.RoleInterface();
-            Models.Role role = new Models.Role();
+            if(validate())
+            {
+                DatabaseManagement.FileSystem.RoleInterface roleInterface = new DatabaseManagement.FileSystem.RoleInterface();
+                Models.Role role = new Models.Role();
 
-            role.name = textBox_roles_create_name.Text;
-            role.description = textBox_roles_create_desc.Text;
+                role.name = textBox_roles_create_name.Text;
+                role.description = textBox_roles_create_desc.Text;
 
-            roleInterface.saveRole(role);
+                role.created_at = DateTime.UtcNow.ToString("o");
+                role.updated_at = DateTime.UtcNow.ToString("o");
 
-            MessageBox.Show("Role created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                roleInterface.saveRole(role);
 
-            List<Models.Role> roles = new List<Models.Role>();
-            roles.AddRange(roleInterface.loadRoles());
-            _adminForm.dataGridView_roles_render(roles);
+                MessageBox.Show("Role created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.Close();
+                List<Models.Role> roles = new List<Models.Role>();
+                roles.AddRange(roleInterface.loadRoles());
+                _adminForm.dataGridView_roles_render(roles);
+
+                this.Close();
+            }
         }
     }
 }

@@ -139,6 +139,12 @@ namespace DatabaseManagement.FileSystem
 
             roles = removeDuplicates(roles);
 
+            foreach (var role in roles)
+            {
+                role.created_at ??= DateTime.UtcNow.ToString("o");
+                role.updated_at ??= DateTime.UtcNow.ToString("o");
+            }
+
             return roles;
         }
 
@@ -146,6 +152,12 @@ namespace DatabaseManagement.FileSystem
         {
             List<Role> roles = loadRoles();
             return roles.FirstOrDefault(r => r.id == id);
+        }
+
+        public Role getRoleByName(string name)
+        {
+            List<Role> roles = loadRoles();
+            return roles.FirstOrDefault(r => r.name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public void destroyRole(Role role)
@@ -160,7 +172,7 @@ namespace DatabaseManagement.FileSystem
             {
                 foreach (Role r in roles)
                 {
-                    writer.WriteLine($"{r.id},{r.name},{r.description}");
+                    writer.WriteLine($"{r.id},{r.name},{r.description},{r.created_at},{r.updated_at}");
                 }
             }
         }

@@ -67,6 +67,69 @@ namespace DatabaseManagement.FileSystem
             }
         }
 
+        public void updateUser(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            if (string.IsNullOrWhiteSpace(user.name))
+            {
+                throw new ArgumentException("User name cannot be null or empty", nameof(user.name));
+            }
+            if (string.IsNullOrWhiteSpace(user.prename))
+            {
+                throw new ArgumentException("User prename cannot be null or empty", nameof(user.prename));
+            }
+            if (string.IsNullOrWhiteSpace(user.email))
+            {
+                throw new ArgumentException("User email cannot be null or empty", nameof(user.email));
+            }
+            if (user.role == null)
+            {
+                throw new ArgumentException("User role cannot be null", nameof(user.role));
+            }
+            if (string.IsNullOrWhiteSpace(user.created_at))
+            {
+                throw new ArgumentException("User created_at cannot be null or empty", nameof(user.created_at));
+            }
+            if (string.IsNullOrWhiteSpace(user.updated_at))
+            {
+                throw new ArgumentException("User updated_at cannot be null or empty", nameof(user.updated_at));
+            }
+
+            List<User> users = loadUsers();
+            int index = users.FindIndex(u => u.id == user.id);
+            if (index == -1)
+            {
+                throw new KeyNotFoundException($"User with ID {user.id} not found");
+            }
+
+            users[index].name = user.name;
+            users[index].prename = user.prename;
+            users[index].email = user.email;
+            users[index].setPassword(user.getPassword());
+            users[index].role = user.role;
+            users[index].phone = user.phone;
+            users[index].created_at = user.created_at;
+            users[index].updated_at = DateTime.UtcNow.ToString("o");
+
+            users = removeDuplicates(users);
+
+            foreach (User u in users)
+            {
+                Console.WriteLine(u.display());
+            }
+
+            using (StreamWriter writer = new StreamWriter(file_path, false))
+            {
+                foreach (User u in users)
+                {
+                    writer.WriteLine($"{u.id},{u.name},{u.prename},{u.email},{u.getPassword()},{u.role.name},{u.phone},{u.created_at},{u.updated_at}");
+                }
+            }
+        }
+
         public int getLatestID()
         {
             if (!File.Exists(file_path))
@@ -101,7 +164,7 @@ namespace DatabaseManagement.FileSystem
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length != 9)  
+                    if (parts.Length != 9)
                     {
                         throw new FormatException($"Invalid line format: {line}");
                     }
@@ -176,6 +239,21 @@ namespace DatabaseManagement.FileSystem
             List<User> users = loadUsers();
             User user = users.FirstOrDefault(u => u.email == email && u.getPassword() == password);
             return user != null;
+        }
+
+        public List<User> removeDuplicates(List<User> users)
+        {
+            List<User> uniqueUsers = new List<User>();
+            HashSet<int> seenIDs = new HashSet<int>();
+            foreach (User user in users)
+            {
+                if (!seenIDs.Contains(user.id))
+                {
+                    uniqueUsers.Add(user);
+                    seenIDs.Add(user.id);
+                }
+            }
+            return uniqueUsers;
         }
     }
 }

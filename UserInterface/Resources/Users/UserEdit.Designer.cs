@@ -41,7 +41,7 @@
             textBox_users_edit_phone = new TextBox();
             label_users_edit_phone = new Label();
             label_users_edit_role = new Label();
-            comboBox1 = new ComboBox();
+            comboBox_users_edit = new ComboBox();
             button_users_edit_save = new Button();
             SuspendLayout();
             // 
@@ -156,13 +156,14 @@
             label_users_edit_role.TabIndex = 12;
             label_users_edit_role.Text = "Role";
             // 
-            // comboBox1
+            // comboBox_users_edit
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 437);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(553, 28);
-            comboBox1.TabIndex = 13;
+            comboBox_users_edit.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_users_edit.FormattingEnabled = true;
+            comboBox_users_edit.Location = new Point(12, 437);
+            comboBox_users_edit.Name = "comboBox_users_edit";
+            comboBox_users_edit.Size = new Size(553, 28);
+            comboBox_users_edit.TabIndex = 13;
             // 
             // button_users_edit_save
             // 
@@ -181,7 +182,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(577, 522);
             Controls.Add(button_users_edit_save);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBox_users_edit);
             Controls.Add(label_users_edit_role);
             Controls.Add(textBox_users_edit_phone);
             Controls.Add(label_users_edit_phone);
@@ -218,7 +219,7 @@
         private TextBox textBox_users_edit_phone;
         public Label label_users_edit_phone;
         public Label label_users_edit_role;
-        private ComboBox comboBox1;
+        private ComboBox comboBox_users_edit;
         private Button button_users_edit_save;
         private Label label1;
     }

@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button_users_create = new Button();
             button_users_search = new Button();
             textBox_users_search = new TextBox();
             dataGridView_users = new DataGridView();
@@ -58,7 +59,7 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
-            button_users_create = new Button();
+            button_roles_destroyAll = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -94,6 +95,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button_users_create
+            // 
+            button_users_create.Location = new Point(284, 6);
+            button_users_create.Name = "button_users_create";
+            button_users_create.Size = new Size(128, 29);
+            button_users_create.TabIndex = 3;
+            button_users_create.Text = "Add a new user";
+            button_users_create.UseVisualStyleBackColor = true;
+            button_users_create.Click += button_users_create_Click;
             // 
             // button_users_search
             // 
@@ -201,6 +212,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button_roles_destroyAll);
             tabPage2.Controls.Add(button_roles_edit_add);
             tabPage2.Controls.Add(dataGridView_roles);
             tabPage2.Controls.Add(button_roles_search);
@@ -329,15 +341,15 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
-            // button_users_create
+            // button_roles_destroyAll
             // 
-            button_users_create.Location = new Point(284, 6);
-            button_users_create.Name = "button_users_create";
-            button_users_create.Size = new Size(128, 29);
-            button_users_create.TabIndex = 3;
-            button_users_create.Text = "Add a new user";
-            button_users_create.UseVisualStyleBackColor = true;
-            button_users_create.Click += button_users_create_Click;
+            button_roles_destroyAll.Location = new Point(421, 6);
+            button_roles_destroyAll.Name = "button_roles_destroyAll";
+            button_roles_destroyAll.Size = new Size(132, 29);
+            button_roles_destroyAll.TabIndex = 7;
+            button_roles_destroyAll.Text = "Destroy all roles";
+            button_roles_destroyAll.UseVisualStyleBackColor = true;
+            button_roles_destroyAll.Click += button_roles_destroyAll_Click;
             // 
             // Admin
             // 
@@ -398,5 +410,6 @@
         private BindingSource roleBindingSource;
         private Button button_roles_edit_add;
         private Button button_users_create;
+        private Button button_roles_destroyAll;
     }
 }

@@ -200,5 +200,25 @@ namespace UserInterface
             UserInterface.Resources.Users.UserCreate userCreate = new UserInterface.Resources.Users.UserCreate(this);
             userCreate.ShowDialog(this);
         }
+
+        private void button_roles_destroyAll_Click(object sender, EventArgs e)
+        {
+            List<Models.Role> roles = new List<Models.Role>();
+            roles.AddRange((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles());
+
+            var confirm = MessageBox.Show("Are you sure you want to delete all roles?", "Delete All Roles", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirm == DialogResult.Yes)
+            {
+                foreach (Models.Role role in roles)
+                {
+                    DatabaseManagement.FileSystem.RoleInterface roleInterface = new DatabaseManagement.FileSystem.RoleInterface();
+                    roleInterface.destroyRole(role);
+                }
+
+                dataGridView_roles_render(roles);
+                MessageBox.Show("All roles deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
