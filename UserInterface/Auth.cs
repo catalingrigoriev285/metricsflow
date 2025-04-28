@@ -56,14 +56,10 @@ namespace UserInterface
                 user.name = metroTextBox_signup_name.Text;
                 user.prename = metroTextBox_signup_prename.Text;
 
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(metroTextBox_signup_password.Text);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                user.created_at = DateTime.UtcNow.ToString("o");
+                user.updated_at = DateTime.UtcNow.ToString("o");
 
-                    string encryptedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-                    user.setPassword(encryptedPassword);
-                }
+                user.setPassword(metroTextBox_signup_password.Text);
 
                 if ((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles().Count == 0)
                 {
@@ -115,7 +111,7 @@ namespace UserInterface
 
         private void metroButton_auth_submit_Click(object sender, EventArgs e)
         {
-            if(validateLogin())
+            if (validateLogin())
             {
                 Models.User user = new Models.User();
                 user.email = metroTextBox_email.Text;
@@ -130,7 +126,7 @@ namespace UserInterface
                 }
 
                 DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
-                
+
                 try
                 {
                     if (userInterface.auth(user.email, user.getPassword()))
@@ -167,6 +163,11 @@ namespace UserInterface
                     MessageBox.Show($"Error logging in: {ex.Message}", "Error");
                 }
             }
+        }
+
+        private void metroTabControl_main_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -206,6 +206,12 @@ namespace UserInterface
             List<Models.Role> roles = new List<Models.Role>();
             roles.AddRange((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles());
 
+            if(roles.Count == 0)
+            {
+                MessageBox.Show("No roles to delete!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var confirm = MessageBox.Show("Are you sure you want to delete all roles?", "Delete All Roles", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirm == DialogResult.Yes)

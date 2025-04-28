@@ -236,6 +236,9 @@ namespace DatabaseManagement.FileSystem
                 return false;
             }
 
+            Models.Encryption encryption = new Models.Encryption(password);
+            string passwordHash = encryption.ToString();
+
             List<User> users = loadUsers();
             User user = users.FirstOrDefault(u => u.email == email && u.getPassword() == password);
             return user != null;

@@ -58,7 +58,13 @@ namespace Models
 
         public void setPassword(string password)
         {
-            this.password = password;
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Password cannot be null or empty", nameof(password));
+            }
+
+            Models.Encryption encryption = new Models.Encryption(password);
+            this.password = encryption.ToString();
         }
 
         public string getPassword()

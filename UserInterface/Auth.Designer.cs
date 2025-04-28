@@ -70,6 +70,7 @@
             metroTabControl_main.TextAlign = ContentAlignment.MiddleLeft;
             metroTabControl_main.Theme = MetroFramework.MetroThemeStyle.Light;
             metroTabControl_main.UseStyleColors = false;
+            metroTabControl_main.SelectedIndexChanged += metroTabControl_main_SelectedIndexChanged;
             // 
             // tabPage_signin
             // 
