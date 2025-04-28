@@ -42,11 +42,13 @@ namespace DatabaseManagement.FileSystem
                 Directory.CreateDirectory(directoryPath);
             }
 
+            evaluation.setID(getLatestID() + 1);
+
             using (StreamWriter writer = new StreamWriter(file_path, true))
             {
                 writer.WriteLine($"{evaluation.id},{evaluation.title},{evaluation.description},{(int)evaluation.type},{evaluation.user_id}");
-                
-                if(evaluation.questions != null)
+
+                if (evaluation.questions != null)
                 {
                     foreach (var question in evaluation.questions)
                     {
@@ -116,7 +118,36 @@ namespace DatabaseManagement.FileSystem
                 }
             }
 
+            evaluations = removeDuplicates(evaluations);
+
             return evaluations;
+        }
+
+        public int getLatestID()
+        {
+            if (!File.Exists(file_path))
+            {
+                return 0;
+            }
+            using (StreamReader reader = new StreamReader(file_path))
+            {
+                string? line;
+                int latestID = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+                    string[] evaluationData = line.Split(',');
+                    int currentID = int.Parse(evaluationData[0]);
+                    if (currentID > latestID)
+                    {
+                        latestID = currentID;
+                    }
+                }
+                return latestID;
+            }
         }
 
         public void destroyEvaluation(Evaluation evaluation)
@@ -125,24 +156,49 @@ namespace DatabaseManagement.FileSystem
             {
                 throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
             }
+
             List<Evaluation> evaluations = loadEvaluations();
-            evaluations.RemoveAll(e => e.id == evaluation.id);
-            using (StreamWriter writer = new StreamWriter(file_path, false))
+            Evaluation? evaluationToRemove = evaluations.FirstOrDefault(e => e.id == evaluation.id);
+
+            if (evaluationToRemove != null)
             {
-                foreach (Evaluation e in evaluations)
+                evaluations.Remove(evaluationToRemove);
+
+                using (StreamWriter writer = new StreamWriter(file_path, false))
                 {
-                    writer.WriteLine($"{e.id},{e.title},{e.description}");
-                    foreach (var question in e.questions)
+                    foreach (var eval in evaluations)
                     {
-                        writer.WriteLine($"{question.id},{question.title},{question.description}");
-                        foreach (var answer in question.answers)
+                        writer.WriteLine($"{eval.id},{eval.title},{eval.description},{(int)eval.type},{eval.user_id}");
+
+                        if (eval.questions != null)
                         {
-                            writer.WriteLine($"{answer.value},{answer.validation}");
+                            foreach (var question in eval.questions)
+                            {
+                                writer.WriteLine($"{question.id},{question.title},{question.description}");
+                                foreach (var answer in question.answers)
+                                {
+                                    writer.WriteLine($"{answer.value},{answer.validation}");
+                                }
+                            }
                         }
+
+                        writer.WriteLine("\n");
                     }
-                    writer.WriteLine("\n");
                 }
             }
+        }
+
+        public List<Evaluation> removeDuplicates(List<Evaluation> evaluations)
+        {
+            List<Evaluation> uniqueEvaluations = new List<Evaluation>();
+            foreach (var evaluation in evaluations)
+            {
+                if (!uniqueEvaluations.Any(e => e.id == evaluation.id))
+                {
+                    uniqueEvaluations.Add(evaluation);
+                }
+            }
+            return uniqueEvaluations;
         }
     }
 }

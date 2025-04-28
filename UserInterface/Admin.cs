@@ -166,8 +166,8 @@ namespace UserInterface
                         Models.Evaluation evaluation = new Models.Evaluation();
                         evaluation.setID(evaluationId);
                         UserInterface.globals.sessionSelectedEvaluation = evaluation;
-                        //UserInterface.Resources.Evaluations.EvaluationEdit evaluationEdit = new UserInterface.Resources.Evaluations.EvaluationEdit(this);
-                        //evaluationEdit.ShowDialog();
+                        UserInterface.Resources.Evaluations.EvaluationEdit evaluationEdit = new UserInterface.Resources.Evaluations.EvaluationEdit(this);
+                        evaluationEdit.ShowDialog();
                     }
                 }
             };
