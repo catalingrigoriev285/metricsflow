@@ -299,5 +299,23 @@ namespace UserInterface
         {
 
         }
+
+        private void button_evaluation_search_Click(object sender, EventArgs e)
+        {
+            List<Models.Evaluation> evaluations = new List<Models.Evaluation>();
+            evaluations.AddRange((new DatabaseManagement.FileSystem.EvaluationInterface()).loadEvaluations());
+
+            string searchText = textBox_evaluation_search.Text.ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                dataGridView_evaluations_render(evaluations);
+            }
+            else
+            {
+                var filteredEvaluations = evaluations.Where(e => e.title.ToLower().Contains(searchText) || e.description.ToLower().Contains(searchText)).ToList();
+                dataGridView_evaluations_render(filteredEvaluations);
+            }
+        }
     }
 }

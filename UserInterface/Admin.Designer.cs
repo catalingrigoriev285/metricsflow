@@ -378,6 +378,7 @@
             button_evaluation_search.TabIndex = 6;
             button_evaluation_search.Text = "Search";
             button_evaluation_search.UseVisualStyleBackColor = true;
+            button_evaluation_search.Click += button_evaluation_search_Click;
             // 
             // textBox_evaluation_search
             // 

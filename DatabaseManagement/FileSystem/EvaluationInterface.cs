@@ -123,6 +123,21 @@ namespace DatabaseManagement.FileSystem
             return evaluations;
         }
 
+        public Evaluation getEvaluationById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "ID must be greater than zero.");
+            }
+            List<Evaluation> evaluations = loadEvaluations();
+            Evaluation? evaluation = evaluations.FirstOrDefault(e => e.id == id);
+            if (evaluation == null)
+            {
+                throw new KeyNotFoundException($"Evaluation with ID {id} not found.");
+            }
+            return evaluation;
+        }
+
         public int getLatestID()
         {
             if (!File.Exists(file_path))

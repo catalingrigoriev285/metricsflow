@@ -60,7 +60,7 @@
             // 
             textBox_evaluation_create_description.Location = new Point(12, 116);
             textBox_evaluation_create_description.Name = "textBox_evaluation_create_description";
-            textBox_evaluation_create_description.PlaceholderText = "Title";
+            textBox_evaluation_create_description.PlaceholderText = "Description";
             textBox_evaluation_create_description.Size = new Size(553, 27);
             textBox_evaluation_create_description.TabIndex = 3;
             // 
@@ -135,7 +135,7 @@
             Controls.Add(label_evaluation_create_title);
             Name = "EvaluationCreate";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "EvaluationCreate";
+            Text = "Create a new evaluation";
             Load += EvaluationCreate_Load;
             ResumeLayout(false);
             PerformLayout();
