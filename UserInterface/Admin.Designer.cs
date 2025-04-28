@@ -46,6 +46,8 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
+            textBox_users_search = new TextBox();
+            button_users_search = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -67,6 +69,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button_users_search);
+            tabPage1.Controls.Add(textBox_users_search);
             tabPage1.Controls.Add(dataGridView_users);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
@@ -80,19 +84,18 @@
             // 
             dataGridView_users.AllowUserToAddRows = false;
             dataGridView_users.AllowUserToDeleteRows = false;
+            dataGridView_users.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView_users.AutoGenerateColumns = false;
             dataGridView_users.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView_users.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView_users.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_users.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, prenameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn, createdatDataGridViewTextBoxColumn, updatedatDataGridViewTextBoxColumn });
             dataGridView_users.DataSource = userBindingSource;
-            dataGridView_users.Dock = DockStyle.Fill;
-            dataGridView_users.Location = new Point(3, 3);
+            dataGridView_users.Location = new Point(3, 41);
             dataGridView_users.Name = "dataGridView_users";
             dataGridView_users.ReadOnly = true;
             dataGridView_users.RowHeadersVisible = false;
             dataGridView_users.RowHeadersWidth = 51;
-            dataGridView_users.Size = new Size(768, 409);
+            dataGridView_users.Size = new Size(768, 371);
             dataGridView_users.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -206,6 +209,23 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
+            // textBox_users_search
+            // 
+            textBox_users_search.Location = new Point(6, 8);
+            textBox_users_search.Name = "textBox_users_search";
+            textBox_users_search.Size = new Size(172, 27);
+            textBox_users_search.TabIndex = 1;
+            // 
+            // button_users_search
+            // 
+            button_users_search.Location = new Point(184, 6);
+            button_users_search.Name = "button_users_search";
+            button_users_search.Size = new Size(94, 29);
+            button_users_search.TabIndex = 2;
+            button_users_search.Text = "Search";
+            button_users_search.UseVisualStyleBackColor = true;
+            button_users_search.Click += button_users_search_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -220,6 +240,7 @@
             WindowState = FormWindowState.Maximized;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).EndInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -247,5 +268,7 @@
         private DataGridViewTextBoxColumn createdatDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn updatedatDataGridViewTextBoxColumn;
         private BindingSource userBindingSource;
+        private Button button_users_search;
+        private TextBox textBox_users_search;
     }
 }

@@ -17,7 +17,9 @@ namespace UserInterface
         {
             InitializeComponent();
 
-            dataGridView_users_render();
+            List<Models.User> users = new List<Models.User>();
+            users.AddRange((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+            dataGridView_users_render(users);
 
             DataGridViewButtonColumn buttonColumn_edit = new DataGridViewButtonColumn();
             buttonColumn_edit.Name = "Edit";
@@ -50,7 +52,10 @@ namespace UserInterface
                             userInterface.destroyUser(user);
                             MessageBox.Show("User deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            dataGridView_users_render();
+                            List<Models.User> users = new List<Models.User>();
+                            users.AddRange((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+
+                            dataGridView_users_render(users);
                         }
                     }
                     else if (e.ColumnIndex == dataGridView_users.Columns["Edit"].Index)
@@ -62,11 +67,8 @@ namespace UserInterface
             };
         }
 
-        private void dataGridView_users_render()
+        private void dataGridView_users_render(List<Models.User> users)
         {
-            List<Models.User> users = new List<Models.User>();
-            users.AddRange((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
-
             users = users.Where(u => u.id != UserInterface.globals.sessionUser.id).ToList();
 
             dataGridView_users.DataSource = null;
@@ -81,6 +83,22 @@ namespace UserInterface
             UserInterface.Auth auth = new UserInterface.Auth();
             auth.ShowDialog();
             this.Close();
+        }
+
+        private void button_users_search_Click(object sender, EventArgs e)
+        {
+            List<Models.User> users = new List<Models.User>();
+            users.AddRange((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+            string searchText = textBox_users_search.Text.ToLower();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                dataGridView_users_render(users);
+            }
+            else
+            {
+                var filteredUsers = users.Where(u => u.name.ToLower().Contains(searchText) || u.prename.ToLower().Contains(searchText) || u.email.ToLower().Contains(searchText)).ToList();
+                dataGridView_users_render(filteredUsers);
+            }
         }
     }
 }
