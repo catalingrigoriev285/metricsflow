@@ -115,8 +115,8 @@ namespace UserInterface
                         Models.Role role = new Models.Role();
                         role.setID(roleId);
                         UserInterface.globals.sessionSelectedRole = role;
-                        //UserInterface.Resources.Roles.RoleEdit roleEdit = new UserInterface.Resources.Roles.RoleEdit();
-                        //roleEdit.ShowDialog();
+                        UserInterface.Resources.Roles.RoleEdit roleEdit = new UserInterface.Resources.Roles.RoleEdit(this);
+                        roleEdit.ShowDialog();
                     }
                 }
             };

@@ -36,9 +36,54 @@ namespace DatabaseManagement.FileSystem
 
             role.setID(getLatestID() + 1);
 
+            role.created_at = DateTime.UtcNow.ToString("o");
+            role.updated_at = DateTime.UtcNow.ToString("o");
+
             using (StreamWriter writer = new StreamWriter(file_path, true))
             {
-                writer.WriteLine($"{role.id},{role.name},{role.description}");
+                writer.WriteLine($"{role.id},{role.name},{role.description}, {role.created_at}, {role.updated_at}");
+            }
+        }
+
+        public void updateRole(Role role)
+        {
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role), "Role cannot be null");
+            }
+            if (string.IsNullOrWhiteSpace(role.name))
+            {
+                throw new ArgumentException("Role name cannot be null or empty", nameof(role.name));
+            }
+            if (string.IsNullOrWhiteSpace(role.description))
+            {
+                throw new ArgumentException("Role description cannot be null or empty", nameof(role.description));
+            }
+
+            List<Role> roles = loadRoles();
+            int index = roles.FindIndex(r => r.id == role.id);
+            if (index == -1)
+            {
+                throw new KeyNotFoundException($"Role with ID {role.id} not found");
+            }
+
+            roles[index].name = role.name;
+            roles[index].description = role.description;
+            roles[index].updated_at = DateTime.UtcNow.ToString("o");
+
+            roles = removeDuplicates(roles);
+
+            foreach (Role r in roles)
+            {
+                Console.WriteLine(r.display());
+            }
+
+            using (StreamWriter writer = new StreamWriter(file_path, false))
+            {
+                foreach (Role r in roles)
+                {
+                    writer.WriteLine($"{r.id},{r.name},{r.description},{r.created_at},{r.updated_at}");
+                }
             }
         }
 
@@ -68,7 +113,6 @@ namespace DatabaseManagement.FileSystem
         {
             if (!File.Exists(file_path))
             {
-                //throw new FileNotFoundException("The file does not exist.", file_path);
                 return new List<Role>();
             }
 
@@ -78,16 +122,30 @@ namespace DatabaseManagement.FileSystem
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length != 3)
+                    if (parts.Length != 5)
                     {
                         throw new FormatException($"Invalid line format: {line}");
                     }
-                    Role role = new Role(parts[1], parts[2]);
-                    role.id = int.Parse(parts[0]);
+
+                    Role role = new Role(parts[1], parts[2])
+                    {
+                        id = int.Parse(parts[0]),
+                        created_at = parts[3],
+                        updated_at = parts[4]
+                    };
                     roles.Add(role);
                 }
             }
+
+            roles = removeDuplicates(roles);
+
             return roles;
+        }
+
+        public Role getRoleById(int id)
+        {
+            List<Role> roles = loadRoles();
+            return roles.FirstOrDefault(r => r.id == id);
         }
 
         public void destroyRole(Role role)
@@ -105,6 +163,22 @@ namespace DatabaseManagement.FileSystem
                     writer.WriteLine($"{r.id},{r.name},{r.description}");
                 }
             }
+        }
+
+        public List<Role> removeDuplicates(List<Role> roles)
+        {
+            Dictionary<int, Role> latestRoles = new Dictionary<int, Role>();
+
+            foreach (var role in roles)
+            {
+                if (!latestRoles.ContainsKey(role.id) ||
+                    DateTime.Parse(role.updated_at) > DateTime.Parse(latestRoles[role.id].updated_at))
+                {
+                    latestRoles[role.id] = role;
+                }
+            }
+
+            return latestRoles.Values.ToList();
         }
     }
 }
