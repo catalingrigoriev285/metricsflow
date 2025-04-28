@@ -44,7 +44,7 @@ namespace DatabaseManagement.FileSystem
 
             using (StreamWriter writer = new StreamWriter(file_path, true))
             {
-                writer.WriteLine($"{evaluation.id},{evaluation.title},{evaluation.description}");
+                writer.WriteLine($"{evaluation.id},{evaluation.title},{evaluation.description},{(int)evaluation.type},{evaluation.user_id}");
                 
                 if(evaluation.questions != null)
                 {
@@ -66,13 +66,12 @@ namespace DatabaseManagement.FileSystem
         {
             if (!File.Exists(file_path))
             {
-                //throw new FileNotFoundException("The file does not exist.", file_path);
                 return new List<Evaluation>();
             }
 
             using (StreamReader reader = new StreamReader(file_path))
             {
-                string line;
+                string? line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     if (string.IsNullOrWhiteSpace(line))
@@ -80,12 +79,16 @@ namespace DatabaseManagement.FileSystem
                         continue;
                     }
                     string[] evaluationData = line.Split(',');
-                    if (evaluationData.Length < 3)
+                    if (evaluationData.Length < 5)
                     {
                         throw new FormatException("Invalid evaluation data format.");
                     }
-                    Evaluation evaluation = new Evaluation(evaluationData[1], evaluationData[2]);
-                    evaluation.id = int.Parse(evaluationData[0]);
+                    Evaluation evaluation = new Evaluation(evaluationData[1], evaluationData[2])
+                    {
+                        id = int.Parse(evaluationData[0]),
+                        type = Enum.Parse<Evaluation.EvaluationType>(evaluationData[3]),
+                        user_id = int.Parse(evaluationData[4]),
+                    };
                     while ((line = reader.ReadLine()) != null && !string.IsNullOrWhiteSpace(line))
                     {
                         string[] questionData = line.Split(',');
@@ -93,8 +96,10 @@ namespace DatabaseManagement.FileSystem
                         {
                             throw new FormatException("Invalid question data format.");
                         }
-                        Question question = new Question(questionData[1], questionData[2]);
-                        question.id = int.Parse(questionData[0]);
+                        Question question = new Question(questionData[1], questionData[2])
+                        {
+                            id = int.Parse(questionData[0])
+                        };
                         while ((line = reader.ReadLine()) != null && !string.IsNullOrWhiteSpace(line))
                         {
                             string[] answerData = line.Split(',');

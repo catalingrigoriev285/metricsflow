@@ -124,8 +124,6 @@ namespace UserInterface
             List<Models.Evaluation> evaluations = new List<Models.Evaluation>();
             evaluations.AddRange((new DatabaseManagement.FileSystem.EvaluationInterface()).loadEvaluations());
 
-            dataGridView_evaluations.Columns["user_id"].HeaderText = "user";
-
             dataGridView_evaluations_render(evaluations);
 
             DataGridViewButtonColumn buttonColumn_edit_evaluation = new DataGridViewButtonColumn();

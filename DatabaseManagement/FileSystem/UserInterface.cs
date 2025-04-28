@@ -197,6 +197,21 @@ namespace DatabaseManagement.FileSystem
             return user;
         }
 
+        public User getUserByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Name cannot be null or empty", nameof(name));
+            }
+            List<User> users = loadUsers();
+            User user = users.FirstOrDefault(u => u.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User with name {name} not found");
+            }
+            return user;
+        }
+
         public void destroyUser(User user)
         {
             if (user == null)

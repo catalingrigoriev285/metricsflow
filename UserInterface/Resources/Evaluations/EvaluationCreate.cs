@@ -71,7 +71,11 @@ namespace UserInterface.Resources.Evaluations
             {
                 Evaluation evaluation = new Evaluation(textBox_evaluation_create_title.Text, textBox_evaluation_create_description.Text);
 
-                evaluation.user_id = comboBox_evaluation_create_user.SelectedIndex + 1;
+                int temp_user_id = comboBox_evaluation_create_user.SelectedIndex + 1;
+
+                DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
+                evaluation.user_id = userInterface.getUserByName(comboBox_evaluation_create_user.SelectedItem.ToString()).id;
+
                 evaluation.type = (Evaluation.EvaluationType)Enum.Parse(typeof(Evaluation.EvaluationType), comboBox_evaluation_create_type.SelectedItem.ToString());
                 
                 DatabaseManagement.FileSystem.EvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
