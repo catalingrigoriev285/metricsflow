@@ -216,9 +216,14 @@ namespace UserInterface
                     roleInterface.destroyRole(role);
                 }
 
-                dataGridView_roles_render(roles);
+                dataGridView_roles_render((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles());
                 MessageBox.Show("All roles deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void button_roles_refresh_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Roles refreshed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

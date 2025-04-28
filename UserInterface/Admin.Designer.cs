@@ -45,6 +45,7 @@
             updatedatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             userBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
+            button_roles_destroyAll = new Button();
             button_roles_edit_add = new Button();
             dataGridView_roles = new DataGridView();
             idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -59,7 +60,7 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
-            button_roles_destroyAll = new Button();
+            button_roles_refresh = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -212,6 +213,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button_roles_refresh);
             tabPage2.Controls.Add(button_roles_destroyAll);
             tabPage2.Controls.Add(button_roles_edit_add);
             tabPage2.Controls.Add(dataGridView_roles);
@@ -225,9 +227,19 @@
             tabPage2.Text = "Roles";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button_roles_destroyAll
+            // 
+            button_roles_destroyAll.Location = new Point(559, 5);
+            button_roles_destroyAll.Name = "button_roles_destroyAll";
+            button_roles_destroyAll.Size = new Size(132, 29);
+            button_roles_destroyAll.TabIndex = 7;
+            button_roles_destroyAll.Text = "Destroy all roles";
+            button_roles_destroyAll.UseVisualStyleBackColor = true;
+            button_roles_destroyAll.Click += button_roles_destroyAll_Click;
+            // 
             // button_roles_edit_add
             // 
-            button_roles_edit_add.Location = new Point(283, 7);
+            button_roles_edit_add.Location = new Point(421, 6);
             button_roles_edit_add.Name = "button_roles_edit_add";
             button_roles_edit_add.Size = new Size(132, 29);
             button_roles_edit_add.TabIndex = 6;
@@ -341,15 +353,15 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
-            // button_roles_destroyAll
+            // button_roles_refresh
             // 
-            button_roles_destroyAll.Location = new Point(421, 6);
-            button_roles_destroyAll.Name = "button_roles_destroyAll";
-            button_roles_destroyAll.Size = new Size(132, 29);
-            button_roles_destroyAll.TabIndex = 7;
-            button_roles_destroyAll.Text = "Destroy all roles";
-            button_roles_destroyAll.UseVisualStyleBackColor = true;
-            button_roles_destroyAll.Click += button_roles_destroyAll_Click;
+            button_roles_refresh.Location = new Point(283, 6);
+            button_roles_refresh.Name = "button_roles_refresh";
+            button_roles_refresh.Size = new Size(132, 29);
+            button_roles_refresh.TabIndex = 8;
+            button_roles_refresh.Text = "Refresh";
+            button_roles_refresh.UseVisualStyleBackColor = true;
+            button_roles_refresh.Click += button_roles_refresh_Click;
             // 
             // Admin
             // 
@@ -411,5 +423,6 @@
         private Button button_roles_edit_add;
         private Button button_users_create;
         private Button button_roles_destroyAll;
+        private Button button_roles_refresh;
     }
 }
