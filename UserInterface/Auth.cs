@@ -114,16 +114,9 @@ namespace UserInterface
             if (validateLogin())
             {
                 Models.User user = new Models.User();
+
                 user.email = metroTextBox_email.Text;
-
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(metroTextBox_password.Text);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
-
-                    string encryptedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-                    user.setPassword(encryptedPassword);
-                }
+                user.setPassword(metroTextBox_password.Text);
 
                 DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
 

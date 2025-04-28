@@ -76,6 +76,11 @@ namespace UserInterface.Resources.Users
                 user.phone = phone;
                 user.role = role;
 
+                if(!string.IsNullOrEmpty(textBox_users_edit_password.Text))
+                {
+                    user.setPassword(textBox_users_edit_password.Text, false);
+                }
+
                 user.updated_at = DateTime.UtcNow.ToString("o");
 
                 userInterface.updateUser(user);

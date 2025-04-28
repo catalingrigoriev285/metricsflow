@@ -52,7 +52,20 @@ namespace UserInterface.Resources.Users
 
             tempUser.phone = textBox_users_create_phone.Text;
 
-            tempUser.setPassword(textBox_users_create_password.Text);
+            if (String.IsNullOrEmpty(textBox_users_create_password.Text))
+            {
+                MessageBox.Show("Password cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if(textBox_users_create_password.Text != textBox_users_create_repeatPassword.Text)
+            {
+                MessageBox.Show("Passwords do not match!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                tempUser.setPassword(textBox_users_create_password.Text);
+            }
 
             tempUser.role = (Role)comboBox_users_create.SelectedItem;
 

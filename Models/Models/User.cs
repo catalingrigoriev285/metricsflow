@@ -56,15 +56,22 @@ namespace Models
             this.id = id;
         }
 
-        public void setPassword(string password)
+        public void setPassword(string password, bool hashing = true)
         {
             if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentException("Password cannot be null or empty", nameof(password));
             }
 
-            Models.Encryption encryption = new Models.Encryption(password);
-            this.password = encryption.ToString();
+            if (hashing)
+            {
+                Models.Encryption encryption = new Models.Encryption(password);
+                this.password = encryption.ToString();
+            }
+            else
+            {
+                this.password = password;
+            }
         }
 
         public string getPassword()

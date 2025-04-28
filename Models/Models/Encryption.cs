@@ -15,7 +15,7 @@ namespace Models
 
         public Encryption(string password)
         {
-            this.password = SHA256Hash(password);
+            this.password = SHA1Hash(password);
         }
 
         public override string ToString()

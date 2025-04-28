@@ -116,11 +116,6 @@ namespace DatabaseManagement.FileSystem
 
             users = removeDuplicates(users);
 
-            foreach (User u in users)
-            {
-                Console.WriteLine(u.display());
-            }
-
             using (StreamWriter writer = new StreamWriter(file_path, false))
             {
                 foreach (User u in users)
@@ -172,7 +167,7 @@ namespace DatabaseManagement.FileSystem
                     {
                         User user = new User(parts[1].Trim(), parts[2].Trim(), parts[3].Trim(), new Role(parts[5].Trim(), ""));
                         user.setID(int.Parse(parts[0].Trim()));
-                        user.setPassword(parts[4].Trim());
+                        user.setPassword(parts[4].Trim(), false);
                         user.phone = parts[6].Trim();
                         user.created_at = parts[7].Trim();
                         user.updated_at = parts[8].Trim();
@@ -235,9 +230,6 @@ namespace DatabaseManagement.FileSystem
                 //throw new ArgumentException("Password cannot be null or empty", nameof(password));
                 return false;
             }
-
-            Models.Encryption encryption = new Models.Encryption(password);
-            string passwordHash = encryption.ToString();
 
             List<User> users = loadUsers();
             User user = users.FirstOrDefault(u => u.email == email && u.getPassword() == password);
