@@ -90,6 +90,7 @@
             dataGridView_users.Location = new Point(3, 3);
             dataGridView_users.Name = "dataGridView_users";
             dataGridView_users.ReadOnly = true;
+            dataGridView_users.RowHeadersVisible = false;
             dataGridView_users.RowHeadersWidth = 51;
             dataGridView_users.Size = new Size(768, 409);
             dataGridView_users.TabIndex = 0;
@@ -201,7 +202,7 @@
             // signOutToolStripMenuItem
             // 
             signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            signOutToolStripMenuItem.Size = new Size(224, 26);
+            signOutToolStripMenuItem.Size = new Size(149, 26);
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 

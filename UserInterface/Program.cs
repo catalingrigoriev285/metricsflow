@@ -4,7 +4,7 @@ namespace UserInterface
 {
     public class globals {
         public static User _sessionUser;
-        public static string sessionToken;
+        public static string _sessionToken;
 
         public static User sessionUser
         {

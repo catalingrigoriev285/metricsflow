@@ -111,8 +111,8 @@ namespace DatabaseManagement.FileSystem
                         user.setID(int.Parse(parts[0].Trim()));
                         user.setPassword(parts[4].Trim());
                         user.phone = parts[6].Trim();
-                        user.created_at = DateTime.Parse(parts[7].Trim());
-                        user.updated_at = DateTime.Parse(parts[8].Trim());
+                        user.created_at = parts[7].Trim();
+                        user.updated_at = parts[8].Trim();
                         users.Add(user);
                     }
                     catch (Exception ex)
@@ -122,6 +122,27 @@ namespace DatabaseManagement.FileSystem
                 }
             }
             return users;
+        }
+
+        public void destroyUser(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            List<User> users = loadUsers();
+            User userToDelete = users.FirstOrDefault(u => u.id == user.id);
+            if (userToDelete != null)
+            {
+                users.Remove(userToDelete);
+                using (StreamWriter writer = new StreamWriter(File.Open(file_path, FileMode.Create)))
+                {
+                    foreach (User u in users)
+                    {
+                        writer.WriteLine($"{u.id}, {u.name},{u.prename},{u.email},{u.getPassword()},{u.role.name},{u.phone},{u.created_at},{u.updated_at}");
+                    }
+                }
+            }
         }
 
         public bool auth(string email, string password)

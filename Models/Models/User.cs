@@ -21,8 +21,8 @@ namespace Models
 
         public Role role { get; set; }
 
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
 
         public User() { }
 
@@ -32,8 +32,8 @@ namespace Models
             this.prename = prename;
             this.email = email;
             this.role = role;
-            this.created_at = DateTime.Now;
-            this.updated_at = DateTime.Now;
+            this.created_at = DateTime.Now.ToString();
+            this.updated_at = DateTime.Now.ToString();
         }
 
         public override string ToString()
@@ -74,8 +74,8 @@ namespace Models
             this.password = null;
             this.phone = null;
             this.role = null;
-            this.created_at = DateTime.MinValue;
-            this.updated_at = DateTime.MinValue;
+            this.created_at = DateTime.MinValue.ToString();
+            this.updated_at = DateTime.MinValue.ToString();
         }
     }
 }

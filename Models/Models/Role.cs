@@ -27,7 +27,12 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Role: {name}, Description: {description}, Created At: {created_at}, Updated At: {updated_at}";
+            return $"{name}";
+        }
+
+        public string display()
+        {
+            return $"{id}, {name}, {description}, Created At: {created_at}, Updated At: {updated_at}";
         }
     }
 }
