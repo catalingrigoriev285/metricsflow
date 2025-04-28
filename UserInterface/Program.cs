@@ -27,6 +27,14 @@ namespace UserInterface
             set { _sessionSelectedRole = value; }
         }
 
+        public static Evaluation _sessionSelectedEvaluation;
+
+        public static Evaluation sessionSelectedEvaluation
+        {
+            get { return _sessionSelectedEvaluation; }
+            set { _sessionSelectedEvaluation = value; }
+        }
+
         public static string _sessionToken;
 
         public static string sessionToken

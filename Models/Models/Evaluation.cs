@@ -37,6 +37,17 @@ namespace Models
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
 
+        public Evaluation()
+        {
+            this.title = null;
+            this.description = null;
+            this.user_id = 0;
+            this.type = EvaluationType.Formative;
+            this.questions = null;
+            this.created_at = DateTime.MinValue;
+            this.updated_at = DateTime.MinValue;
+        }
+
         public Evaluation(string title, string description)
         {
             this.title = title;
@@ -48,6 +59,23 @@ namespace Models
         public override string ToString()
         {
             return $"Evaluation: {title}, Description: {description}, Created At: {created_at}, Updated At: {updated_at}";
+        }
+
+        public void setID(int id)
+        {
+            this.id = id;
+        }
+
+        public void destroyEvaluation()
+        {
+            this.id = 0;
+            this.title = null;
+            this.description = null;
+            this.user_id = 0;
+            this.type = EvaluationType.Formative;
+            this.questions = null;
+            this.created_at = DateTime.MinValue;
+            this.updated_at = DateTime.MinValue;
         }
 
         public void AddQuestion(Question question)

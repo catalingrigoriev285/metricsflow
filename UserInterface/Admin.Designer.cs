@@ -58,6 +58,18 @@
             button_roles_search = new Button();
             textBox_roles_search = new TextBox();
             tabPage3 = new TabPage();
+            button_evaluation_create = new Button();
+            button_evaluation_search = new Button();
+            textBox_evaluation_search = new TextBox();
+            dataGridView_evaluations = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            title = new DataGridViewTextBoxColumn();
+            description = new DataGridViewTextBoxColumn();
+            type = new DataGridViewTextBoxColumn();
+            user_id = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            evaluationBindingSource = new BindingSource(components);
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
@@ -68,6 +80,9 @@
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_roles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)roleBindingSource).BeginInit();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_evaluations).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)evaluationBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,6 +111,7 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Click += tabPage1_Click;
             // 
             // button_users_create
             // 
@@ -333,12 +349,121 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(button_evaluation_create);
+            tabPage3.Controls.Add(button_evaluation_search);
+            tabPage3.Controls.Add(textBox_evaluation_search);
+            tabPage3.Controls.Add(dataGridView_evaluations);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(774, 415);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Evaluations";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button_evaluation_create
+            // 
+            button_evaluation_create.Location = new Point(284, 4);
+            button_evaluation_create.Name = "button_evaluation_create";
+            button_evaluation_create.Size = new Size(181, 29);
+            button_evaluation_create.TabIndex = 7;
+            button_evaluation_create.Text = "Create a new evaluation";
+            button_evaluation_create.UseVisualStyleBackColor = true;
+            button_evaluation_create.Click += button_evaluation_create_Click;
+            // 
+            // button_evaluation_search
+            // 
+            button_evaluation_search.Location = new Point(184, 4);
+            button_evaluation_search.Name = "button_evaluation_search";
+            button_evaluation_search.Size = new Size(94, 29);
+            button_evaluation_search.TabIndex = 6;
+            button_evaluation_search.Text = "Search";
+            button_evaluation_search.UseVisualStyleBackColor = true;
+            // 
+            // textBox_evaluation_search
+            // 
+            textBox_evaluation_search.Location = new Point(6, 6);
+            textBox_evaluation_search.Name = "textBox_evaluation_search";
+            textBox_evaluation_search.PlaceholderText = "Search an user...";
+            textBox_evaluation_search.Size = new Size(172, 27);
+            textBox_evaluation_search.TabIndex = 5;
+            // 
+            // dataGridView_evaluations
+            // 
+            dataGridView_evaluations.AllowUserToAddRows = false;
+            dataGridView_evaluations.AllowUserToDeleteRows = false;
+            dataGridView_evaluations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView_evaluations.AutoGenerateColumns = false;
+            dataGridView_evaluations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_evaluations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_evaluations.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, title, description, type, user_id, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8 });
+            dataGridView_evaluations.DataSource = evaluationBindingSource;
+            dataGridView_evaluations.Location = new Point(3, 39);
+            dataGridView_evaluations.Name = "dataGridView_evaluations";
+            dataGridView_evaluations.ReadOnly = true;
+            dataGridView_evaluations.RowHeadersVisible = false;
+            dataGridView_evaluations.RowHeadersWidth = 51;
+            dataGridView_evaluations.Size = new Size(768, 371);
+            dataGridView_evaluations.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            dataGridViewTextBoxColumn1.HeaderText = "id";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // title
+            // 
+            title.DataPropertyName = "title";
+            title.HeaderText = "title";
+            title.MinimumWidth = 6;
+            title.Name = "title";
+            title.ReadOnly = true;
+            // 
+            // description
+            // 
+            description.DataPropertyName = "description";
+            description.HeaderText = "description";
+            description.MinimumWidth = 6;
+            description.Name = "description";
+            description.ReadOnly = true;
+            // 
+            // type
+            // 
+            type.DataPropertyName = "type";
+            type.HeaderText = "type";
+            type.MinimumWidth = 6;
+            type.Name = "type";
+            type.ReadOnly = true;
+            // 
+            // user_id
+            // 
+            user_id.DataPropertyName = "user_id";
+            user_id.HeaderText = "user_id";
+            user_id.MinimumWidth = 6;
+            user_id.Name = "user_id";
+            user_id.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "created_at";
+            dataGridViewTextBoxColumn7.HeaderText = "created_at";
+            dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.DataPropertyName = "updated_at";
+            dataGridViewTextBoxColumn8.HeaderText = "updated_at";
+            dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // evaluationBindingSource
+            // 
+            evaluationBindingSource.DataSource = typeof(Models.Evaluation);
             // 
             // menuStrip1
             // 
@@ -385,6 +510,10 @@
             tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_roles).EndInit();
             ((System.ComponentModel.ISupportInitialize)roleBindingSource).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_evaluations).EndInit();
+            ((System.ComponentModel.ISupportInitialize)evaluationBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -425,5 +554,17 @@
         private Button button_users_create;
         private Button button_roles_destroyAll;
         private Button button_roles_refresh;
+        private Button button_evaluation_create;
+        private Button button_evaluation_search;
+        private TextBox textBox_evaluation_search;
+        private DataGridView dataGridView_evaluations;
+        private BindingSource evaluationBindingSource;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn title;
+        private DataGridViewTextBoxColumn description;
+        private DataGridViewTextBoxColumn type;
+        private DataGridViewTextBoxColumn user_id;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }

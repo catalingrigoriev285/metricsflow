@@ -31,10 +31,10 @@ namespace DatabaseManagement.FileSystem
             {
                 throw new ArgumentException("Evaluation description cannot be null or empty", nameof(evaluation.description));
             }
-            else if (evaluation.questions == null)
-            {
-                throw new ArgumentException("Evaluation questions cannot be null or empty", nameof(evaluation.questions));
-            }
+            //else if (evaluation.questions == null)
+            //{
+            //    throw new ArgumentException("Evaluation questions cannot be null or empty", nameof(evaluation.questions));
+            //}
 
             string directoryPath = Path.GetDirectoryName(file_path);
             if (!Directory.Exists(directoryPath))
@@ -45,12 +45,16 @@ namespace DatabaseManagement.FileSystem
             using (StreamWriter writer = new StreamWriter(file_path, true))
             {
                 writer.WriteLine($"{evaluation.id},{evaluation.title},{evaluation.description}");
-                foreach (var question in evaluation.questions)
+                
+                if(evaluation.questions != null)
                 {
-                    writer.WriteLine($"{question.id},{question.title},{question.description}");
-                    foreach (var answer in question.answers)
+                    foreach (var question in evaluation.questions)
                     {
-                        writer.WriteLine($"{answer.value},{answer.validation}");
+                        writer.WriteLine($"{question.id},{question.title},{question.description}");
+                        foreach (var answer in question.answers)
+                        {
+                            writer.WriteLine($"{answer.value},{answer.validation}");
+                        }
                     }
                 }
 
@@ -108,6 +112,32 @@ namespace DatabaseManagement.FileSystem
             }
 
             return evaluations;
+        }
+
+        public void destroyEvaluation(Evaluation evaluation)
+        {
+            if (evaluation == null)
+            {
+                throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
+            }
+            List<Evaluation> evaluations = loadEvaluations();
+            evaluations.RemoveAll(e => e.id == evaluation.id);
+            using (StreamWriter writer = new StreamWriter(file_path, false))
+            {
+                foreach (Evaluation e in evaluations)
+                {
+                    writer.WriteLine($"{e.id},{e.title},{e.description}");
+                    foreach (var question in e.questions)
+                    {
+                        writer.WriteLine($"{question.id},{question.title},{question.description}");
+                        foreach (var answer in question.answers)
+                        {
+                            writer.WriteLine($"{answer.value},{answer.validation}");
+                        }
+                    }
+                    writer.WriteLine("\n");
+                }
+            }
         }
     }
 }

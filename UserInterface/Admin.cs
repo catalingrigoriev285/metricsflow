@@ -120,6 +120,59 @@ namespace UserInterface
                     }
                 }
             };
+
+            List<Models.Evaluation> evaluations = new List<Models.Evaluation>();
+            evaluations.AddRange((new DatabaseManagement.FileSystem.EvaluationInterface()).loadEvaluations());
+
+            dataGridView_evaluations.Columns["user_id"].HeaderText = "user";
+
+            dataGridView_evaluations_render(evaluations);
+
+            DataGridViewButtonColumn buttonColumn_edit_evaluation = new DataGridViewButtonColumn();
+            buttonColumn_edit_evaluation.Name = "Edit";
+            buttonColumn_edit_evaluation.HeaderText = "";
+            buttonColumn_edit_evaluation.Text = "Edit";
+            buttonColumn_edit_evaluation.UseColumnTextForButtonValue = true;
+            dataGridView_evaluations.Columns.Add(buttonColumn_edit_evaluation);
+
+            DataGridViewButtonColumn buttonColumn_destroy_evaluation = new DataGridViewButtonColumn();
+            buttonColumn_destroy_evaluation.Name = "Destroy";
+            buttonColumn_destroy_evaluation.HeaderText = "";
+            buttonColumn_destroy_evaluation.Text = "Destroy";
+            buttonColumn_destroy_evaluation.UseColumnTextForButtonValue = true;
+            dataGridView_evaluations.Columns.Add(buttonColumn_destroy_evaluation);
+
+            dataGridView_evaluations.CellClick += (s, e) =>
+            {
+                if (e.RowIndex >= 0)
+                {
+                    if (e.ColumnIndex == dataGridView_evaluations.Columns["Destroy"].Index)
+                    {
+                        var confirm = MessageBox.Show("Are you sure you want to delete this evaluation?", "Delete Evaluation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
+                            Models.Evaluation evaluation = new Models.Evaluation();
+                            evaluation.setID(evaluationId);
+                            DatabaseManagement.FileSystem.EvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                            evaluationInterface.destroyEvaluation(evaluation);
+                            MessageBox.Show("Evaluation deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            List<Models.Evaluation> evaluations = new List<Models.Evaluation>();
+                            evaluations.AddRange((new DatabaseManagement.FileSystem.EvaluationInterface()).loadEvaluations());
+                            dataGridView_evaluations_render(evaluations);
+                        }
+                    }
+                    else if (e.ColumnIndex == dataGridView_evaluations.Columns["Edit"].Index)
+                    {
+                        int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
+                        Models.Evaluation evaluation = new Models.Evaluation();
+                        evaluation.setID(evaluationId);
+                        UserInterface.globals.sessionSelectedEvaluation = evaluation;
+                        //UserInterface.Resources.Evaluations.EvaluationEdit evaluationEdit = new UserInterface.Resources.Evaluations.EvaluationEdit(this);
+                        //evaluationEdit.ShowDialog();
+                    }
+                }
+            };
         }
 
         public void dataGridView_users_render(List<Models.User> users)
@@ -134,6 +187,12 @@ namespace UserInterface
         {
             dataGridView_roles.DataSource = null;
             dataGridView_roles.DataSource = roles;
+        }
+
+        public void dataGridView_evaluations_render(List<Models.Evaluation> evaluations)
+        {
+            dataGridView_evaluations.DataSource = null;
+            dataGridView_evaluations.DataSource = evaluations;
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,7 +265,7 @@ namespace UserInterface
             List<Models.Role> roles = new List<Models.Role>();
             roles.AddRange((new DatabaseManagement.FileSystem.RoleInterface()).loadRoles());
 
-            if(roles.Count == 0)
+            if (roles.Count == 0)
             {
                 MessageBox.Show("No roles to delete!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -230,6 +289,17 @@ namespace UserInterface
         private void button_roles_refresh_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Roles refreshed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button_evaluation_create_Click(object sender, EventArgs e)
+        {
+            UserInterface.Resources.Evaluations.EvaluationCreate evaluationCreate = new UserInterface.Resources.Evaluations.EvaluationCreate(this);
+            evaluationCreate.ShowDialog(this);
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
