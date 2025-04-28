@@ -62,6 +62,10 @@
             button_evaluation_search = new Button();
             textBox_evaluation_search = new TextBox();
             dataGridView_evaluations = new DataGridView();
+            evaluationBindingSource = new BindingSource(components);
+            menuStrip1 = new MenuStrip();
+            accountToolStripMenuItem = new ToolStripMenuItem();
+            signOutToolStripMenuItem = new ToolStripMenuItem();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
             description = new DataGridViewTextBoxColumn();
@@ -69,10 +73,6 @@
             user_id = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            evaluationBindingSource = new BindingSource(components);
-            menuStrip1 = new MenuStrip();
-            accountToolStripMenuItem = new ToolStripMenuItem();
-            signOutToolStripMenuItem = new ToolStripMenuItem();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -406,6 +406,34 @@
             dataGridView_evaluations.Size = new Size(768, 371);
             dataGridView_evaluations.TabIndex = 4;
             // 
+            // evaluationBindingSource
+            // 
+            evaluationBindingSource.DataSource = typeof(Models.Evaluation);
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { accountToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(782, 28);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // accountToolStripMenuItem
+            // 
+            accountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { signOutToolStripMenuItem });
+            accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            accountToolStripMenuItem.Size = new Size(77, 24);
+            accountToolStripMenuItem.Text = "Account";
+            // 
+            // signOutToolStripMenuItem
+            // 
+            signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            signOutToolStripMenuItem.Size = new Size(149, 26);
+            signOutToolStripMenuItem.Text = "Sign Out";
+            signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
+            // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.DataPropertyName = "id";
@@ -461,34 +489,6 @@
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // evaluationBindingSource
-            // 
-            evaluationBindingSource.DataSource = typeof(Models.Evaluation);
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { accountToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(782, 28);
-            menuStrip1.TabIndex = 1;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // accountToolStripMenuItem
-            // 
-            accountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { signOutToolStripMenuItem });
-            accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            accountToolStripMenuItem.Size = new Size(77, 24);
-            accountToolStripMenuItem.Text = "Account";
-            // 
-            // signOutToolStripMenuItem
-            // 
-            signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            signOutToolStripMenuItem.Size = new Size(149, 26);
-            signOutToolStripMenuItem.Text = "Sign Out";
-            signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
             // Admin
             // 
