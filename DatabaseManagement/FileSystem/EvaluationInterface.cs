@@ -74,51 +74,78 @@ namespace DatabaseManagement.FileSystem
             using (StreamReader reader = new StreamReader(file_path))
             {
                 string? line;
+                Evaluation? currentEvaluation = null;
+                Question? currentQuestion = null;
+
                 while ((line = reader.ReadLine()) != null)
                 {
                     if (string.IsNullOrWhiteSpace(line))
                     {
+                        if (currentEvaluation != null)
+                        {
+                            evaluations.Add(currentEvaluation);
+                            currentEvaluation = null;
+                            currentQuestion = null;
+                        }
                         continue;
                     }
-                    string[] evaluationData = line.Split(',');
-                    if (evaluationData.Length < 5)
+
+                    string[] parts = line.Split(',');
+
+                    if (parts.Length == 5 && Enum.TryParse<Evaluation.EvaluationType>(parts[3], out _)) // Evaluation
                     {
-                        throw new FormatException("Invalid evaluation data format.");
-                    }
-                    Evaluation evaluation = new Evaluation(evaluationData[1], evaluationData[2])
-                    {
-                        id = int.Parse(evaluationData[0]),
-                        type = Enum.Parse<Evaluation.EvaluationType>(evaluationData[3]),
-                        user_id = int.Parse(evaluationData[4]),
-                    };
-                    while ((line = reader.ReadLine()) != null && !string.IsNullOrWhiteSpace(line))
-                    {
-                        string[] questionData = line.Split(',');
-                        if (questionData.Length < 3)
+                        if (currentEvaluation != null)
                         {
-                            throw new FormatException("Invalid question data format.");
+                            evaluations.Add(currentEvaluation);
                         }
-                        Question question = new Question(questionData[1], questionData[2])
+
+                        currentEvaluation = new Evaluation(parts[1], parts[2])
                         {
-                            id = int.Parse(questionData[0])
+                            id = int.Parse(parts[0]),
+                            type = Enum.Parse<Evaluation.EvaluationType>(parts[3]),
+                            user_id = int.Parse(parts[4])
                         };
-                        while ((line = reader.ReadLine()) != null && !string.IsNullOrWhiteSpace(line))
-                        {
-                            string[] answerData = line.Split(',');
-                            if (answerData.Length < 2)
-                            {
-                                throw new FormatException("Invalid answer data format.");
-                            }
-                            Question.Answer answer = new Question.Answer(answerData[0], bool.Parse(answerData[1]));
-                            question.AddAnswer(answer);
-                        }
-                        evaluation.AddQuestion(question);
+                        currentQuestion = null;
                     }
-                    evaluations.Add(evaluation);
+                    else if (parts.Length == 5 && DateTime.TryParse(parts[3], out _) && DateTime.TryParse(parts[4], out _)) // Question
+                    {
+                        currentQuestion = new Question(parts[1], parts[2])
+                        {
+                            id = int.Parse(parts[0]),
+                            created_at = DateTime.Parse(parts[3]),
+                            updated_at = DateTime.Parse(parts[4])
+                        };
+                        currentEvaluation?.AddQuestion(currentQuestion);
+                    }
+                    else if (parts.Length == 2) // Answer
+                    {
+                        if (currentQuestion != null)
+                        {
+                            bool isValid = bool.TryParse(parts[1], out bool validation) && validation;
+                            currentQuestion.AddAnswer(new Question.Answer(parts[0], isValid));
+                        }
+                    }
+                    else
+                    {
+                        throw new FormatException($"Unrecognized line format: {line}");
+                    }
+                }
+
+                if (currentEvaluation != null)
+                {
+                    evaluations.Add(currentEvaluation);
                 }
             }
 
             evaluations = removeDuplicates(evaluations);
+
+            foreach (var evaluation in evaluations)
+            {
+                if (evaluation.questions != null)
+                {
+                    evaluation.questions = removeQuestionsDuplicates(evaluation.questions);
+                }
+            }
 
             return evaluations;
         }
@@ -162,6 +189,76 @@ namespace DatabaseManagement.FileSystem
                     }
                 }
                 return latestID;
+            }
+        }
+
+        public int getLatestID_Question()
+        {
+            if (!File.Exists(file_path))
+            {
+                return 0;
+            }
+            using (StreamReader reader = new StreamReader(file_path))
+            {
+                string? line;
+                int latestID = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+                    string[] questionData = line.Split(',');
+                    int currentID = int.Parse(questionData[0]);
+                    if (currentID > latestID)
+                    {
+                        latestID = currentID;
+                    }
+                }
+                return latestID;
+            }
+        }
+
+        public void updateEvaluation(Evaluation evaluation)
+        {
+            if (evaluation == null)
+            {
+                throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
+            }
+            List<Evaluation> evaluations = loadEvaluations();
+            Evaluation? evaluationToUpdate = evaluations.FirstOrDefault(e => e.id == evaluation.id);
+            if (evaluationToUpdate != null)
+            {
+                evaluationToUpdate.title = evaluation.title;
+                evaluationToUpdate.description = evaluation.description;
+                evaluationToUpdate.type = evaluation.type;
+                evaluationToUpdate.user_id = evaluation.user_id;
+                evaluationToUpdate.questions = evaluation.questions;
+                using (StreamWriter writer = new StreamWriter(file_path, false))
+                {
+                    foreach (var eval in evaluations)
+                    {
+                        writer.WriteLine($"{eval.id},{eval.title},{eval.description},{(int)eval.type},{eval.user_id}");
+                        if (eval.questions != null)
+                        {
+                            eval.questions = removeQuestionsDuplicates(eval.questions);
+
+                            foreach (var question in eval.questions)
+                            {
+                                writer.WriteLine($"{question.id},{question.title},{question.description},{question.created_at},{question.updated_at}");
+
+                                if (question.answers != null)
+                                {
+                                    foreach (var answer in question.answers)
+                                    {
+                                        writer.WriteLine($"{answer.value},{answer.validation}");
+                                    }
+                                }
+                            }
+                        }
+                        writer.WriteLine("\n");
+                    }
+                }
             }
         }
 
@@ -214,6 +311,15 @@ namespace DatabaseManagement.FileSystem
                 }
             }
             return uniqueEvaluations;
+        }
+
+        public List<Question> removeQuestionsDuplicates(List<Question> questions)
+        {
+            return questions
+                .OrderByDescending(q => q.created_at)
+                .GroupBy(q => q.id)
+                .Select(g => g.First())
+                .ToList();
         }
     }
 }

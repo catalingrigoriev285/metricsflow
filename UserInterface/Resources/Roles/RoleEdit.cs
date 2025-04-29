@@ -60,6 +60,8 @@ namespace UserInterface.Resources.Roles
             }
             else
             {
+                this.Text = "Editing role [ #" + UserInterface.globals.sessionSelectedRole.id + " ]";
+
                 DatabaseManagement.FileSystem.RoleInterface roleInterface = new DatabaseManagement.FileSystem.RoleInterface();
                 Models.Role role = roleInterface.getRoleById(UserInterface.globals.sessionSelectedRole.id);
                 if (role != null)

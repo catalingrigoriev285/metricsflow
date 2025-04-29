@@ -35,6 +35,8 @@ namespace UserInterface.Resources.Users
                 DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
                 Models.User user = userInterface.getUserById(UserInterface.globals.sessionSelectedUser.id);
 
+                this.Text = "Editing user [ #" + user.id + " ]";
+
                 if (user != null)
                 {
                     textBox_users_edit_name.Text = user.name;

@@ -126,6 +126,13 @@ namespace UserInterface
 
             dataGridView_evaluations_render(evaluations);
 
+            DataGridViewButtonColumn buttonColumn_questions = new DataGridViewButtonColumn();
+            buttonColumn_questions.Name = "Questions";
+            buttonColumn_questions.HeaderText = "";
+            buttonColumn_questions.Text = "Questions";
+            buttonColumn_questions.UseColumnTextForButtonValue = true;
+            dataGridView_evaluations.Columns.Add(buttonColumn_questions);
+
             DataGridViewButtonColumn buttonColumn_edit_evaluation = new DataGridViewButtonColumn();
             buttonColumn_edit_evaluation.Name = "Edit";
             buttonColumn_edit_evaluation.HeaderText = "";
@@ -168,6 +175,15 @@ namespace UserInterface
                         UserInterface.globals.sessionSelectedEvaluation = evaluation;
                         UserInterface.Resources.Evaluations.EvaluationEdit evaluationEdit = new UserInterface.Resources.Evaluations.EvaluationEdit(this);
                         evaluationEdit.ShowDialog();
+                    }
+                    else if (e.ColumnIndex == dataGridView_evaluations.Columns["Questions"].Index)
+                    {
+                        int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
+                        Models.Evaluation evaluation = new Models.Evaluation();
+                        evaluation.setID(evaluationId);
+                        UserInterface.globals.sessionSelectedEvaluation = evaluation;
+                        UserInterface.Resources.Evaluations.Questions.QuestionsIndex questionsIndex = new UserInterface.Resources.Evaluations.Questions.QuestionsIndex(this);
+                        questionsIndex.ShowDialog();
                     }
                 }
             };
