@@ -1,4 +1,4 @@
-Metricsflow is a tool designed to streamline the process of defining, calculating, and analyzing metrics. It provides a framework for managing metrics within a data ecosystem, promoting consistency and reusability.  While the description is brief, this README will expand on potential features and usage based on common metrics management tools.
+Metricsflow is a digital platform for testing and assessing company employees. It offers customizable tests, automated scoring, performance tracking, and secure access, streamlining the evaluation process.
 
 ![image](https://github.com/user-attachments/assets/9d0171fa-42c9-44bb-8caa-507591ba4e28)
 
