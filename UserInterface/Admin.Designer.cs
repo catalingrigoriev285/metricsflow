@@ -62,10 +62,6 @@
             button_evaluation_search = new Button();
             textBox_evaluation_search = new TextBox();
             dataGridView_evaluations = new DataGridView();
-            evaluationBindingSource = new BindingSource(components);
-            menuStrip1 = new MenuStrip();
-            accountToolStripMenuItem = new ToolStripMenuItem();
-            signOutToolStripMenuItem = new ToolStripMenuItem();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
             description = new DataGridViewTextBoxColumn();
@@ -73,6 +69,11 @@
             user_id = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            evaluationBindingSource = new BindingSource(components);
+            menuStrip1 = new MenuStrip();
+            accountToolStripMenuItem = new ToolStripMenuItem();
+            signOutToolStripMenuItem = new ToolStripMenuItem();
+            button_users_generate = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -100,6 +101,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button_users_generate);
             tabPage1.Controls.Add(button_users_create);
             tabPage1.Controls.Add(button_users_search);
             tabPage1.Controls.Add(textBox_users_search);
@@ -406,34 +408,6 @@
             dataGridView_evaluations.Size = new Size(768, 371);
             dataGridView_evaluations.TabIndex = 4;
             // 
-            // evaluationBindingSource
-            // 
-            evaluationBindingSource.DataSource = typeof(Models.Evaluation);
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { accountToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(782, 28);
-            menuStrip1.TabIndex = 1;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // accountToolStripMenuItem
-            // 
-            accountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { signOutToolStripMenuItem });
-            accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            accountToolStripMenuItem.Size = new Size(77, 24);
-            accountToolStripMenuItem.Text = "Account";
-            // 
-            // signOutToolStripMenuItem
-            // 
-            signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            signOutToolStripMenuItem.Size = new Size(149, 26);
-            signOutToolStripMenuItem.Text = "Sign Out";
-            signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.DataPropertyName = "id";
@@ -489,6 +463,44 @@
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // evaluationBindingSource
+            // 
+            evaluationBindingSource.DataSource = typeof(Models.Evaluation);
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { accountToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(782, 28);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // accountToolStripMenuItem
+            // 
+            accountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { signOutToolStripMenuItem });
+            accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            accountToolStripMenuItem.Size = new Size(77, 24);
+            accountToolStripMenuItem.Text = "Account";
+            // 
+            // signOutToolStripMenuItem
+            // 
+            signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            signOutToolStripMenuItem.Size = new Size(149, 26);
+            signOutToolStripMenuItem.Text = "Sign Out";
+            signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
+            // 
+            // button_users_generate
+            // 
+            button_users_generate.Location = new Point(418, 6);
+            button_users_generate.Name = "button_users_generate";
+            button_users_generate.Size = new Size(184, 29);
+            button_users_generate.TabIndex = 4;
+            button_users_generate.Text = "Generate a random user";
+            button_users_generate.UseVisualStyleBackColor = true;
+            button_users_generate.Click += button_users_generate_Click;
             // 
             // Admin
             // 
@@ -567,5 +579,6 @@
         private DataGridViewTextBoxColumn user_id;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private Button button_users_generate;
     }
 }

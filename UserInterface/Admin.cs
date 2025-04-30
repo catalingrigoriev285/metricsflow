@@ -333,5 +333,50 @@ namespace UserInterface
                 dataGridView_evaluations_render(filteredEvaluations);
             }
         }
+
+        private void button_users_generate_Click(object sender, EventArgs e)
+        {
+            User tempUser = new User();
+
+            List<string> names = new List<string>();
+            names.Add("John");
+            names.Add("Jane");
+            names.Add("Michael");
+            names.Add("Sarah");
+            names.Add("David");
+            names.Add("Emily");
+            names.Add("Daniel");
+            names.Add("Sophia");
+            names.Add("Matthew");
+            names.Add("Olivia");
+
+            List<string> surnames = new List<string>();
+            surnames.Add("Smith");
+            surnames.Add("Johnson");
+            surnames.Add("Williams");
+            surnames.Add("Jones");
+            surnames.Add("Brown");
+            surnames.Add("Davis");
+            surnames.Add("Miller");
+            surnames.Add("Wilson");
+            surnames.Add("Moore");
+
+            tempUser.name = names[new Random().Next(0, names.Count)];
+            tempUser.prename = surnames[new Random().Next(0, surnames.Count)];
+
+            tempUser.email = tempUser.name.ToLower() + "." + tempUser.prename.ToLower() + "@example.com";
+            tempUser.phone = "+41 79 " + new Random().Next(1000000, 9999999).ToString();
+            tempUser.setPassword("password123");
+            tempUser.created_at = DateTime.UtcNow.ToString("o");
+            tempUser.updated_at = DateTime.UtcNow.ToString("o");
+
+            tempUser.role = (new DatabaseManagement.FileSystem.RoleInterface()).getRoleByName("employee");
+            DatabaseManagement.FileSystem.UserInterface userInterface = new DatabaseManagement.FileSystem.UserInterface();
+            userInterface.saveUser(tempUser);
+
+            dataGridView_users_render((new DatabaseManagement.FileSystem.UserInterface()).loadUsers());
+
+            MessageBox.Show("User generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
