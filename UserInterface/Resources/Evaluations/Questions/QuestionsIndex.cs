@@ -31,6 +31,13 @@ namespace UserInterface.Resources.Evaluations.Questions
 
             _evaluation = evaluation;
 
+            DataGridViewButtonColumn answersButton = new DataGridViewButtonColumn();
+            answersButton.HeaderText = "";
+            answersButton.Text = "Answers";
+            answersButton.Name = "Answers";
+            answersButton.UseColumnTextForButtonValue = true;
+            dataGridView_questions.Columns.Add(answersButton);
+
             DataGridViewButtonColumn editButton = new DataGridViewButtonColumn();
             editButton.HeaderText = "";
             editButton.Text = "Edit";
@@ -64,9 +71,34 @@ namespace UserInterface.Resources.Evaluations.Questions
                     }
                     else if (dataGridView_questions.Columns["Destroy"] != null && e.ColumnIndex == dataGridView_questions.Columns["Destroy"].Index)
                     {
-                        MessageBox.Show("Destroy button clicked");
+                        var confirm = MessageBox.Show("Are you sure you want to delete this question?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (confirm == DialogResult.Yes)
+                        {
+                            int questionID = (int)dataGridView_questions.Rows[e.RowIndex].Cells[0].Value;
+
+                            Question question = new Question(string.Empty, string.Empty);
+                            question.id = questionID;
+
+                            Evaluation evaluation = new DatabaseManagement.FileSystem.EvaluationInterface().getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
+                            Question questionToDelete = evaluation.questions.FirstOrDefault(q => q.id == questionID);
+                            if (questionToDelete != null)
+                            {
+                                evaluation.questions.Remove(questionToDelete);
+                                new DatabaseManagement.FileSystem.EvaluationInterface().updateEvaluation(evaluation);
+                                dataGridView_questions_render(evaluation.questions);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Question not found.");
+                            }
+                        }
                     }
-                }
+                    else if (dataGridView_questions.Columns["Answers"] != null && e.ColumnIndex == dataGridView_questions.Columns["Answers"].Index)
+                    {
+                        MessageBox.Show("Answers button clicked");
+                    }
+                };
             };
         }
 

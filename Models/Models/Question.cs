@@ -8,23 +8,6 @@ namespace Models
 {
     public class Question
     {
-        public struct Answer
-        {
-            public string value { get; set; }
-            public bool validation { get; set; }
-
-            public Answer(string value, bool validation)
-            {
-                this.value = value;
-                this.validation = validation;
-            }
-
-            public override string ToString()
-            {
-                return $"Answer: {value}, Valid: {validation}";
-            }
-        }
-
         public int id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
