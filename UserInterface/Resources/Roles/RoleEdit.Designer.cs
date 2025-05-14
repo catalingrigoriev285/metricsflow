@@ -33,6 +33,7 @@
             label_roles_edit_desc = new Label();
             textBox_roles_edit_name = new TextBox();
             label_roles_edit_name = new Label();
+            checkBox_enable = new CheckBox();
             SuspendLayout();
             // 
             // button_roles_edit_save
@@ -81,11 +82,22 @@
             label_roles_edit_name.TabIndex = 16;
             label_roles_edit_name.Text = "Name";
             // 
+            // checkBox_enable
+            // 
+            checkBox_enable.AutoSize = true;
+            checkBox_enable.Location = new Point(13, 302);
+            checkBox_enable.Name = "checkBox_enable";
+            checkBox_enable.Size = new Size(140, 24);
+            checkBox_enable.TabIndex = 21;
+            checkBox_enable.Text = "Enable / Disable";
+            checkBox_enable.UseVisualStyleBackColor = true;
+            // 
             // RoleEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(577, 522);
+            Controls.Add(checkBox_enable);
             Controls.Add(button_roles_edit_save);
             Controls.Add(textBox_roles_edit_desc);
             Controls.Add(label_roles_edit_desc);
@@ -106,5 +118,6 @@
         private Label label_roles_edit_desc;
         private TextBox textBox_roles_edit_name;
         private Label label_roles_edit_name;
+        private CheckBox checkBox_enable;
     }
 }

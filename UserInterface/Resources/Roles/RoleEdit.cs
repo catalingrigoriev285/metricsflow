@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -88,6 +89,7 @@ namespace UserInterface.Resources.Roles
                     role.id = currentRole.id;
                     role.name = name;
                     role.description = description;
+                    role.enabled = checkBox_enable.Checked;
 
                     role.updated_at = DateTime.UtcNow.ToString("o");
 

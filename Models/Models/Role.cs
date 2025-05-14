@@ -12,6 +12,8 @@ namespace Models
         public string name { get; set; }
         public string description { get; set; }
 
+        public bool enabled { get; set; } = true;
+
         public string created_at { get; set; }
         public string updated_at { get; set; }
 
