@@ -157,9 +157,8 @@ namespace UserInterface
                         if (confirm == DialogResult.Yes)
                         {
                             int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
-                            Models.Evaluation evaluation = new Models.Evaluation();
-                            evaluation.setID(evaluationId);
-                            DatabaseManagement.FileSystem.EvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                            var evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                            Models.Evaluation evaluation = evaluationInterface.getEvaluationById(evaluationId);
                             evaluationInterface.destroyEvaluation(evaluation);
                             MessageBox.Show("Evaluation deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             List<Models.Evaluation> evaluations = new List<Models.Evaluation>();
@@ -170,8 +169,8 @@ namespace UserInterface
                     else if (e.ColumnIndex == dataGridView_evaluations.Columns["Edit"].Index)
                     {
                         int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
-                        Models.Evaluation evaluation = new Models.Evaluation();
-                        evaluation.setID(evaluationId);
+                        var evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                        Models.Evaluation evaluation = evaluationInterface.getEvaluationById(evaluationId);
                         UserInterface.globals.sessionSelectedEvaluation = evaluation;
                         UserInterface.Resources.Evaluations.EvaluationEdit evaluationEdit = new UserInterface.Resources.Evaluations.EvaluationEdit(this);
                         evaluationEdit.ShowDialog();
@@ -179,8 +178,8 @@ namespace UserInterface
                     else if (e.ColumnIndex == dataGridView_evaluations.Columns["Questions"].Index)
                     {
                         int evaluationId = (int)dataGridView_evaluations.Rows[e.RowIndex].Cells[0].Value;
-                        Models.Evaluation evaluation = new Models.Evaluation();
-                        evaluation.setID(evaluationId);
+                        var evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                        Models.Evaluation evaluation = evaluationInterface.getEvaluationById(evaluationId);
                         UserInterface.globals.sessionSelectedEvaluation = evaluation;
                         UserInterface.Resources.Evaluations.Questions.QuestionsIndex questionsIndex = new UserInterface.Resources.Evaluations.Questions.QuestionsIndex(this);
                         questionsIndex.ShowDialog();

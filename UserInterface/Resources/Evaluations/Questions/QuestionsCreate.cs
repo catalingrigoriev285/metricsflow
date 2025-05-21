@@ -55,7 +55,7 @@ namespace UserInterface.Resources.Evaluations.Questions
 
                 Question question = new Question(title, description);
 
-                question.id = new EvaluationInterface().getLatestID_Question() + 1;
+                question.id = new EvaluationInterface().GetNextQuestionId();
                 question.answers = new List<Question.Answer>();
                 question.created_at = DateTime.Now;
                 question.updated_at = DateTime.Now;

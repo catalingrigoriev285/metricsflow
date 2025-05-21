@@ -101,6 +101,16 @@ namespace UserInterface.Resources.Evaluations.Questions
                         DatabaseManagement.Interfaces.IEvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
                         Question question = evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id).questions.FirstOrDefault(q => q.id == questionID);
 
+                        if(question != null)
+                        {
+                            UserInterface.globals.sessionSelectedQuestion = question;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Question not found.");
+                            return;
+                        }
+
                         UserInterface.Resources.Evaluations.Questions.Answers.AnswersIndex answersIndex = new UserInterface.Resources.Evaluations.Questions.Answers.AnswersIndex(this, question);
                         answersIndex.ShowDialog();
                     }
