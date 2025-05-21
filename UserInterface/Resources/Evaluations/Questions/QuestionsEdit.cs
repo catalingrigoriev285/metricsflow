@@ -65,27 +65,29 @@ namespace UserInterface.Resources.Evaluations.Questions
         {
             if (validate())
             {
-                Question question = new Question(textBox_questions_edit_title.Text, textBox_questions_edit_desc.Text);
-                question.id = UserInterface.globals.sessionSelectedQuestion.id;
+                // Get fresh data from database
+                EvaluationInterface evaluationInterface = new EvaluationInterface();
+                Evaluation evaluation = evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
+                Question existingQuestion = evaluation.questions?.FirstOrDefault(q => q.id == UserInterface.globals.sessionSelectedQuestion.id);
 
-                DatabaseManagement.FileSystem.EvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
-
-                EvaluationInterface evaluation = new EvaluationInterface();
-                Evaluation evaluationSelected = evaluation.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
-
-                if(evaluation != null)
+                if (existingQuestion == null)
                 {
-                    evaluationSelected.questions.Remove(UserInterface.globals.sessionSelectedQuestion);
-                    evaluationSelected.questions.Add(question);
+                    MessageBox.Show("Question not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
-                evaluationInterface.updateEvaluation(evaluationSelected);
+                // Update the existing question's properties
+                existingQuestion.title = textBox_questions_edit_title.Text;
+                existingQuestion.description = textBox_questions_edit_desc.Text;
+                existingQuestion.updated_at = DateTime.Now;
 
-                List<Question> updatedQuestions = evaluation.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id).questions;
-                _questionsIndexForm.dataGridView_questions_render(updatedQuestions);
+                // Update the evaluation
+                evaluationInterface.updateEvaluation(evaluation);
 
-                MessageBox.Show("Question updated successfully.");
+                // Refresh the questions list
+                _questionsIndexForm.dataGridView_questions_render(evaluation.questions);
 
+                MessageBox.Show("Question updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
         }
