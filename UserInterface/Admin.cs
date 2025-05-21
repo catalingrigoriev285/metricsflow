@@ -378,5 +378,10 @@ namespace UserInterface
 
             MessageBox.Show("User generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

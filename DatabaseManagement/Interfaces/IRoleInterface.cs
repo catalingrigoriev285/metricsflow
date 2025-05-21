@@ -7,7 +7,7 @@ using Models;
 
 namespace DatabaseManagement.Interfaces
 {
-    interface IRoleInterface
+    public interface IRoleInterface
     {
         public void saveRole(Role role);
         public void updateRole(Role role);

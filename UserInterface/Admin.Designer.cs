@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button_users_generate = new Button();
             button_users_create = new Button();
             button_users_search = new Button();
             textBox_users_search = new TextBox();
@@ -73,7 +74,6 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
-            button_users_generate = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -114,6 +114,16 @@
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += tabPage1_Click;
+            // 
+            // button_users_generate
+            // 
+            button_users_generate.Location = new Point(418, 6);
+            button_users_generate.Name = "button_users_generate";
+            button_users_generate.Size = new Size(184, 29);
+            button_users_generate.TabIndex = 4;
+            button_users_generate.Text = "Generate a random user";
+            button_users_generate.UseVisualStyleBackColor = true;
+            button_users_generate.Click += button_users_generate_Click;
             // 
             // button_users_create
             // 
@@ -477,6 +487,7 @@
             menuStrip1.Size = new Size(782, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // accountToolStripMenuItem
             // 
@@ -491,16 +502,6 @@
             signOutToolStripMenuItem.Size = new Size(149, 26);
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
-            // 
-            // button_users_generate
-            // 
-            button_users_generate.Location = new Point(418, 6);
-            button_users_generate.Name = "button_users_generate";
-            button_users_generate.Size = new Size(184, 29);
-            button_users_generate.TabIndex = 4;
-            button_users_generate.Text = "Generate a random user";
-            button_users_generate.UseVisualStyleBackColor = true;
-            button_users_generate.Click += button_users_generate_Click;
             // 
             // Admin
             // 

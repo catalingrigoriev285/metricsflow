@@ -7,7 +7,7 @@ using Models;
 
 namespace DatabaseManagement.Interfaces
 {
-    interface IEvaluationInterface
+    public interface IEvaluationInterface
     {
         public void saveEvaluation(Evaluation evaluation);
         public List<Evaluation> loadEvaluations();

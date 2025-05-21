@@ -7,7 +7,7 @@ using Models;
 
 namespace DatabaseManagement.Interfaces
 {
-    interface IUserInterface
+    public interface IUserInterface
     {
         public void saveUser(User user);
         public void updateUser(User user);

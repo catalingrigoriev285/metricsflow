@@ -73,5 +73,10 @@ namespace UserInterface.Resources.Evaluations.Questions
                 this.Close();
             }
         }
+
+        private void label_questions_create_name_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

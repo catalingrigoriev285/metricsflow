@@ -96,7 +96,13 @@ namespace UserInterface.Resources.Evaluations.Questions
                     }
                     else if (dataGridView_questions.Columns["Answers"] != null && e.ColumnIndex == dataGridView_questions.Columns["Answers"].Index)
                     {
-                        MessageBox.Show("Answers button clicked");
+                        int questionID = (int)dataGridView_questions.Rows[e.RowIndex].Cells[0].Value;
+
+                        DatabaseManagement.Interfaces.IEvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
+                        Question question = evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id).questions.FirstOrDefault(q => q.id == questionID);
+
+                        UserInterface.Resources.Evaluations.Questions.Answers.AnswersIndex answersIndex = new UserInterface.Resources.Evaluations.Questions.Answers.AnswersIndex(this, question);
+                        answersIndex.ShowDialog();
                     }
                 };
             };
