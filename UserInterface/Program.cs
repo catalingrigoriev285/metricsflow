@@ -42,6 +42,13 @@ namespace UserInterface
             set { _sessionSelectedQuestion = value; }
         }
 
+        public static Question.Answer _sessionSelectedAnswer;
+        public static Question.Answer sessionSelectedAnswer
+        {
+            get { return _sessionSelectedAnswer; }
+            set { _sessionSelectedAnswer = value; }
+        }
+
         public static string _sessionToken;
 
         public static string sessionToken

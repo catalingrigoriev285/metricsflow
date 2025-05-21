@@ -15,14 +15,12 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
     public partial class AnswersCreate : Form
     {
         private AnswersIndex _answersIndex;
-        private Question _question;
-        public AnswersCreate(AnswersIndex answersIndex, Question question)
+        public AnswersCreate(AnswersIndex answersIndex)
         {
             this.MaximizeBox = false;
             InitializeComponent();
 
             _answersIndex = answersIndex;
-            _question = question;
         }
 
         private void AnswersCreate_Load(object sender, EventArgs e)
@@ -50,23 +48,15 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
             if (validate())
             {
                 string value = textBox_answers_create_value.Text;
-                bool validation = false;
+                bool validation = radioButton_answers_create_true.Checked;
 
-                if (radioButton_answers_create_true.Checked)
-                {
-                    validation = true;
-                } else if(radioButton_answers_create_false.Checked)
-                {
-                    validation = false;
-                }
+                Question question = UserInterface.globals.sessionSelectedQuestion;
 
-                _question.AddAnswer(new Question.Answer(value, validation));
+                question.AddAnswer(new Question.Answer(value, validation));
+                question.updated_at = DateTime.Now;
 
-                _question.updated_at = DateTime.Now;
-
-                Evaluation evaluation = new DatabaseManagement.FileSystem.EvaluationInterface().getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
-                EvaluationInterface evaluationInterface = new DatabaseManagement.FileSystem.EvaluationInterface();
-
+                Evaluation evaluation = UserInterface.globals.sessionSelectedEvaluation;
+                EvaluationInterface evaluationInterface = new EvaluationInterface();
                 evaluationInterface.updateEvaluation(evaluation);
 
                 textBox_answers_create_value.Text = String.Empty;

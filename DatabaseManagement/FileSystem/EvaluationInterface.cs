@@ -14,28 +14,45 @@ namespace DatabaseManagement.FileSystem
 
         List<Evaluation> evaluations = new List<Evaluation>();
 
+        private void WriteEvaluationsToFile(List<Evaluation> evaluations, bool append = false)
+        {
+            using (StreamWriter writer = new StreamWriter(file_path, append))
+            {
+                foreach (var eval in evaluations)
+                {
+                    writer.WriteLine($"{eval.id},{eval.title},{eval.description},{(int)eval.type},{eval.user_id}");
+
+                    if (eval.questions != null)
+                    {
+                        foreach (var question in eval.questions)
+                        {
+                            writer.WriteLine($"{question.id},{question.title},{question.description},{question.created_at},{question.updated_at}");
+
+                            if (question.answers != null)
+                            {
+                                foreach (var answer in question.answers)
+                                {
+                                    writer.WriteLine($"{answer.value},{answer.validation}");
+                                }
+                            }
+                        }
+                    }
+
+                    writer.WriteLine(); // Empty line to separate evaluations
+                }
+            }
+        }
+
         public void saveEvaluation(Evaluation evaluation)
         {
             if (evaluation == null)
-            {
                 throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
-            }
             if (evaluation.id == null)
-            {
                 throw new ArgumentException("Evaluation ID cannot be null or empty", nameof(evaluation.id));
-            }
-            else if (evaluation.title == null)
-            {
-                throw new ArgumentException("Evaluation name cannot be null or empty", nameof(evaluation.title));
-            }
-            else if (evaluation.description == null)
-            {
+            if (evaluation.title == null)
+                throw new ArgumentException("Evaluation title cannot be null or empty", nameof(evaluation.title));
+            if (evaluation.description == null)
                 throw new ArgumentException("Evaluation description cannot be null or empty", nameof(evaluation.description));
-            }
-            //else if (evaluation.questions == null)
-            //{
-            //    throw new ArgumentException("Evaluation questions cannot be null or empty", nameof(evaluation.questions));
-            //}
 
             string directoryPath = Path.GetDirectoryName(file_path);
             if (!Directory.Exists(directoryPath))
@@ -44,25 +61,7 @@ namespace DatabaseManagement.FileSystem
             }
 
             evaluation.setID(getLatestID() + 1);
-
-            using (StreamWriter writer = new StreamWriter(file_path, true))
-            {
-                writer.WriteLine($"{evaluation.id},{evaluation.title},{evaluation.description},{(int)evaluation.type},{evaluation.user_id}");
-
-                if (evaluation.questions != null)
-                {
-                    foreach (var question in evaluation.questions)
-                    {
-                        writer.WriteLine($"{question.id},{question.title},{question.description}");
-                        foreach (var answer in question.answers)
-                        {
-                            writer.WriteLine($"{answer.value},{answer.validation}");
-                        }
-                    }
-                }
-
-                writer.WriteLine("\n");
-            }
+            WriteEvaluationsToFile(new List<Evaluation> { evaluation }, true);
         }
 
         public List<Evaluation> loadEvaluations()
@@ -71,6 +70,8 @@ namespace DatabaseManagement.FileSystem
             {
                 return new List<Evaluation>();
             }
+
+            evaluations.Clear(); // Clear any previously loaded evaluations
 
             using (StreamReader reader = new StreamReader(file_path))
             {
@@ -93,7 +94,8 @@ namespace DatabaseManagement.FileSystem
 
                     string[] parts = line.Split(',');
 
-                    if (parts.Length == 5 && Enum.TryParse<Evaluation.EvaluationType>(parts[3], out _)) // Evaluation
+                    // Evaluation line
+                    if (parts.Length == 5 && int.TryParse(parts[0], out int evalId) && Enum.TryParse<Evaluation.EvaluationType>(parts[3], out _))
                     {
                         if (currentEvaluation != null)
                         {
@@ -102,29 +104,30 @@ namespace DatabaseManagement.FileSystem
 
                         currentEvaluation = new Evaluation(parts[1], parts[2])
                         {
-                            id = int.Parse(parts[0]),
+                            id = evalId,
                             type = Enum.Parse<Evaluation.EvaluationType>(parts[3]),
                             user_id = int.Parse(parts[4])
                         };
+
                         currentQuestion = null;
                     }
-                    else if (parts.Length == 5 && DateTime.TryParse(parts[3], out _) && DateTime.TryParse(parts[4], out _)) // Question
+                    // Question line (5 parts: id, title, description, created_at, updated_at)
+                    else if (parts.Length == 5 && int.TryParse(parts[0], out int questionId) && DateTime.TryParse(parts[3], out DateTime createdAt) && DateTime.TryParse(parts[4], out DateTime updatedAt))
                     {
                         currentQuestion = new Question(parts[1], parts[2])
                         {
-                            id = int.Parse(parts[0]),
-                            created_at = DateTime.Parse(parts[3]),
-                            updated_at = DateTime.Parse(parts[4])
+                            id = questionId,
+                            created_at = createdAt,
+                            updated_at = updatedAt
                         };
+
                         currentEvaluation?.AddQuestion(currentQuestion);
                     }
-                    else if (parts.Length == 2) // Answer
+                    // Answer line (2 parts)
+                    else if (parts.Length == 2 && currentQuestion != null)
                     {
-                        if (currentQuestion != null)
-                        {
-                            bool isValid = bool.TryParse(parts[1], out bool validation) && validation;
-                            currentQuestion.AddAnswer(new Question.Answer(parts[0], isValid));
-                        }
+                        bool isValid = bool.TryParse(parts[1], out bool validation) && validation;
+                        currentQuestion.AddAnswer(new Question.Answer(parts[0], isValid));
                     }
                     else
                     {
@@ -182,11 +185,16 @@ namespace DatabaseManagement.FileSystem
                     {
                         continue;
                     }
-                    string[] evaluationData = line.Split(',');
-                    int currentID = int.Parse(evaluationData[0]);
-                    if (currentID > latestID)
+
+                    string[] data = line.Split(',');
+
+                    // Ensure the line corresponds to an Evaluation entry (5 parts and valid type)  
+                    if (data.Length == 5 && Enum.TryParse<Evaluation.EvaluationType>(data[3], out _))
                     {
-                        latestID = currentID;
+                        if (int.TryParse(data[0], out int currentID) && currentID > latestID)
+                        {
+                            latestID = currentID;
+                        }
                     }
                 }
                 return latestID;
@@ -223,82 +231,32 @@ namespace DatabaseManagement.FileSystem
         public void updateEvaluation(Evaluation evaluation)
         {
             if (evaluation == null)
-            {
                 throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
-            }
+
             List<Evaluation> evaluations = loadEvaluations();
-            Evaluation? evaluationToUpdate = evaluations.FirstOrDefault(e => e.id == evaluation.id);
-            if (evaluationToUpdate != null)
+            Evaluation? evalToUpdate = evaluations.FirstOrDefault(e => e.id == evaluation.id);
+
+            if (evalToUpdate != null)
             {
-                evaluationToUpdate.title = evaluation.title;
-                evaluationToUpdate.description = evaluation.description;
-                evaluationToUpdate.type = evaluation.type;
-                evaluationToUpdate.user_id = evaluation.user_id;
-                evaluationToUpdate.questions = evaluation.questions;
-                using (StreamWriter writer = new StreamWriter(file_path, false))
-                {
-                    foreach (var eval in evaluations)
-                    {
-                        writer.WriteLine($"{eval.id},{eval.title},{eval.description},{(int)eval.type},{eval.user_id}");
-                        if (eval.questions != null)
-                        {
-                            eval.questions = removeQuestionsDuplicates(eval.questions);
+                evalToUpdate.title = evaluation.title;
+                evalToUpdate.description = evaluation.description;
+                evalToUpdate.type = evaluation.type;
+                evalToUpdate.user_id = evaluation.user_id;
+                evalToUpdate.questions = evaluation.questions;
 
-                            foreach (var question in eval.questions)
-                            {
-                                writer.WriteLine($"{question.id},{question.title},{question.description},{question.created_at},{question.updated_at}");
-
-                                if (question.answers != null)
-                                {
-                                    foreach (var answer in question.answers)
-                                    {
-                                        writer.WriteLine($"{answer.value},{answer.validation}");
-                                    }
-                                }
-                            }
-                        }
-                        writer.WriteLine("\n");
-                    }
-                }
+                WriteEvaluationsToFile(evaluations, false);
             }
         }
 
         public void destroyEvaluation(Evaluation evaluation)
         {
             if (evaluation == null)
-            {
                 throw new ArgumentNullException(nameof(evaluation), "Evaluation cannot be null");
-            }
 
             List<Evaluation> evaluations = loadEvaluations();
-            Evaluation? evaluationToRemove = evaluations.FirstOrDefault(e => e.id == evaluation.id);
+            evaluations.RemoveAll(e => e.id == evaluation.id);
 
-            if (evaluationToRemove != null)
-            {
-                evaluations.Remove(evaluationToRemove);
-
-                using (StreamWriter writer = new StreamWriter(file_path, false))
-                {
-                    foreach (var eval in evaluations)
-                    {
-                        writer.WriteLine($"{eval.id},{eval.title},{eval.description},{(int)eval.type},{eval.user_id}");
-
-                        if (eval.questions != null)
-                        {
-                            foreach (var question in eval.questions)
-                            {
-                                writer.WriteLine($"{question.id},{question.title},{question.description}");
-                                foreach (var answer in question.answers)
-                                {
-                                    writer.WriteLine($"{answer.value},{answer.validation}");
-                                }
-                            }
-                        }
-
-                        writer.WriteLine("\n");
-                    }
-                }
-            }
+            WriteEvaluationsToFile(evaluations, false);
         }
 
         public List<Evaluation> removeDuplicates(List<Evaluation> evaluations)

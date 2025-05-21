@@ -48,7 +48,7 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
 
         private void button_questions_create_Click(object sender, EventArgs e)
         {
-            UserInterface.Resources.Evaluations.Questions.Answers.AnswersCreate answersCreate = new UserInterface.Resources.Evaluations.Questions.Answers.AnswersCreate(this, _question);
+            UserInterface.Resources.Evaluations.Questions.Answers.AnswersCreate answersCreate = new UserInterface.Resources.Evaluations.Questions.Answers.AnswersCreate(this);
             answersCreate.ShowDialog();
         }
 
