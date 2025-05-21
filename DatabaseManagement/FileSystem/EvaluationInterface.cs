@@ -230,43 +230,19 @@ namespace DatabaseManagement.FileSystem
             evalToUpdate.user_id = evaluation.user_id;
             evalToUpdate.updated_at = DateTime.Now;
 
-            // Preserve existing questions and answers
+            // Update questions
             if (evaluation.questions != null)
             {
-                if (evalToUpdate.questions == null)
-                {
-                    evalToUpdate.questions = new List<Question>();
-                }
-
-                // Update or add questions
-                foreach (var question in evaluation.questions)
-                {
-                    var existingQuestion = evalToUpdate.questions.FirstOrDefault(q => q.id == question.id);
-                    if (existingQuestion != null)
-                    {
-                        // Update existing question
-                        existingQuestion.title = question.title;
-                        existingQuestion.description = question.description;
-                        existingQuestion.updated_at = DateTime.Now;
-
-                        // Preserve existing answers
-                        if (question.answers != null)
-                        {
-                            if (existingQuestion.answers == null)
-                            {
-                                existingQuestion.answers = new List<Question.Answer>();
-                            }
-                            existingQuestion.answers = question.answers;
-                        }
-                    }
-                    else
-                    {
-                        // Add new question
-                        evalToUpdate.questions.Add(question);
-                    }
-                }
+                // Replace the entire questions list to ensure proper removal
+                evalToUpdate.questions = evaluation.questions;
+            }
+            else
+            {
+                // If questions is null, clear the list
+                evalToUpdate.questions = new List<Question>();
             }
 
+            // Write to file with append=false to overwrite the entire file
             WriteEvaluationsToFile(evaluations, false);
         }
 
