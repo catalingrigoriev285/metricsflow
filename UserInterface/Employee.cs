@@ -25,6 +25,12 @@ namespace UserInterface
         {
             _sessionUser = UserInterface.globals._sessionUser;
 
+            updateWelcomeTitle();
+        }
+
+        public void updateWelcomeTitle()
+        {
+            _sessionUser = UserInterface.globals.sessionUser;
             label_welcome_back.Text = $"Welcome back, {_sessionUser.name} {_sessionUser.prename}!";
         }
 
@@ -35,7 +41,8 @@ namespace UserInterface
 
         private void button_employee_edit_profile_Click(object sender, EventArgs e)
         {
-            
+            UserInterface.Resources.Employee.EmployeeEdit employeeEdit = new UserInterface.Resources.Employee.EmployeeEdit(this);
+            employeeEdit.ShowDialog();
         }
     }
 }
