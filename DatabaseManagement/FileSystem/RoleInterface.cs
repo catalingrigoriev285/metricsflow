@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseManagement.Interfaces;
 using Models;
 
 namespace DatabaseManagement.FileSystem
 {
-    public class RoleInterface
+    public class RoleInterface : IRoleInterface
     {
         string file_path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + "\\data\\roles.txt";
 

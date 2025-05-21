@@ -7,10 +7,11 @@ using System.Configuration;
 
 using Models;
 using System.IO;
+using DatabaseManagement.Interfaces;
 
 namespace DatabaseManagement.FileSystem
 {
-    public class UserInterface
+    public class UserInterface : IUserInterface
     {
         //string file_path = AppDomain.CurrentDomain.BaseDirectory + "\\" + ConfigurationManager.AppSettings["users_path"];
         string file_path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + "\\data\\users.txt";

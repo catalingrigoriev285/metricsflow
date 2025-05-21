@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseManagement.Interfaces;
 using Models;
 
 namespace DatabaseManagement.FileSystem
 {
-    public class EvaluationInterface
+    public class EvaluationInterface : IEvaluationInterface
     {
         string file_path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + "\\data\\evaluations.txt";
 
