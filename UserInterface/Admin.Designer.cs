@@ -74,6 +74,12 @@
             menuStrip1 = new MenuStrip();
             accountToolStripMenuItem = new ToolStripMenuItem();
             signOutToolStripMenuItem = new ToolStripMenuItem();
+            button_faq_chat = new Button();
+            panel_faq_chat = new Panel();
+            textBox_faq_chat = new TextBox();
+            button_faq_send = new Button();
+            richTextBox_faq_messages = new RichTextBox();
+            button_faq_close = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_users).BeginInit();
@@ -503,11 +509,102 @@
             signOutToolStripMenuItem.Text = "Sign Out";
             signOutToolStripMenuItem.Click += signOutToolStripMenuItem_Click;
             // 
+            // button_faq_chat
+            // 
+            button_faq_chat = new Button();
+            button_faq_chat.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button_faq_chat.Location = new Point(682, 426);
+            button_faq_chat.Name = "button_faq_chat";
+            button_faq_chat.Size = new Size(88, 38);
+            button_faq_chat.TabIndex = 2;
+            button_faq_chat.Text = "FAQ Chat";
+            button_faq_chat.UseVisualStyleBackColor = true;
+            button_faq_chat.BackColor = Color.FromArgb(0, 122, 204);
+            button_faq_chat.ForeColor = Color.White;
+            button_faq_chat.FlatStyle = FlatStyle.Flat;
+            button_faq_chat.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_faq_chat.Click += button_faq_chat_Click;
+            // 
+            // panel_faq_chat
+            // 
+            panel_faq_chat = new Panel();
+            panel_faq_chat.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            panel_faq_chat.Location = new Point(282, 126);
+            panel_faq_chat.Name = "panel_faq_chat";
+            panel_faq_chat.Size = new Size(488, 338);
+            panel_faq_chat.TabIndex = 3;
+            panel_faq_chat.Visible = false;
+            panel_faq_chat.BorderStyle = BorderStyle.FixedSingle;
+            panel_faq_chat.BackColor = Color.White;
+            // 
+            // textBox_faq_chat
+            // 
+            textBox_faq_chat = new TextBox();
+            textBox_faq_chat.Location = new Point(3, 300);
+            textBox_faq_chat.Name = "textBox_faq_chat";
+            textBox_faq_chat.Size = new Size(407, 27);
+            textBox_faq_chat.TabIndex = 0;
+            textBox_faq_chat.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox_faq_chat.BorderStyle = BorderStyle.FixedSingle;
+            // 
+            // button_faq_send
+            // 
+            button_faq_send = new Button();
+            button_faq_send.Location = new Point(416, 300);
+            button_faq_send.Name = "button_faq_send";
+            button_faq_send.Size = new Size(69, 27);
+            button_faq_send.TabIndex = 1;
+            button_faq_send.Text = "Send";
+            button_faq_send.UseVisualStyleBackColor = true;
+            button_faq_send.BackColor = Color.FromArgb(0, 122, 204);
+            button_faq_send.ForeColor = Color.White;
+            button_faq_send.FlatStyle = FlatStyle.Flat;
+            button_faq_send.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_faq_send.Click += button_faq_send_Click;
+            // 
+            // richTextBox_faq_messages
+            // 
+            richTextBox_faq_messages = new RichTextBox();
+            richTextBox_faq_messages.Location = new Point(3, 30);
+            richTextBox_faq_messages.Name = "richTextBox_faq_messages";
+            richTextBox_faq_messages.ReadOnly = true;
+            richTextBox_faq_messages.Size = new Size(482, 267);
+            richTextBox_faq_messages.TabIndex = 2;
+            richTextBox_faq_messages.Text = "";
+            richTextBox_faq_messages.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            richTextBox_faq_messages.BorderStyle = BorderStyle.None;
+            richTextBox_faq_messages.BackColor = Color.FromArgb(240, 240, 240);
+            // 
+            // button_faq_close
+            // 
+            button_faq_close = new Button();
+            button_faq_close.Location = new Point(458, 3);
+            button_faq_close.Name = "button_faq_close";
+            button_faq_close.Size = new Size(27, 23);
+            button_faq_close.TabIndex = 3;
+            button_faq_close.Text = "X";
+            button_faq_close.UseVisualStyleBackColor = true;
+            button_faq_close.BackColor = Color.FromArgb(220, 220, 220);
+            button_faq_close.ForeColor = Color.Black;
+            button_faq_close.FlatStyle = FlatStyle.Flat;
+            button_faq_close.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button_faq_close.Click += button_faq_close_Click;
+            // 
+            // panel_faq_chat
+            // 
+            panel_faq_chat.Controls.Add(button_faq_close);
+            panel_faq_chat.Controls.Add(richTextBox_faq_messages);
+            panel_faq_chat.Controls.Add(button_faq_send);
+            panel_faq_chat.Controls.Add(textBox_faq_chat);
+            panel_faq_chat.BorderStyle = BorderStyle.FixedSingle;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(782, 476);
+            Controls.Add(panel_faq_chat);
+            Controls.Add(button_faq_chat);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -581,5 +678,11 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private Button button_users_generate;
+        private Button button_faq_chat;
+        private Panel panel_faq_chat;
+        private TextBox textBox_faq_chat;
+        private Button button_faq_send;
+        private RichTextBox richTextBox_faq_messages;
+        private Button button_faq_close;
     }
 }

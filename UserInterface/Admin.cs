@@ -382,5 +382,75 @@ namespace UserInterface
         {
 
         }
+
+        private void button_faq_chat_Click(object sender, EventArgs e)
+        {
+            panel_faq_chat.Visible = true;
+            button_faq_chat.Visible = false;
+            richTextBox_faq_messages.AppendText("FAQ Assistant: Hello! How can I help you today?\n");
+        }
+
+        private void button_faq_close_Click(object sender, EventArgs e)
+        {
+            panel_faq_chat.Visible = false;
+            button_faq_chat.Visible = true;
+            textBox_faq_chat.Clear();
+            richTextBox_faq_messages.Clear();
+        }
+
+        private void button_faq_send_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox_faq_chat.Text))
+                return;
+
+            string userMessage = textBox_faq_chat.Text;
+            richTextBox_faq_messages.AppendText($"You: {userMessage}\n");
+            textBox_faq_chat.Clear();
+
+            // Simple FAQ responses
+            string response = GetFAQResponse(userMessage.ToLower());
+            richTextBox_faq_messages.AppendText($"FAQ Assistant: {response}\n");
+        }
+
+        private string GetFAQResponse(string message)
+        {
+            if (message.Contains("user") || message.Contains("users"))
+            {
+                return "To manage users:\n" +
+                       "1. Click 'Add a new user' to create a user\n" +
+                       "2. Use the search box to find specific users\n" +
+                       "3. Click 'Edit' to modify user details\n" +
+                       "4. Click 'Destroy' to delete a user";
+            }
+            else if (message.Contains("role") || message.Contains("roles"))
+            {
+                return "To manage roles:\n" +
+                       "1. Click 'Add a new role' to create a role\n" +
+                       "2. Use the search box to find specific roles\n" +
+                       "3. Click 'Edit' to modify role details\n" +
+                       "4. Click 'Destroy' to delete a role";
+            }
+            else if (message.Contains("evaluation") || message.Contains("evaluations"))
+            {
+                return "To manage evaluations:\n" +
+                       "1. Click 'Create a new evaluation' to create an evaluation\n" +
+                       "2. Use the search box to find specific evaluations\n" +
+                       "3. Click 'Questions' to manage evaluation questions\n" +
+                       "4. Click 'Edit' to modify evaluation details\n" +
+                       "5. Click 'Destroy' to delete an evaluation";
+            }
+            else if (message.Contains("help") || message.Contains("how"))
+            {
+                return "I can help you with:\n" +
+                       "- User management\n" +
+                       "- Role management\n" +
+                       "- Evaluation management\n" +
+                       "Just ask about any of these topics!";
+            }
+            else
+            {
+                return "I'm not sure about that. Try asking about users, roles, or evaluations. Type 'help' for more information.";
+            }
+        }
     }
 }
