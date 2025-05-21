@@ -175,6 +175,7 @@
             Controls.Add(textBox_users_edit_name);
             Controls.Add(label_users_edit_name);
             Name = "EmployeeEdit";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "EmployeeEdit";
             Load += EmployeeEdit_Load;
             ResumeLayout(false);
