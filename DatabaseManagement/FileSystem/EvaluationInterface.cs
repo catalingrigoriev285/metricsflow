@@ -223,12 +223,49 @@ namespace DatabaseManagement.FileSystem
             if (evalToUpdate == null)
                 throw new KeyNotFoundException($"Evaluation with ID {evaluation.id} not found");
 
+            // Update basic properties
             evalToUpdate.title = evaluation.title;
             evalToUpdate.description = evaluation.description;
             evalToUpdate.type = evaluation.type;
             evalToUpdate.user_id = evaluation.user_id;
-            evalToUpdate.questions = evaluation.questions;
             evalToUpdate.updated_at = DateTime.Now;
+
+            // Preserve existing questions and answers
+            if (evaluation.questions != null)
+            {
+                if (evalToUpdate.questions == null)
+                {
+                    evalToUpdate.questions = new List<Question>();
+                }
+
+                // Update or add questions
+                foreach (var question in evaluation.questions)
+                {
+                    var existingQuestion = evalToUpdate.questions.FirstOrDefault(q => q.id == question.id);
+                    if (existingQuestion != null)
+                    {
+                        // Update existing question
+                        existingQuestion.title = question.title;
+                        existingQuestion.description = question.description;
+                        existingQuestion.updated_at = DateTime.Now;
+
+                        // Preserve existing answers
+                        if (question.answers != null)
+                        {
+                            if (existingQuestion.answers == null)
+                            {
+                                existingQuestion.answers = new List<Question.Answer>();
+                            }
+                            existingQuestion.answers = question.answers;
+                        }
+                    }
+                    else
+                    {
+                        // Add new question
+                        evalToUpdate.questions.Add(question);
+                    }
+                }
+            }
 
             WriteEvaluationsToFile(evaluations, false);
         }

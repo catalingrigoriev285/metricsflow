@@ -58,7 +58,10 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
                 string value = textBox_answers_create_value.Text.Trim();
                 bool validation = radioButton_answers_create_true.Checked;
 
-                Question question = UserInterface.globals.sessionSelectedQuestion;
+                // Get fresh data from database
+                Evaluation evaluation = _evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
+                Question question = evaluation.questions?.FirstOrDefault(q => q.id == UserInterface.globals.sessionSelectedQuestion.id);
+                
                 if (question == null)
                 {
                     MessageBox.Show("No question selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -70,14 +73,10 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
                 question.updated_at = DateTime.Now;
 
                 // Update the evaluation
-                Evaluation evaluation = UserInterface.globals.sessionSelectedEvaluation;
-                if (evaluation == null)
-                {
-                    MessageBox.Show("No evaluation selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
                 _evaluationInterface.updateEvaluation(evaluation);
+
+                // Update the session question with the latest data
+                UserInterface.globals.sessionSelectedQuestion = question;
 
                 // Clear form
                 textBox_answers_create_value.Text = String.Empty;

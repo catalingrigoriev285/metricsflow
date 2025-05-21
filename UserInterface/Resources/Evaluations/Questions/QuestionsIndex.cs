@@ -71,26 +71,26 @@ namespace UserInterface.Resources.Evaluations.Questions
                     }
                     else if (dataGridView_questions.Columns["Destroy"] != null && e.ColumnIndex == dataGridView_questions.Columns["Destroy"].Index)
                     {
-                        var confirm = MessageBox.Show("Are you sure you want to delete this question?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        var confirm = MessageBox.Show("Are you sure you want to delete this question?", "Delete Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                         if (confirm == DialogResult.Yes)
                         {
                             int questionID = (int)dataGridView_questions.Rows[e.RowIndex].Cells[0].Value;
 
-                            Question question = new Question(string.Empty, string.Empty);
-                            question.id = questionID;
-
+                            // Get fresh data from database
                             Evaluation evaluation = new DatabaseManagement.FileSystem.EvaluationInterface().getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
-                            Question questionToDelete = evaluation.questions.FirstOrDefault(q => q.id == questionID);
+                            Question questionToDelete = evaluation.questions?.FirstOrDefault(q => q.id == questionID);
+                            
                             if (questionToDelete != null)
                             {
                                 evaluation.questions.Remove(questionToDelete);
                                 new DatabaseManagement.FileSystem.EvaluationInterface().updateEvaluation(evaluation);
                                 dataGridView_questions_render(evaluation.questions);
+                                MessageBox.Show("Question deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
-                                MessageBox.Show("Question not found.");
+                                MessageBox.Show("Question not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
