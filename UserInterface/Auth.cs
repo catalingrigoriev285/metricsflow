@@ -139,6 +139,8 @@ namespace UserInterface
 
                                     break;
                                 case "employee":
+                                    UserInterface.Employee employee = new UserInterface.Employee();
+                                    employee.ShowDialog();
                                     break;
                                 default:
                                     MessageBox.Show("Role not recognized!", "Error");
