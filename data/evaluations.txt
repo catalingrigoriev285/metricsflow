@@ -1,4 +1,4 @@
-EVAL|2|first evaluation|example description|8|10|2025-05-25 17:46:31|2025-05-25 17:56:42
+EVAL|2|Programming|This is a demo evaluation|0|10|2025-05-25 17:46:31|2025-05-25 20:51:14
 Q|2|What is C++?|test desc|2025-05-25 17:46:56|2025-05-25 17:47:17
 A|Programming Language|True
 A|Decorative software|False
@@ -6,7 +6,4 @@ Q|3|Python|Is python a compiler language?|2025-05-25 17:49:38|2025-05-25 17:50:0
 A|True|True
 A|False|False
 A|I don't know|False
-Q|4|What date is today?|indicate correct answer|2025-05-25 17:56:20|2025-05-25 17:56:42
-A|5/25/2025|True
-A|24/03/1993|False
 
