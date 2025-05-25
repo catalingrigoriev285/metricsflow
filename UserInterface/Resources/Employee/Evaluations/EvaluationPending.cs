@@ -63,7 +63,6 @@ namespace UserInterface.Resources.Employee.Evaluations
                     answerRadioButton.Text = answer.value;
                     answerRadioButton.AutoSize = true;
 
-                    // Save mapping
                     answerMap[answerRadioButton] = answer;
 
                     questionPanel.Controls.Add(answerRadioButton);
@@ -82,18 +81,15 @@ namespace UserInterface.Resources.Employee.Evaluations
                 RadioButton radioButton = entry.Key;
                 Models.Question.Answer answer = entry.Value;
 
-                // Default color
                 radioButton.ForeColor = SystemColors.ControlText;
 
                 if (answer.validation)
                 {
-                    // Correct answer - mark green
                     radioButton.ForeColor = Color.Green;
                 }
 
                 if (radioButton.Checked && !answer.validation)
                 {
-                    // Selected but incorrect - mark red
                     radioButton.ForeColor = Color.Red;
                 }
             }
