@@ -44,5 +44,11 @@ namespace UserInterface
             UserInterface.Resources.Employee.EmployeeEdit employeeEdit = new UserInterface.Resources.Employee.EmployeeEdit(this);
             employeeEdit.ShowDialog();
         }
+
+        private void button_employee_evaluations_Click(object sender, EventArgs e)
+        {
+            Resources.Employee.Evaluations.EvaluationsIndex evaluationsIndex = new Resources.Employee.Evaluations.EvaluationsIndex();
+            evaluationsIndex.ShowDialog();
+        }
     }
 }

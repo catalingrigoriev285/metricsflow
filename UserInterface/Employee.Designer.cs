@@ -51,6 +51,7 @@
             button_employee_evaluations.TabIndex = 1;
             button_employee_evaluations.Text = "My Evaluations";
             button_employee_evaluations.UseVisualStyleBackColor = true;
+            button_employee_evaluations.Click += button_employee_evaluations_Click;
             // 
             // button_employee_edit_profile
             // 
