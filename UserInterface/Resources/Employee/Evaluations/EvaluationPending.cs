@@ -13,6 +13,7 @@ namespace UserInterface.Resources.Employee.Evaluations
     public partial class EvaluationPending : Form
     {
         private Models.Evaluation _evaluation;
+        private Dictionary<RadioButton, Models.Question.Answer> answerMap = new Dictionary<RadioButton, Models.Question.Answer>();
 
         public EvaluationPending()
         {
@@ -61,6 +62,10 @@ namespace UserInterface.Resources.Employee.Evaluations
                     RadioButton answerRadioButton = new RadioButton();
                     answerRadioButton.Text = answer.value;
                     answerRadioButton.AutoSize = true;
+
+                    // Save mapping
+                    answerMap[answerRadioButton] = answer;
+
                     questionPanel.Controls.Add(answerRadioButton);
                 }
 
@@ -70,5 +75,31 @@ namespace UserInterface.Resources.Employee.Evaluations
             }
         }
 
+        private void button_evaluation_submit_Click(object sender, EventArgs e)
+        {
+            foreach (var entry in answerMap)
+            {
+                RadioButton radioButton = entry.Key;
+                Models.Question.Answer answer = entry.Value;
+
+                // Default color
+                radioButton.ForeColor = SystemColors.ControlText;
+
+                if (answer.validation)
+                {
+                    // Correct answer - mark green
+                    radioButton.ForeColor = Color.Green;
+                }
+
+                if (radioButton.Checked && !answer.validation)
+                {
+                    // Selected but incorrect - mark red
+                    radioButton.ForeColor = Color.Red;
+                }
+            }
+
+            int correctCount = answerMap.Count(entry => entry.Key.Checked && entry.Value.validation);
+            MessageBox.Show($"You have answered {correctCount} correct questions!", "Evaluation Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

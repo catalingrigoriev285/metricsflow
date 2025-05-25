@@ -70,6 +70,7 @@
             button_evaluation_submit.TabIndex = 3;
             button_evaluation_submit.Text = "Submit Answers";
             button_evaluation_submit.UseVisualStyleBackColor = true;
+            button_evaluation_submit.Click += button_evaluation_submit_Click;
             // 
             // EvaluationPending
             // 
