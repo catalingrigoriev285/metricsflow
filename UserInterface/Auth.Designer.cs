@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             metroTabControl_main = new MetroFramework.Controls.MetroTabControl();
+            tabPage_signin = new TabPage();
+            metroButton_auth_submit = new MetroFramework.Controls.MetroButton();
+            metroTextBox_password = new MetroFramework.Controls.MetroTextBox();
+            metroLabel_password = new MetroFramework.Controls.MetroLabel();
+            metroTextBox_email = new MetroFramework.Controls.MetroTextBox();
+            metroLabel_email = new MetroFramework.Controls.MetroLabel();
             tabPage_signup = new TabPage();
             radioButton_auth_as_admin = new RadioButton();
             radioButton_auth_as_employee = new RadioButton();
@@ -43,15 +49,9 @@
             metroLabel_signup_password = new MetroFramework.Controls.MetroLabel();
             metroTextBox_signup_email = new MetroFramework.Controls.MetroTextBox();
             metroLabel_signup_email = new MetroFramework.Controls.MetroLabel();
-            tabPage_signin = new TabPage();
-            metroButton_auth_submit = new MetroFramework.Controls.MetroButton();
-            metroTextBox_password = new MetroFramework.Controls.MetroTextBox();
-            metroLabel_password = new MetroFramework.Controls.MetroLabel();
-            metroTextBox_email = new MetroFramework.Controls.MetroTextBox();
-            metroLabel_email = new MetroFramework.Controls.MetroLabel();
             metroTabControl_main.SuspendLayout();
-            tabPage_signup.SuspendLayout();
             tabPage_signin.SuspendLayout();
+            tabPage_signup.SuspendLayout();
             SuspendLayout();
             // 
             // metroTabControl_main
@@ -73,6 +73,99 @@
             metroTabControl_main.Theme = MetroFramework.MetroThemeStyle.Light;
             metroTabControl_main.UseStyleColors = false;
             metroTabControl_main.SelectedIndexChanged += metroTabControl_main_SelectedIndexChanged;
+            // 
+            // tabPage_signin
+            // 
+            tabPage_signin.Controls.Add(metroButton_auth_submit);
+            tabPage_signin.Controls.Add(metroTextBox_password);
+            tabPage_signin.Controls.Add(metroLabel_password);
+            tabPage_signin.Controls.Add(metroTextBox_email);
+            tabPage_signin.Controls.Add(metroLabel_email);
+            tabPage_signin.Location = new Point(4, 39);
+            tabPage_signin.Name = "tabPage_signin";
+            tabPage_signin.Size = new Size(632, 437);
+            tabPage_signin.TabIndex = 0;
+            tabPage_signin.Text = "Sign In";
+            // 
+            // metroButton_auth_submit
+            // 
+            metroButton_auth_submit.Font = new Font("Segoe UI", 12F);
+            metroButton_auth_submit.Highlight = false;
+            metroButton_auth_submit.Location = new Point(462, 341);
+            metroButton_auth_submit.Name = "metroButton_auth_submit";
+            metroButton_auth_submit.Size = new Size(144, 41);
+            metroButton_auth_submit.Style = MetroFramework.MetroColorStyle.Blue;
+            metroButton_auth_submit.StyleManager = null;
+            metroButton_auth_submit.TabIndex = 4;
+            metroButton_auth_submit.Text = "Sign In";
+            metroButton_auth_submit.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroButton_auth_submit.Click += metroButton_auth_submit_Click;
+            // 
+            // metroTextBox_password
+            // 
+            metroTextBox_password.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            metroTextBox_password.FontWeight = MetroFramework.MetroTextBoxWeight.Regular;
+            metroTextBox_password.Location = new Point(8, 122);
+            metroTextBox_password.Multiline = false;
+            metroTextBox_password.Name = "metroTextBox_password";
+            metroTextBox_password.SelectedText = "";
+            metroTextBox_password.Size = new Size(598, 29);
+            metroTextBox_password.Style = MetroFramework.MetroColorStyle.Black;
+            metroTextBox_password.StyleManager = null;
+            metroTextBox_password.TabIndex = 3;
+            metroTextBox_password.Text = "123123";
+            metroTextBox_password.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroTextBox_password.UseStyleColors = false;
+            // 
+            // metroLabel_password
+            // 
+            metroLabel_password.AutoSize = true;
+            metroLabel_password.CustomBackground = false;
+            metroLabel_password.FontSize = MetroFramework.MetroLabelSize.Medium;
+            metroLabel_password.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            metroLabel_password.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            metroLabel_password.Location = new Point(8, 90);
+            metroLabel_password.Name = "metroLabel_password";
+            metroLabel_password.Size = new Size(66, 20);
+            metroLabel_password.Style = MetroFramework.MetroColorStyle.Blue;
+            metroLabel_password.StyleManager = null;
+            metroLabel_password.TabIndex = 2;
+            metroLabel_password.Text = "Password";
+            metroLabel_password.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroLabel_password.UseStyleColors = false;
+            // 
+            // metroTextBox_email
+            // 
+            metroTextBox_email.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            metroTextBox_email.FontWeight = MetroFramework.MetroTextBoxWeight.Regular;
+            metroTextBox_email.Location = new Point(8, 46);
+            metroTextBox_email.Multiline = false;
+            metroTextBox_email.Name = "metroTextBox_email";
+            metroTextBox_email.SelectedText = "";
+            metroTextBox_email.Size = new Size(598, 29);
+            metroTextBox_email.Style = MetroFramework.MetroColorStyle.Black;
+            metroTextBox_email.StyleManager = null;
+            metroTextBox_email.TabIndex = 1;
+            metroTextBox_email.Text = "employee";
+            metroTextBox_email.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroTextBox_email.UseStyleColors = false;
+            // 
+            // metroLabel_email
+            // 
+            metroLabel_email.AutoSize = true;
+            metroLabel_email.CustomBackground = false;
+            metroLabel_email.FontSize = MetroFramework.MetroLabelSize.Medium;
+            metroLabel_email.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            metroLabel_email.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            metroLabel_email.Location = new Point(8, 14);
+            metroLabel_email.Name = "metroLabel_email";
+            metroLabel_email.Size = new Size(42, 20);
+            metroLabel_email.Style = MetroFramework.MetroColorStyle.Blue;
+            metroLabel_email.StyleManager = null;
+            metroLabel_email.TabIndex = 0;
+            metroLabel_email.Text = "Email";
+            metroLabel_email.Theme = MetroFramework.MetroThemeStyle.Light;
+            metroLabel_email.UseStyleColors = false;
             // 
             // tabPage_signup
             // 
@@ -291,99 +384,6 @@
             metroLabel_signup_email.Theme = MetroFramework.MetroThemeStyle.Light;
             metroLabel_signup_email.UseStyleColors = false;
             // 
-            // tabPage_signin
-            // 
-            tabPage_signin.Controls.Add(metroButton_auth_submit);
-            tabPage_signin.Controls.Add(metroTextBox_password);
-            tabPage_signin.Controls.Add(metroLabel_password);
-            tabPage_signin.Controls.Add(metroTextBox_email);
-            tabPage_signin.Controls.Add(metroLabel_email);
-            tabPage_signin.Location = new Point(4, 39);
-            tabPage_signin.Name = "tabPage_signin";
-            tabPage_signin.Size = new Size(632, 437);
-            tabPage_signin.TabIndex = 0;
-            tabPage_signin.Text = "Sign In";
-            // 
-            // metroButton_auth_submit
-            // 
-            metroButton_auth_submit.Font = new Font("Segoe UI", 12F);
-            metroButton_auth_submit.Highlight = false;
-            metroButton_auth_submit.Location = new Point(462, 341);
-            metroButton_auth_submit.Name = "metroButton_auth_submit";
-            metroButton_auth_submit.Size = new Size(144, 41);
-            metroButton_auth_submit.Style = MetroFramework.MetroColorStyle.Blue;
-            metroButton_auth_submit.StyleManager = null;
-            metroButton_auth_submit.TabIndex = 4;
-            metroButton_auth_submit.Text = "Sign In";
-            metroButton_auth_submit.Theme = MetroFramework.MetroThemeStyle.Light;
-            metroButton_auth_submit.Click += metroButton_auth_submit_Click;
-            // 
-            // metroTextBox_password
-            // 
-            metroTextBox_password.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            metroTextBox_password.FontWeight = MetroFramework.MetroTextBoxWeight.Regular;
-            metroTextBox_password.Location = new Point(8, 122);
-            metroTextBox_password.Multiline = false;
-            metroTextBox_password.Name = "metroTextBox_password";
-            metroTextBox_password.SelectedText = "";
-            metroTextBox_password.Size = new Size(598, 29);
-            metroTextBox_password.Style = MetroFramework.MetroColorStyle.Black;
-            metroTextBox_password.StyleManager = null;
-            metroTextBox_password.TabIndex = 3;
-            metroTextBox_password.Text = "123123";
-            metroTextBox_password.Theme = MetroFramework.MetroThemeStyle.Light;
-            metroTextBox_password.UseStyleColors = false;
-            // 
-            // metroLabel_password
-            // 
-            metroLabel_password.AutoSize = true;
-            metroLabel_password.CustomBackground = false;
-            metroLabel_password.FontSize = MetroFramework.MetroLabelSize.Medium;
-            metroLabel_password.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            metroLabel_password.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            metroLabel_password.Location = new Point(8, 90);
-            metroLabel_password.Name = "metroLabel_password";
-            metroLabel_password.Size = new Size(66, 20);
-            metroLabel_password.Style = MetroFramework.MetroColorStyle.Blue;
-            metroLabel_password.StyleManager = null;
-            metroLabel_password.TabIndex = 2;
-            metroLabel_password.Text = "Password";
-            metroLabel_password.Theme = MetroFramework.MetroThemeStyle.Light;
-            metroLabel_password.UseStyleColors = false;
-            // 
-            // metroTextBox_email
-            // 
-            metroTextBox_email.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            metroTextBox_email.FontWeight = MetroFramework.MetroTextBoxWeight.Regular;
-            metroTextBox_email.Location = new Point(8, 46);
-            metroTextBox_email.Multiline = false;
-            metroTextBox_email.Name = "metroTextBox_email";
-            metroTextBox_email.SelectedText = "";
-            metroTextBox_email.Size = new Size(598, 29);
-            metroTextBox_email.Style = MetroFramework.MetroColorStyle.Black;
-            metroTextBox_email.StyleManager = null;
-            metroTextBox_email.TabIndex = 1;
-            metroTextBox_email.Text = "admin";
-            metroTextBox_email.Theme = MetroFramework.MetroThemeStyle.Light;
-            metroTextBox_email.UseStyleColors = false;
-            // 
-            // metroLabel_email
-            // 
-            metroLabel_email.AutoSize = true;
-            metroLabel_email.CustomBackground = false;
-            metroLabel_email.FontSize = MetroFramework.MetroLabelSize.Medium;
-            metroLabel_email.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            metroLabel_email.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            metroLabel_email.Location = new Point(8, 14);
-            metroLabel_email.Name = "metroLabel_email";
-            metroLabel_email.Size = new Size(42, 20);
-            metroLabel_email.Style = MetroFramework.MetroColorStyle.Blue;
-            metroLabel_email.StyleManager = null;
-            metroLabel_email.TabIndex = 0;
-            metroLabel_email.Text = "Email";
-            metroLabel_email.Theme = MetroFramework.MetroThemeStyle.Light;
-            metroLabel_email.UseStyleColors = false;
-            // 
             // Auth
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -394,10 +394,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authentication";
             metroTabControl_main.ResumeLayout(false);
-            tabPage_signup.ResumeLayout(false);
-            tabPage_signup.PerformLayout();
             tabPage_signin.ResumeLayout(false);
             tabPage_signin.PerformLayout();
+            tabPage_signup.ResumeLayout(false);
+            tabPage_signup.PerformLayout();
             ResumeLayout(false);
         }
 
