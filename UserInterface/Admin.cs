@@ -407,7 +407,6 @@ namespace UserInterface
             richTextBox_faq_messages.AppendText($"You: {userMessage}\n");
             textBox_faq_chat.Clear();
 
-            // Simple FAQ responses
             string response = GetFAQResponse(userMessage.ToLower());
             richTextBox_faq_messages.AppendText($"FAQ Assistant: {response}\n");
         }

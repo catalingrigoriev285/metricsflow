@@ -77,7 +77,6 @@ namespace UserInterface.Resources.Evaluations.Questions
                         {
                             int questionID = (int)dataGridView_questions.Rows[e.RowIndex].Cells[0].Value;
 
-                            // Get fresh data from database
                             Evaluation evaluation = new DatabaseManagement.FileSystem.EvaluationInterface().getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
                             Question questionToDelete = evaluation.questions?.FirstOrDefault(q => q.id == questionID);
                             

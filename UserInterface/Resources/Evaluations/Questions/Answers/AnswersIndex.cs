@@ -77,11 +77,9 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
                     return;
                 }
 
-                // Configure the DataGridView
                 dataGridView_answers.AutoGenerateColumns = false;
                 dataGridView_answers.Columns.Clear();
 
-                // Add columns
                 dataGridView_answers.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     Name = "Value",
@@ -121,7 +119,7 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
 
         private void button_questions_search_Click(object sender, EventArgs e)
         {
-            // Implement search functionality if needed
+            
         }
     }
 }

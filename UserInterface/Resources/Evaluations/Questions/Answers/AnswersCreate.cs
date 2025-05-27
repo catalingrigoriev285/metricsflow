@@ -28,7 +28,7 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
 
         private void AnswersCreate_Load(object sender, EventArgs e)
         {
-            // Initialize form
+            
         }
 
         private bool Validate()
@@ -58,7 +58,6 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
                 string value = textBox_answers_create_value.Text.Trim();
                 bool validation = radioButton_answers_create_true.Checked;
 
-                // Get fresh data from database
                 Evaluation evaluation = _evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
                 Question question = evaluation.questions?.FirstOrDefault(q => q.id == UserInterface.globals.sessionSelectedQuestion.id);
                 
@@ -68,22 +67,17 @@ namespace UserInterface.Resources.Evaluations.Questions.Answers
                     return;
                 }
 
-                // Create and add the answer
                 question.AddAnswer(new Question.Answer(value, validation));
                 question.updated_at = DateTime.Now;
 
-                // Update the evaluation
                 _evaluationInterface.updateEvaluation(evaluation);
 
-                // Update the session question with the latest data
                 UserInterface.globals.sessionSelectedQuestion = question;
 
-                // Clear form
                 textBox_answers_create_value.Text = String.Empty;
                 radioButton_answers_create_false.Checked = false;
                 radioButton_answers_create_true.Checked = false;
 
-                // Refresh the answers list
                 _answersIndex.dataGridView_answers_render(question.answers);
 
                 MessageBox.Show("Answer created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

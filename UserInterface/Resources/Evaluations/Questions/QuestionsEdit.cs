@@ -65,7 +65,6 @@ namespace UserInterface.Resources.Evaluations.Questions
         {
             if (validate())
             {
-                // Get fresh data from database
                 EvaluationInterface evaluationInterface = new EvaluationInterface();
                 Evaluation evaluation = evaluationInterface.getEvaluationById(UserInterface.globals.sessionSelectedEvaluation.id);
                 Question existingQuestion = evaluation.questions?.FirstOrDefault(q => q.id == UserInterface.globals.sessionSelectedQuestion.id);
@@ -76,15 +75,12 @@ namespace UserInterface.Resources.Evaluations.Questions
                     return;
                 }
 
-                // Update the existing question's properties
                 existingQuestion.title = textBox_questions_edit_title.Text;
                 existingQuestion.description = textBox_questions_edit_desc.Text;
                 existingQuestion.updated_at = DateTime.Now;
 
-                // Update the evaluation
                 evaluationInterface.updateEvaluation(evaluation);
 
-                // Refresh the questions list
                 _questionsIndexForm.dataGridView_questions_render(evaluation.questions);
 
                 MessageBox.Show("Question updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

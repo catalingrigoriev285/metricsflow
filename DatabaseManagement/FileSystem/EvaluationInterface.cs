@@ -39,28 +39,25 @@ namespace DatabaseManagement.FileSystem
                 using var writer = new StreamWriter(_filePath, append);
                 foreach (var eval in evaluations)
                 {
-                    // Write evaluation header
                     writer.WriteLine($"EVAL|{eval.id}|{eval.title}|{eval.description}|{(int)eval.type}|{eval.user_id}|{eval.created_at:yyyy-MM-dd HH:mm:ss}|{eval.updated_at:yyyy-MM-dd HH:mm:ss}");
 
                     if (eval.questions != null)
                     {
                         foreach (var question in eval.questions)
                         {
-                            // Write question
                             writer.WriteLine($"Q|{question.id}|{question.title}|{question.description}|{question.created_at:yyyy-MM-dd HH:mm:ss}|{question.updated_at:yyyy-MM-dd HH:mm:ss}");
 
                             if (question.answers != null)
                             {
                                 foreach (var answer in question.answers)
                                 {
-                                    // Write answer
                                     writer.WriteLine($"A|{answer.value}|{answer.validation}");
                                 }
                             }
                         }
                     }
 
-                    writer.WriteLine(); // Empty line to separate evaluations
+                    writer.WriteLine();
                 }
             }
             catch (Exception ex)
@@ -223,26 +220,21 @@ namespace DatabaseManagement.FileSystem
             if (evalToUpdate == null)
                 throw new KeyNotFoundException($"Evaluation with ID {evaluation.id} not found");
 
-            // Update basic properties
             evalToUpdate.title = evaluation.title;
             evalToUpdate.description = evaluation.description;
             evalToUpdate.type = evaluation.type;
             evalToUpdate.user_id = evaluation.user_id;
             evalToUpdate.updated_at = DateTime.Now;
 
-            // Update questions
             if (evaluation.questions != null)
             {
-                // Replace the entire questions list to ensure proper removal
                 evalToUpdate.questions = evaluation.questions;
             }
             else
             {
-                // If questions is null, clear the list
                 evalToUpdate.questions = new List<Question>();
             }
 
-            // Write to file with append=false to overwrite the entire file
             WriteEvaluationsToFile(evaluations, false);
         }
 
