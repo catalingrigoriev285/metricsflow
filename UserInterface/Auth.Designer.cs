@@ -111,7 +111,6 @@
             metroTextBox_password.Style = MetroFramework.MetroColorStyle.Black;
             metroTextBox_password.StyleManager = null;
             metroTextBox_password.TabIndex = 3;
-            metroTextBox_password.Text = "123123";
             metroTextBox_password.Theme = MetroFramework.MetroThemeStyle.Light;
             metroTextBox_password.UseStyleColors = false;
             // 
@@ -144,7 +143,6 @@
             metroTextBox_email.Style = MetroFramework.MetroColorStyle.Black;
             metroTextBox_email.StyleManager = null;
             metroTextBox_email.TabIndex = 1;
-            metroTextBox_email.Text = "employee";
             metroTextBox_email.Theme = MetroFramework.MetroThemeStyle.Light;
             metroTextBox_email.UseStyleColors = false;
             // 
