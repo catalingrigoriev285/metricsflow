@@ -31,6 +31,7 @@
             label_welcome_back = new Label();
             button_employee_evaluations = new Button();
             button_employee_edit_profile = new Button();
+            button_employee_logout = new Button();
             SuspendLayout();
             // 
             // label_welcome_back
@@ -63,11 +64,22 @@
             button_employee_edit_profile.UseVisualStyleBackColor = true;
             button_employee_edit_profile.Click += button_employee_edit_profile_Click;
             // 
+            // button_employee_logout
+            // 
+            button_employee_logout.Location = new Point(120, 256);
+            button_employee_logout.Name = "button_employee_logout";
+            button_employee_logout.Size = new Size(444, 43);
+            button_employee_logout.TabIndex = 3;
+            button_employee_logout.Text = "Sign Out";
+            button_employee_logout.UseVisualStyleBackColor = true;
+            button_employee_logout.Click += button_employee_logout_Click;
+            // 
             // Employee
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(691, 301);
+            ClientSize = new Size(691, 360);
+            Controls.Add(button_employee_logout);
             Controls.Add(button_employee_edit_profile);
             Controls.Add(button_employee_evaluations);
             Controls.Add(label_welcome_back);
@@ -84,5 +96,6 @@
         private Button button_employee_evaluations;
         private Button button_employee_edit_profile;
         private Label label1;
+        private Button button_employee_logout;
     }
 }

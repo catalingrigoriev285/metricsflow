@@ -36,8 +36,6 @@
             metroTextBox_email = new MetroFramework.Controls.MetroTextBox();
             metroLabel_email = new MetroFramework.Controls.MetroLabel();
             tabPage_signup = new TabPage();
-            radioButton_auth_as_admin = new RadioButton();
-            radioButton_auth_as_employee = new RadioButton();
             metroTextBox_signup_repeat_password = new MetroFramework.Controls.MetroTextBox();
             metroLabel_signup_repeat_password = new MetroFramework.Controls.MetroLabel();
             metroTextBox_signup_prename = new MetroFramework.Controls.MetroTextBox();
@@ -169,8 +167,6 @@
             // 
             // tabPage_signup
             // 
-            tabPage_signup.Controls.Add(radioButton_auth_as_admin);
-            tabPage_signup.Controls.Add(radioButton_auth_as_employee);
             tabPage_signup.Controls.Add(metroTextBox_signup_repeat_password);
             tabPage_signup.Controls.Add(metroLabel_signup_repeat_password);
             tabPage_signup.Controls.Add(metroTextBox_signup_prename);
@@ -187,28 +183,6 @@
             tabPage_signup.Size = new Size(632, 437);
             tabPage_signup.TabIndex = 1;
             tabPage_signup.Text = "Sign Up";
-            // 
-            // radioButton_auth_as_admin
-            // 
-            radioButton_auth_as_admin.AutoSize = true;
-            radioButton_auth_as_admin.Location = new Point(110, 321);
-            radioButton_auth_as_admin.Name = "radioButton_auth_as_admin";
-            radioButton_auth_as_admin.Size = new Size(74, 24);
-            radioButton_auth_as_admin.TabIndex = 17;
-            radioButton_auth_as_admin.Text = "Admin";
-            radioButton_auth_as_admin.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_auth_as_employee
-            // 
-            radioButton_auth_as_employee.AutoSize = true;
-            radioButton_auth_as_employee.Checked = true;
-            radioButton_auth_as_employee.Location = new Point(8, 321);
-            radioButton_auth_as_employee.Name = "radioButton_auth_as_employee";
-            radioButton_auth_as_employee.Size = new Size(96, 24);
-            radioButton_auth_as_employee.TabIndex = 16;
-            radioButton_auth_as_employee.TabStop = true;
-            radioButton_auth_as_employee.Text = "Employee";
-            radioButton_auth_as_employee.UseVisualStyleBackColor = true;
             // 
             // metroTextBox_signup_repeat_password
             // 
@@ -310,7 +284,7 @@
             // 
             metroButton_signup_submit.Font = new Font("Segoe UI", 12F);
             metroButton_signup_submit.Highlight = false;
-            metroButton_signup_submit.Location = new Point(462, 342);
+            metroButton_signup_submit.Location = new Point(462, 341);
             metroButton_signup_submit.Name = "metroButton_signup_submit";
             metroButton_signup_submit.Size = new Size(144, 41);
             metroButton_signup_submit.Style = MetroFramework.MetroColorStyle.Blue;
@@ -422,7 +396,5 @@
         private MetroFramework.Controls.MetroLabel metroLabel_signup_email;
         private MetroFramework.Controls.MetroTextBox metroTextBox_signup_repeat_password;
         private MetroFramework.Controls.MetroLabel metroLabel_signup_repeat_password;
-        private RadioButton radioButton_auth_as_admin;
-        private RadioButton radioButton_auth_as_employee;
     }
 }

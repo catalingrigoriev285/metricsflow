@@ -50,5 +50,15 @@ namespace UserInterface
             Resources.Employee.Evaluations.EvaluationsIndex evaluationsIndex = new Resources.Employee.Evaluations.EvaluationsIndex();
             evaluationsIndex.ShowDialog();
         }
+
+        private void button_employee_logout_Click(object sender, EventArgs e)
+        {
+            UserInterface.globals.sessionUser = null;
+            this.Hide();
+
+            UserInterface.Auth auth = new UserInterface.Auth();
+            auth.ShowDialog();
+            this.Close();
+        }
     }
 }
