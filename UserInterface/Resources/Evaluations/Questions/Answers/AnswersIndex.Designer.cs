@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button_questions_destroy_all = new Button();
             button_questions_create = new Button();
             button_questions_search = new Button();
             textBox_answers_search = new TextBox();
             dataGridView_answers = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView_answers).BeginInit();
             SuspendLayout();
-            // 
-            // button_questions_destroy_all
-            // 
-            button_questions_destroy_all.Location = new Point(504, 11);
-            button_questions_destroy_all.Name = "button_questions_destroy_all";
-            button_questions_destroy_all.Size = new Size(171, 29);
-            button_questions_destroy_all.TabIndex = 8;
-            button_questions_destroy_all.Text = "Destroy all answers";
-            button_questions_destroy_all.UseVisualStyleBackColor = true;
             // 
             // button_questions_create
             // 
@@ -91,7 +81,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1089, 450);
             Controls.Add(dataGridView_answers);
-            Controls.Add(button_questions_destroy_all);
             Controls.Add(button_questions_create);
             Controls.Add(button_questions_search);
             Controls.Add(textBox_answers_search);
@@ -104,8 +93,6 @@
         }
 
         #endregion
-
-        private Button button_questions_destroy_all;
         private Button button_questions_create;
         private Button button_questions_search;
         private TextBox textBox_answers_search;

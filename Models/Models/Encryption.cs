@@ -13,6 +13,13 @@ namespace Models
         private string salt;
         private string password;
 
+        const string saltPrefix = "salted_";
+        const string hashPrefix = "hashed_";
+
+        const string sha1_default = "40bd001563085fc35165329ea1ff5c5ecbdbbeef";
+        const string sha256_default = "6dcd4ce23d88e2ee9568ba546c007c63a0b3f1b5f7e9f8c5a1b2f3c4e5d6e7f8";
+        const string md5_default = "d41d8cd98f00b204e9800998ecf8427e";
+
         public Encryption(string password)
         {
             this.password = SHA1Hash(password);

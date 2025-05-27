@@ -24,6 +24,8 @@ namespace Models
         public string created_at { get; set; }
         public string updated_at { get; set; }
 
+        const string default_role = "employee";
+
         public User() { }
 
         public User(string name, string prename, string email, Role role)
